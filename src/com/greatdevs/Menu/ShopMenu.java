@@ -31,16 +31,17 @@ public class ShopMenu extends Menu{
 		g.setColor(Color.WHITE);
 		g.setFont(new Font("Arial", Font.BOLD, 25));
 		g.drawString("Shop", 25, 50);
-		g.drawString("Player1", 25, 150);
-		g.drawString("Player2", 25, 200);	
-		g.drawString("Player3", 25, 250);	
-		g.drawString("Player4", 25, 300);	
-		g.drawString("Player5", 25, 350);	
-		g.drawString("Drakula", 25, 400);	
+		g.drawString("Player1", 25, 100);
+		g.drawString("Player2", 25, 150);	
+		g.drawString("Player3", 25, 200);	
+		g.drawString("Player4", 25, 250);	
+		g.drawString("Player5", 25, 300);	
+		g.drawString("Drakula", 25, 350);
+		g.drawString("Custom ship", 25, 400);
 		g.drawString("Exit", 25, 450);	
-		g.drawString(">                 <", 3, sy);
+		g.drawString(">                        <", 3, sy);
 		if (drawimage) g.drawImage(image, 500 - imagew / 2, 250 - imageh / 2, null);
-		if (select >= 7) select = 7;
+		if (select >= 8) select = 8;
 		if (select <= 1) select = 1;
 		if (select < 7) {
 			image = game.icons.player[(select - 1)]; 
@@ -51,7 +52,7 @@ public class ShopMenu extends Menu{
 	 		drawstats.render(g, game, ShipTypes.getShowType(), image, ShipTypes.getShowPowerString());   
 		}
 		if (select == 7) drawimage = false;
-		sy = select * 50 + 100;
+		sy = select * 50 + 50;
 	}
 	
 	public void update(){
@@ -65,7 +66,8 @@ public class ShopMenu extends Menu{
 			ShipTypes.getShowType()[3] = 0;
 			}
 		}
-		if (input.enter.clicked && select == 7) game.setMenu(new MainMenu());
+		if (input.enter.clicked && select == 7) game.setMenu(new CustomShipMenu());
+		if (input.enter.clicked && select == 8) game.setMenu(new MainMenu());
 	}
 	
 	public void BackGroundrender(Graphics g){
