@@ -6,8 +6,10 @@ import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.Graphics;
+
 import com.greatdevs.Menu.*;
 import com.greatdevs.Save.Save;
+
 import java.awt.image.BufferStrategy;
 import java.awt.image.BufferedImage;
 
@@ -16,6 +18,7 @@ import javax.swing.JFrame;
 import com.greatdevs.Entity.Player;
 import com.greatdevs.GameUpdate.Update;
 import com.greatdevs.Image.Icons;
+import com.greatdevs.Image.ShipIcons;
 
 public class Game extends Canvas implements Runnable {
 	private static final long serialVersionUID = 1L;
@@ -33,6 +36,7 @@ public class Game extends Canvas implements Runnable {
 	
 	public InputHandler input = new InputHandler(this);
 	public Icons icons = new Icons();
+	public ShipIcons shipicons = new ShipIcons();
 	public Menu menu;
 	public Update update = new Update();
 	public Save save = new Save();
