@@ -1,4 +1,4 @@
-package com.greatdevs.Menu;
+package com.greatdevs.Menu.CustomShip;
 
 import java.awt.Color;
 import java.awt.Dimension;
@@ -12,30 +12,53 @@ import java.util.ArrayList;
 import javax.imageio.ImageIO;
 
 import com.greatdevs.Game;
+import com.greatdevs.InputHandler;
+import com.greatdevs.Menu.Menu;
 
 public class CustomShipMenu extends Menu{
-	public int x, y, width = 150, height = 150;
+	public int x, y, width, height;
 	public boolean MENU = false;
 	public String name = "name";
 	private double backgroundx = 0;
-	CSMPause menu;
+	public CSMenu menu;
+	
+	public DrawCSStats drawstats = new DrawCSStats();
+	public ShipComponents shipcomponents = new ShipComponents();
 	
 	public ArrayList<BufferedImage> components = new ArrayList<BufferedImage>();
 	public ArrayList<Dimension> componentsdimensions = new ArrayList<Dimension>();
 	public ArrayList<Color> componentscolors = new ArrayList<Color>();
 	 
-	public BufferedImage image = new BufferedImage(width, height, BufferedImage.TYPE_INT_ARGB);
+	//HP, maxspeed, reloadtime, price
+	public static final int[] shiptype = {5, 5, 25, 0};
+	
+	public BufferedImage shipimage;
 	
 	public CustomShipMenu(){
+		
+	}
+	
+	public void init(Game game, InputHandler input) {
+		this.input = input;
+		this.game = game;
+		setMenu(new AskSizeMenu());
+	}
+	
+	public void setSize(int width, int height){
+		this.width = width;
+		this.height = height;
+		
+		shipimage = new BufferedImage(width, height, BufferedImage.TYPE_INT_ARGB);
+		
 		x = (((Game.WIDTH * Game.SCALE) / 2) - (width / 2));
 		y = (((Game.HEIGHT * Game.SCALE) / 2) - (height / 2));
 		
-		addComponent(new BufferedImage(30, 30, BufferedImage.TYPE_INT_RGB), new Dimension(50, 50), new Rectangle(0,0,50,50));
-		addComponent(new BufferedImage(30, 30, BufferedImage.TYPE_INT_RGB), new Dimension(0, 0), new Rectangle(0,0,50,50));
-		addComponent(new BufferedImage(30, 30, BufferedImage.TYPE_INT_RGB), new Dimension(100, 100), new Rectangle(0,0,50,50));
+		addShipComponent(new BufferedImage(30, 30, BufferedImage.TYPE_INT_RGB), new Dimension(50, 50), new Rectangle(0,0,50,50));
+		addShipComponent(new BufferedImage(30, 30, BufferedImage.TYPE_INT_RGB), new Dimension(0, 0), new Rectangle(0,0,50,50));
+		addShipComponent(new BufferedImage(30, 30, BufferedImage.TYPE_INT_RGB), new Dimension(100, 100), new Rectangle(0,0,50,50));
 	}
 	
-	public void setMenu(CSMPause menu) {
+	public void setMenu(CSMenu menu) {
 		this.menu = menu;
 		if (menu != null) menu.init(game, input, this);
 		if (menu != null) MENU = true;
@@ -46,15 +69,18 @@ public class CustomShipMenu extends Menu{
 		BackGroundrender(g);
 		g.setColor(new Color(0,0,0,200));
 		g.fillRect(0, 0, Game.WIDTH * Game.SCALE, Game.HEIGHT * Game.SCALE);
+ 		g.setColor(Color.WHITE);
 		renderframe(g);
-		g.drawImage(image, x, y, null);
+		g.drawImage(shipimage, x, y, null);
+		drawstats.render(g, game, shiptype, shipimage, "Something");
+		shipcomponents.render(g, game, this);
 		if (MENU){
 			menu.render(g);
 		}
 	}
 	
 	public void renderShip(){
-		Graphics g = image.getGraphics();
+		Graphics g = shipimage.getGraphics();
 		g.drawImage(game.shipicons.bg, x, y, width, height, null);
 		for (BufferedImage bufferedimage : components){
 			for (Dimension dimension : componentsdimensions){
@@ -64,29 +90,36 @@ public class CustomShipMenu extends Menu{
 		g.dispose();
 	}
 	
-	public void addComponent(BufferedImage bufferedimage, Dimension dimension, Rectangle rectangle){
+	public void addShipComponent(BufferedImage bufferedimage, Dimension dimension, Rectangle rectangle){
 		Graphics g = bufferedimage.getGraphics();
 		g.fillRect((int) rectangle.getX(), (int) rectangle.getY(), (int) rectangle.getWidth(), (int) rectangle.getHeight());
 		componentsdimensions.add(dimension);
 		components.add(bufferedimage);
 	}
+	public void addComponentsStats(int[] component){
+		shiptype[0] += component[0];
+		shiptype[1] += component[1];
+		shiptype[2] += component[2];
+	}
+	
+	public void SaveShip(){
+			try {
+			    File outputfile = new File("C://Users//Public//SkySnipperIII//" + name + ".png");
+			    ImageIO.write(shipimage, "png", outputfile);
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+	}
 	
 	public void update(){
 		if (!MENU){
 		backgroundx += 0.5;
+		renderShip();
+		shipcomponents.update(game, input, this);
 		if (input.menu.clicked) setMenu(new CSMPause());
-		if (input.enter.clicked){
-			try {
-			    File outputfile = new File("C://Users//Public//SkySnipperIII//" + name + ".png");
-			    ImageIO.write(image, "png", outputfile);
-			} catch (IOException e) {
-				e.printStackTrace();
-			}
-		}
 		} else if (MENU){
 			menu.update();
 		}
-		renderShip();
 	}
 	
 	public void BackGroundrender(Graphics g){

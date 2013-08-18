@@ -7,6 +7,7 @@ import java.awt.image.BufferedImage;
 
 import com.greatdevs.Game;
 import com.greatdevs.Entity.ShipTypes;
+import com.greatdevs.Menu.CustomShip.CustomShipMenu;
 
 public class ShopMenu extends Menu{
 	private int select = 1;
