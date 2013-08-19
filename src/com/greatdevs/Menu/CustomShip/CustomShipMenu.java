@@ -16,7 +16,7 @@ import com.greatdevs.InputHandler;
 import com.greatdevs.Menu.Menu;
 
 public class CustomShipMenu extends Menu{
-	public int x, y, width, height;
+	public int x, y, width = 2, height = 2;
 	public boolean MENU = false;
 	public String name = "name";
 	private double backgroundx = 0;
@@ -24,15 +24,13 @@ public class CustomShipMenu extends Menu{
 	
 	public DrawCSStats drawstats = new DrawCSStats();
 	public ShipComponents shipcomponents = new ShipComponents();
-	
-	public ArrayList<BufferedImage> components = new ArrayList<BufferedImage>();
-	public ArrayList<Dimension> componentsdimensions = new ArrayList<Dimension>();
-	public ArrayList<Color> componentscolors = new ArrayList<Color>();
 	 
+	public ArrayList<component> componentsarray = new ArrayList<component>();
+	
 	//HP, maxspeed, reloadtime, price
 	public static final int[] shiptype = {5, 5, 25, 0};
 	
-	public BufferedImage shipimage;
+	public BufferedImage shipimage = new BufferedImage(width, height, BufferedImage.TYPE_INT_ARGB);;
 	
 	public CustomShipMenu(){
 		
@@ -52,10 +50,6 @@ public class CustomShipMenu extends Menu{
 		
 		x = (((Game.WIDTH * Game.SCALE) / 2) - (width / 2));
 		y = (((Game.HEIGHT * Game.SCALE) / 2) - (height / 2));
-		
-		addShipComponent(new BufferedImage(30, 30, BufferedImage.TYPE_INT_RGB), new Dimension(50, 50), new Rectangle(0,0,50,50));
-		addShipComponent(new BufferedImage(30, 30, BufferedImage.TYPE_INT_RGB), new Dimension(0, 0), new Rectangle(0,0,50,50));
-		addShipComponent(new BufferedImage(30, 30, BufferedImage.TYPE_INT_RGB), new Dimension(100, 100), new Rectangle(0,0,50,50));
 	}
 	
 	public void setMenu(CSMenu menu) {
@@ -72,8 +66,10 @@ public class CustomShipMenu extends Menu{
  		g.setColor(Color.WHITE);
 		renderframe(g);
 		g.drawImage(shipimage, x, y, null);
+		if (!MENU){
 		drawstats.render(g, game, shiptype, shipimage, "Something");
 		shipcomponents.render(g, game, this);
+		}
 		if (MENU){
 			menu.render(g);
 		}
@@ -82,20 +78,27 @@ public class CustomShipMenu extends Menu{
 	public void renderShip(){
 		Graphics g = shipimage.getGraphics();
 		g.drawImage(game.shipicons.bg, x, y, width, height, null);
-		for (BufferedImage bufferedimage : components){
-			for (Dimension dimension : componentsdimensions){
-		        g.drawImage(bufferedimage, (int) dimension.getWidth(), (int) dimension.getHeight(), null);
-			}
+		for (int i = 0; i < componentsarray.size(); i ++){
+			component componentclass = (component) componentsarray.get(i);
+		    g.drawImage(componentclass.component, componentclass.componentsrect.x, componentclass.componentsrect.y, componentclass.componentsrect.width, componentclass.componentsrect.height, null);
 		}
 		g.dispose();
 	}
 	
-	public void addShipComponent(BufferedImage bufferedimage, Dimension dimension, Rectangle rectangle){
-		Graphics g = bufferedimage.getGraphics();
-		g.fillRect((int) rectangle.getX(), (int) rectangle.getY(), (int) rectangle.getWidth(), (int) rectangle.getHeight());
-		componentsdimensions.add(dimension);
-		components.add(bufferedimage);
+	public void addShipComponent(BufferedImage bufferedimage, Rectangle rectangle){
+		componentsarray.add(new component(bufferedimage, rectangle));
 	}
+	
+	class component{
+		public BufferedImage component;
+		public Rectangle componentsrect;
+		
+		public component(BufferedImage bufferedimage, Rectangle rectangle){
+			this.component = bufferedimage;
+			this.componentsrect = rectangle;
+		}
+	}
+	
 	public void addComponentsStats(int[] component){
 		shiptype[0] += component[0];
 		shiptype[1] += component[1];
@@ -140,7 +143,7 @@ public class CustomShipMenu extends Menu{
 	
 	public void renderframe(Graphics g){
 		g.setColor(Color.BLUE);
-		g.fillRect(x - 5, y - 5, width + 10, height + 10);
+		g.drawRect(x - 2, y - 2, width + 4, height + 4);
 		g.setColor(Color.RED);
 		g.drawRect(x - 1, y - 1, width + 2, height + 2);
 	}

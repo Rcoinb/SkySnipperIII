@@ -58,7 +58,7 @@ public class AskSizeMenu extends CSMenu{
 		if (input.enter.clicked && select == 3){
 			if (game.update.gameworld.COINS >= price){
 			game.update.gameworld.COINS -= price;
-			csm.setMenu(null);
+			csm.setMenu(new CreateShipShapeMenu());
 			csm.setSize(width, height);
 			}
 		}
