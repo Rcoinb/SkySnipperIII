@@ -44,6 +44,7 @@ public class InputHandler implements KeyListener {
 	public Key power = new Key();
 	public Key menu = new Key();
 	public Key enter = new Key();
+	public Key backspace = new Key();
 
 	public void releaseAll() {
 		for (int i = 0; i < keys.size(); i++) {
@@ -86,6 +87,7 @@ public class InputHandler implements KeyListener {
 		if (ke.getKeyCode() == KeyEvent.VK_SPACE) attack.toggle(pressed);
 		if (ke.getKeyCode() == KeyEvent.VK_ENTER) enter.toggle(pressed);
 		if (ke.getKeyCode() == KeyEvent.VK_X) power.toggle(pressed);
+		if (ke.getKeyCode() == KeyEvent.VK_BACK_SPACE) backspace.toggle(pressed);
 	}
 
 	public void keyTyped(KeyEvent ke) {

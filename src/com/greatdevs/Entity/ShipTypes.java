@@ -1,8 +1,14 @@
 package com.greatdevs.Entity;
 
+import java.awt.image.BufferedImage;
+
 public class ShipTypes{
 	//HP, maxspeed, reloadtime, price
 	public static int t1p = 0, t2p = 250, t3p = 500, t4p = 1000, t5p = 2500, t6p = 5000;
+	
+	public static boolean ownType = false;
+	public static BufferedImage playerimage;
+	public static String name;
 	
 	public static int[] showtype = new int[5];
 	public static int[] type = new int[5];
@@ -35,6 +41,7 @@ public class ShipTypes{
 		if (t == 4) type = type4;
 		if (t == 5) type = type5;
 		if (t == 6) type = type6;
+		ownType = false;
 	}
 	
 	public static int getIntType(){
@@ -45,6 +52,13 @@ public class ShipTypes{
 		if (type.equals(type5)) return 5;
 		if (type.equals(type6)) return 6;
 		return 1;
+	}
+	
+	public static void setOwnType(int[] type, BufferedImage image, String name){
+		ownType = true;
+		ShipTypes.type = type;
+		ShipTypes.playerimage = image;
+		ShipTypes.name = name;
 	}
 	
 	public static String getShowPowerString(){

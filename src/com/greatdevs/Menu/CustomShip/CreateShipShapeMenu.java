@@ -1,15 +1,12 @@
 package com.greatdevs.Menu.CustomShip;
 
 import java.awt.Color;
-import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Rectangle;
 import java.util.ArrayList;
-
 import com.greatdevs.Game;
 import com.greatdevs.Image.ShipIcons;
-import com.greatdevs.Menu.ShopMenu;
 
 public class CreateShipShapeMenu extends CSMenu{
 	public int select = 0;
@@ -17,11 +14,11 @@ public class CreateShipShapeMenu extends CSMenu{
 	
 	ArrayList<ImageComponent> imagecomponents = new ArrayList<ImageComponent>();
 	
+	ComponentsList componentslist = new ComponentsList();
+	
 	public CreateShipShapeMenu(){
-		for(int i = 0; i < shipicons.component.length - 1; i ++){
-			imagecomponents.add(new ImageComponent(shipicons.component[i], new Rectangle(0, 0, shipicons.component[i].getWidth(), shipicons.component[i].getHeight()), i * 30000000));
-		}
-		imagecomponents.add(new ImageComponent(shipicons.component[18], new Rectangle(0, 0, shipicons.component[18].getWidth(), shipicons.component[18].getHeight()), 0));
+		componentslist.loadImageComponents(this, shipicons);
+		imagecomponents.add(new ImageComponent(shipicons.component[shipicons.component.length - 1], new Rectangle(0, 0, shipicons.component[shipicons.component.length - 1].getWidth(), shipicons.component[shipicons.component.length - 1].getHeight()), 0));
 		for (int i = 0; i < imagecomponents.size(); i ++){
 			ImageComponent imagecomponent = (ImageComponent) imagecomponents.get(i);
 		    imagecomponent.rectangle = new Rectangle(((Game.WIDTH * Game.SCALE) / 2) - (imagecomponent.image.getWidth() / 2), ((Game.HEIGHT * Game.SCALE) / 2) - (imagecomponent.image.getHeight() / 2) + 150, imagecomponent.image.getWidth(), imagecomponent.image.getHeight());
@@ -78,7 +75,7 @@ public class CreateShipShapeMenu extends CSMenu{
 				csm.setMenu(new PlaceComponentMenu(imagecomponent.image));
 				imagecomponents.removeAll(imagecomponents);
 			}
-			else if (input.enter.clicked && select == 18){
+			else if (input.enter.clicked && select == shipicons.component.length - 1){
 				csm.setMenu(null);
 			}
 	}

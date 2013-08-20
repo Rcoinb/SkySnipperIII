@@ -7,7 +7,7 @@ import java.awt.image.BufferedImage;
 
 import com.greatdevs.Game;
 import com.greatdevs.Entity.ShipTypes;
-import com.greatdevs.Menu.CustomShip.CustomShipMenu;
+import com.greatdevs.Menu.CustomShip.FirstMenu;
 
 public class ShopMenu extends Menu{
 	private int select = 1;
@@ -50,7 +50,16 @@ public class ShopMenu extends Menu{
 			imageh = image.getHeight();
 			drawimage = true;
 			ShipTypes.setShowType(select);
-	 		drawstats.render(g, game, ShipTypes.getShowType(), image, ShipTypes.getShowPowerString());   
+	 		drawstats.render(g, game, ShipTypes.getShowType(), image, ShipTypes.getShowPowerString(), false);   
+		}
+		if (select == 7){
+			if (ShipTypes.ownType){
+				image = ShipTypes.playerimage; 
+				imagew = image.getWidth();
+				imageh = image.getHeight();
+				g.drawImage(image, 500 - imagew / 2, 250 - imageh / 2, null);
+				drawstats.render(g, game, ShipTypes.getType(), image, "Random", true);   
+			}
 		}
 		if (select == 7) drawimage = false;
 		sy = select * 50 + 50;
@@ -60,14 +69,14 @@ public class ShopMenu extends Menu{
 		backgroundx += 0.5;
 		if (input.up.clicked) select --;
 		if (input.down.clicked) select ++;
-		if (input.enter.clicked && select != 7){
+		if (input.enter.clicked && select != 7 && select != 8){
 			if (game.update.gameworld.COINS >= ShipTypes.getShowType()[3]){
 			ShipTypes.setType(select);
 			game.update.gameworld.COINS -= ShipTypes.getShowType()[3];
 			ShipTypes.getShowType()[3] = 0;
 			}
 		}
-		if (input.enter.clicked && select == 7) game.setMenu(new CustomShipMenu());
+		if (input.enter.clicked && select == 7) game.setMenu(new FirstMenu());
 		if (input.enter.clicked && select == 8) game.setMenu(new MainMenu());
 	}
 	

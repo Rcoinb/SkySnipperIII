@@ -5,7 +5,6 @@ import java.awt.Font;
 import java.awt.Graphics;
 
 import com.greatdevs.Game;
-import com.greatdevs.Entity.ShipTypes;
 import com.greatdevs.Menu.ShopMenu;
 
 public class AskSizeMenu extends CSMenu{
@@ -62,7 +61,7 @@ public class AskSizeMenu extends CSMenu{
 			csm.setSize(width, height);
 			}
 		}
-		if (input.enter.clicked && select == 4) game.setMenu(new ShopMenu());
+		if (input.enter.clicked && select == 4) game.setMenu(new FirstMenu());
 		
 		if (input.left.clicked && select == 1) width -= 10;
 		if (input.right.clicked && select == 1) width += 10;

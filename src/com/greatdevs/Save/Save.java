@@ -1,6 +1,10 @@
 package com.greatdevs.Save;
 
+import java.awt.image.BufferedImage;
 import java.io.*;
+
+import javax.imageio.ImageIO;
+
 import com.greatdevs.Game;
 import com.greatdevs.Entity.ShipTypes;
 
@@ -25,7 +29,13 @@ public void savegame() throws Exception{
 	    saveFile.write(ShipTypes.type4[3] + "\n");
 	    saveFile.write(ShipTypes.type5[3] + "\n");
 	    saveFile.write(ShipTypes.type6[3] + "\n");
-	    saveFile.write(ShipTypes.getIntType() + "\n");
+	    if (!ShipTypes.ownType){
+	    	saveFile.write(ShipTypes.getIntType() + "\n");
+	    }
+	    else if (ShipTypes.ownType){
+	    	saveFile.write("7" + "\n");
+	    	saveFile.write(ShipTypes.name + "\n");
+	    }
 	    saveFile.write("\n");
 	    
 	    // All done, close the FileWriter.
@@ -52,7 +62,11 @@ public void loadgame() throws Exception{
 	    ShipTypes.type4[3] = Integer.parseInt(saveFile.readLine());
 	    ShipTypes.type5[3] = Integer.parseInt(saveFile.readLine());
 	    ShipTypes.type6[3] = Integer.parseInt(saveFile.readLine());
-	    ShipTypes.setType(Integer.parseInt(saveFile.readLine()));
+	    int t = Integer.parseInt(saveFile.readLine());
+	    if (t != 7) ShipTypes.setType(t);
+	    else if (t == 7){
+	    	loadtype(saveFile.readLine());
+	    }
 	    } 
 	    // Not needed, but read blank line at the bottom.
 	    saveFile.readLine(); 
@@ -60,13 +74,38 @@ public void loadgame() throws Exception{
 	    saveFile.close();
 }
 
+public void loadtype(String name) throws Exception{
+    BufferedReader saveFile =  new BufferedReader(new FileReader(new File("C://Users//Public//SkySnipperIII//Ships//" + name + ".txt")));
+	saveFile.readLine();
+	int[] type = new int[4];
+	
+	type[0] = Integer.parseInt(saveFile.readLine());
+	type[1] = Integer.parseInt(saveFile.readLine());
+	type[2] = Integer.parseInt(saveFile.readLine());
+	type[3] = Integer.parseInt(saveFile.readLine());
+	
+	BufferedImage image = ImageIO.read(new File("C://Users//Public//SkySnipperIII//Ships//" + name + ".png"));
+	
+	ShipTypes.setOwnType(type, image, name);
+}
+
 public void createdirectory(){
 	File ff = new File("C://Users//Public//SkySnipperIII");
 	try{
 	if(ff.mkdir())
-	System.out.println("Directory Created");
+	System.out.println("Directory SkySnipperIII Created");
 	else
-	System.out.println("Directory is not created");
+	System.out.println("Directory SkySnipperIII is not created");
+	}catch(Exception e){
+	e.fillInStackTrace();
+	} 
+	
+	File fff = new File("C://Users//Public//SkySnipperIII//Ships");
+	try{
+	if(fff.mkdir())
+	System.out.println("Directory Ships Created");
+	else
+	System.out.println("Directory Ships is not created");
 	}catch(Exception e){
 	e.fillInStackTrace();
 	} 

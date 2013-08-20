@@ -10,6 +10,7 @@ public class PlayerFireDraw {
 		if (animation >= 4){
 			animation = 0;
 		}
+		if (!ShipTypes.ownType){
 		if (ShipTypes.getIntType() == 1){
 			g.drawImage(player.icons.fire[(int) animation], player.x - 25, player.y + player.height / 2 - 23, 35, 20, null);
 			g.drawImage(player.icons.fire[(int) animation], player.x - 25, player.y + player.height / 2 - 13, 35, 25, null);
@@ -38,6 +39,12 @@ public class PlayerFireDraw {
 		}
 		if (ShipTypes.getIntType() == 6){
 			g.drawImage(player.icons.fire[(int) animation], player.x - 35, player.y + player.height / 2 - 25, 50, 50, null); 
+		}
+		}
+		else if (ShipTypes.ownType){
+			g.drawImage(player.icons.fire[(int) animation], player.x - 25, player.y + player.height / 2 - 23, 35, 20, null);
+			g.drawImage(player.icons.fire[(int) animation], player.x - 25, player.y + player.height / 2 - 13, 35, 25, null);
+			g.drawImage(player.icons.fire[(int) animation], player.x - 25, player.y + player.height / 2 + 3, 35, 20, null);
 		}
 	}
 }

@@ -8,51 +8,24 @@ import java.util.ArrayList;
 
 import com.greatdevs.Game;
 import com.greatdevs.InputHandler;
-import com.greatdevs.Entity.ShipTypes;
-import com.greatdevs.GameWorld.GameWorld;
 import com.greatdevs.Image.Icons;
+import com.greatdevs.Image.ShipIcons;
 
 public class ShipComponents {
 	
 	public int sy;
 	public int select;
+
 	private int yOffset;
 	
 	public ArrayList<Component> components = new ArrayList<Component>();
 	
+	ComponentsList componentslist = new ComponentsList();
 	Icons icons = new Icons();
+	ShipIcons shipcicons = new ShipIcons();
 	
 	public ShipComponents(){
-		components.add(new Component(1, 5, 5, 50000000, icons.player[2], 1));
-		components.add(new Component(2, 5, 5, 50, icons.player[3], 2));
-		components.add(new Component(3, 5, 5, 50, icons.player[3], 3));
-		components.add(new Component(4, 5, 5, 50, icons.player[3], 4));
-		components.add(new Component(5, 5, 5, 50, icons.player[3], 5));
-		components.add(new Component(6, 5, 5, 50, icons.player[3], 6));
-		components.add(new Component(7, 5, 5, 50, icons.player[3], 7));
-		components.add(new Component(8, 5, 5, 50, icons.player[3], 8));
-		components.add(new Component(9, 5, 5, 50, icons.player[3], 9));
-		components.add(new Component(0, 5, 5, 50, icons.player[3], 10));
-		components.add(new Component(23, 5, 5, 50, icons.player[4], 11));
-		components.add(new Component(4, 5, 5, 50, icons.player[4], 12));
-		components.add(new Component(5, 5, 5, 50, icons.player[4], 13));
-		components.add(new Component(5, 5, 5, 50, icons.player[4], 14));
-		components.add(new Component(5, 5, 5, 50, icons.player[4], 15));
-		components.add(new Component(5, 5, 5, 50, icons.player[2], 16));
-		components.add(new Component(5, 5, 5, 50, icons.player[3], 17));
-		components.add(new Component(5, 5, 5, 50, icons.player[3], 18));
-		components.add(new Component(5, 5, 5, 50, icons.player[3], 19));
-		components.add(new Component(5, 5, 5, 50, icons.player[3], 20));
-		components.add(new Component(5, 5, 5, 50, icons.player[3], 21));
-		components.add(new Component(5, 5, 5, 50, icons.player[3], 22));
-		components.add(new Component(5, 5, 5, 50, icons.player[3], 23));
-		components.add(new Component(5, 5, 5, 50, icons.player[2], 24));
-		components.add(new Component(5, 5, 5, 50, icons.player[3], 25));
-		components.add(new Component(5, 5, 5, 50, icons.player[3], 26));
-		components.add(new Component(5, 5, 5, 50, icons.player[3], 27));
-		components.add(new Component(5, 5, 5, 50, icons.player[3], 28));
-		components.add(new Component(5, 5, 5, 50, icons.player[3], 29));
-		components.add(new Component(5, 5, 5, 50, icons.player[0], 30));
+		componentslist.loadStatsComponents(this, icons, shipcicons);
 	}
 	
 	public Rectangle getSelectRect(){
@@ -85,6 +58,7 @@ public class ShipComponents {
 			if (component.isSelected(getSelectRect())){
 				g.setFont(new Font("Arial", Font.BOLD, 10));
 				int cy = component.rect.y;
+				if (component.id != 0){
 				g.setColor(Color.BLUE);
 				g.fillRoundRect(50, cy, 150, 50, 25, 25);
 				g.setColor(Color.BLACK);
@@ -94,6 +68,7 @@ public class ShipComponents {
 				g.drawString("Speed +" + component.getComponentStats()[1], 110, cy + 20);
 				g.drawString("Reload speed +" + component.getComponentStats()[2], 60, cy + 30);
 				g.drawString("Price " + component.getComponentStats()[3], 60, cy + 40);
+				}
 				
 				
 				
@@ -122,9 +97,16 @@ public class ShipComponents {
 		for(int i = 0; i < components.size(); i ++){
 			Component component = (Component) components.get(i);
 			if (component.isSelected(getSelectRect())){
+				if (component.getID() != 0){
 				if (input.enter.clicked && game.update.gameworld.COINS >= component.getComponentStats()[3]){
 					game.update.gameworld.COINS -= component.getComponentStats()[3];
 					csm.addComponentsStats(component.getComponentStats());
+				}
+				}
+				else if (component.getID() == 0){
+					if (input.enter.clicked){
+						csm.setMenu(new SaveShipMenu());;
+					}
 				}
 			}
 		}

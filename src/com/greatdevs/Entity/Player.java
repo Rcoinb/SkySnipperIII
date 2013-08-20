@@ -5,6 +5,8 @@ import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Rectangle;
 import java.awt.image.BufferedImage;
+import java.util.Random;
+
 import com.greatdevs.Game;
 import com.greatdevs.Entity.SuperPower.*;
 import com.greatdevs.Image.Icons;
@@ -113,7 +115,8 @@ public class Player{
 		if (x > 450 && x <= 550) speed = 1;
 		if (x > 600) x = 600;
 		
-		image = game.icons.player[type[4]];
+		if (!ShipTypes.ownType) image = game.icons.player[type[4]];
+		else if (ShipTypes.ownType) image = ShipTypes.playerimage;
 		
 		width = image.getWidth();
 		height = image.getHeight();
@@ -163,6 +166,7 @@ public class Player{
 	}
 	
 	public void firebullet(){
+		if (!ShipTypes.ownType){
 		if (ShipTypes.getIntType() == 1){
 			game.update.entity.bulletarray.add(new Bullet((x + getRect().width),(y + 20),25));
 			game.update.entity.bulletarray.add(new Bullet((x + getRect().width),(y + getRect().height - 20),25));
@@ -186,6 +190,11 @@ public class Player{
 			game.update.entity.bulletarray.add(new Bullet((x + getRect().width),(y + 10),25));
 			game.update.entity.bulletarray.add(new Bullet((x + getRect().width),(y + getRect().height - 10),25));
 		}
+		}
+		else if (ShipTypes.ownType){
+			game.update.entity.bulletarray.add(new Bullet((x + getRect().width),(y + 20),25));
+			game.update.entity.bulletarray.add(new Bullet((x + getRect().width),(y + getRect().height - 20),25));
+		}
 	}
 	
 	public void magnetbonus(){
@@ -200,12 +209,24 @@ public class Player{
 	
 	public void power(Game game){
 		if (game.input.power.clicked && !superpowerinuse){
+			if (!ShipTypes.ownType){
 			if (ShipTypes.getIntType() == 1) setsuperpower(new P1Power());
 			if (ShipTypes.getIntType() == 2) setsuperpower(new P2Power());
 			if (ShipTypes.getIntType() == 3) setsuperpower(new P3Power());
 			if (ShipTypes.getIntType() == 4) setsuperpower(new P4Power());
 			if (ShipTypes.getIntType() == 5) setsuperpower(new P5Power());
 		    if (ShipTypes.getIntType() == 6) setsuperpower(new P6Power());
+			}
+			else if (ShipTypes.ownType){
+				Random r = new Random();
+				int i = r.nextInt(6) + 1;
+				if (i == 1) setsuperpower(new P1Power());
+				if (i == 2) setsuperpower(new P2Power());
+				if (i == 3) setsuperpower(new P3Power());
+				if (i == 4) setsuperpower(new P4Power());
+				if (i == 5) setsuperpower(new P5Power());
+			    if (i == 6) setsuperpower(new P6Power()); 
+			}
 		}
 	}
 }

@@ -16,6 +16,7 @@ import java.awt.image.BufferedImage;
 import javax.swing.JFrame;
 
 import com.greatdevs.Entity.Player;
+import com.greatdevs.Entity.ShipTypes;
 import com.greatdevs.GameUpdate.Update;
 import com.greatdevs.Image.Icons;
 import com.greatdevs.Image.ShipIcons;

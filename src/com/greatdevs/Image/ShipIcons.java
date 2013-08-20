@@ -34,7 +34,7 @@ public class ShipIcons {
     	   component[15] = ss.grabSprite(0, 60, 100, 50);
     	   component[16] = ss.grabSprite(0, 110, 100, 50);
     	   component[17] = ss.grabSprite(100, 60, 100, 50);
-    	   component[18] = ss.grabSprite(950, 0, 50, 50);
+    	   component[component.length - 1] = ss.grabSprite(950, 0, 50, 50);
     	   
     	   bg = ss.grabSprite(999, 999, 1, 1);
        }

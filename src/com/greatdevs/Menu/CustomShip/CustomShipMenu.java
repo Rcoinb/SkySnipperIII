@@ -1,15 +1,10 @@
 package com.greatdevs.Menu.CustomShip;
 
 import java.awt.Color;
-import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.Rectangle;
 import java.awt.image.BufferedImage;
-import java.io.File;
-import java.io.IOException;
 import java.util.ArrayList;
-
-import javax.imageio.ImageIO;
 
 import com.greatdevs.Game;
 import com.greatdevs.InputHandler;
@@ -18,7 +13,6 @@ import com.greatdevs.Menu.Menu;
 public class CustomShipMenu extends Menu{
 	public int x, y, width = 2, height = 2;
 	public boolean MENU = false;
-	public String name = "name";
 	private double backgroundx = 0;
 	public CSMenu menu;
 	
@@ -28,7 +22,7 @@ public class CustomShipMenu extends Menu{
 	public ArrayList<component> componentsarray = new ArrayList<component>();
 	
 	//HP, maxspeed, reloadtime, price
-	public static final int[] shiptype = {5, 5, 25, 0};
+	public int[] shiptype = {5, 5, 25, 0};
 	
 	public BufferedImage shipimage = new BufferedImage(width, height, BufferedImage.TYPE_INT_ARGB);;
 	
@@ -67,7 +61,7 @@ public class CustomShipMenu extends Menu{
 		renderframe(g);
 		g.drawImage(shipimage, x, y, null);
 		if (!MENU){
-		drawstats.render(g, game, shiptype, shipimage, "Something");
+		drawstats.render(g, game, shiptype, shipimage, "Random");
 		shipcomponents.render(g, game, this);
 		}
 		if (MENU){
@@ -105,21 +99,11 @@ public class CustomShipMenu extends Menu{
 		shiptype[2] += component[2];
 	}
 	
-	public void SaveShip(){
-			try {
-			    File outputfile = new File("C://Users//Public//SkySnipperIII//" + name + ".png");
-			    ImageIO.write(shipimage, "png", outputfile);
-			} catch (IOException e) {
-				e.printStackTrace();
-			}
-	}
-	
 	public void update(){
 		if (!MENU){
 		backgroundx += 0.5;
 		renderShip();
 		shipcomponents.update(game, input, this);
-		if (input.menu.clicked) setMenu(new CSMPause());
 		} else if (MENU){
 			menu.update();
 		}

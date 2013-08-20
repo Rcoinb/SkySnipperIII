@@ -8,7 +8,7 @@ import com.greatdevs.Game;
 import com.greatdevs.Entity.ShipTypes;
 
 public class DrawStats {
-	public void render(Graphics g, Game game, int[] type, BufferedImage image, String string){
+	public void render(Graphics g, Game game, int[] type, BufferedImage image, String string, boolean own){
 		g.setColor(new Color(0,0,0,225));
  		g.fillRect(((Game.WIDTH * Game.SCALE) - ((Game.WIDTH * Game.SCALE) / 4)), 0, (Game.WIDTH * Game.SCALE) / 4, Game.HEIGHT * Game.SCALE);
  		g.setColor(Color.WHITE);
@@ -41,6 +41,7 @@ public class DrawStats {
 		int titlew = (int) g.getFontMetrics().getStringBounds("Coins " + game.update.gameworld.COINS, g).getWidth();
 		g.drawString("Coins " + game.update.gameworld.COINS, (((Game.WIDTH  * Game.SCALE) / 2) - (titlew / 2)), 470);
 	
+		if (!own){
 		if (game.update.gameworld.COINS < ShipTypes.getShowType()[3]){
 			g.setColor(Color.RED);
 			g.setFont(new Font("Arial", Font.BOLD, 25));
@@ -53,7 +54,6 @@ public class DrawStats {
 			g.setFont(new Font("Arial", Font.BOLD, 25));
 			int title3w = (int) g.getFontMetrics().getStringBounds("Selected", g).getWidth();
 			g.drawString("Selected", (((Game.WIDTH  * Game.SCALE) / 2) - (title3w / 2)), 30);
-
 		}
 		
 		if (ShipTypes.getShowType()[3] == 0 && !ShipTypes.getType().equals(ShipTypes.getShowType())){
@@ -70,6 +70,13 @@ public class DrawStats {
 			int title5w = (int) g.getFontMetrics().getStringBounds("You can buy it", g).getWidth();
 			g.drawString("You can buy it", (((Game.WIDTH  * Game.SCALE) / 2) - (title5w / 2)), 30);
 
+		}
+		}
+		else if (own){
+			g.setColor(Color.WHITE);
+			g.setFont(new Font("Arial", Font.BOLD, 25));
+			int title3w = (int) g.getFontMetrics().getStringBounds("Selected", g).getWidth();
+			g.drawString("Selected", (((Game.WIDTH  * Game.SCALE) / 2) - (title3w / 2)), 30);
 		}
 	}
 }
