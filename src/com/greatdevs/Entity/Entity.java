@@ -104,7 +104,7 @@ public class Entity {
 			Boss boss = (Boss) bossarray.get(i);
 			boss.update(game);
 		}
-		collision(game);
+		if (!Game.MENU) collision(game);
 	}
 	
 	public void collision(Game game){

@@ -5,8 +5,9 @@ import java.awt.image.BufferedImage;
 public class ShipIcons {
 	SpriteSheet ss;
 	
-	public BufferedImage bg;
+	public BufferedImage bg, used;
 	public BufferedImage[] component = new BufferedImage[19];
+	public BufferedImage[] chip = new BufferedImage[3];
 	
 	public ShipIcons(){
 	   BufferedIL loader = new  BufferedIL();
@@ -35,6 +36,12 @@ public class ShipIcons {
     	   component[16] = ss.grabSprite(0, 110, 100, 50);
     	   component[17] = ss.grabSprite(100, 60, 100, 50);
     	   component[component.length - 1] = ss.grabSprite(950, 0, 50, 50);
+    	   
+    	   chip[0] = ss.grabSprite(0, 800, 50, 50);
+    	   chip[1] = ss.grabSprite(0, 850, 50, 50);
+    	   chip[2] = ss.grabSprite(0, 900, 50, 50);
+    	   
+    	   used = ss.grabSprite(0, 750, 50, 50);
     	   
     	   bg = ss.grabSprite(999, 999, 1, 1);
        }

@@ -84,9 +84,12 @@ public void loadtype(String name) throws Exception{
 	type[2] = Integer.parseInt(saveFile.readLine());
 	type[3] = Integer.parseInt(saveFile.readLine());
 	
+	saveFile.close();
+	
 	BufferedImage image = ImageIO.read(new File("C://Users//Public//SkySnipperIII//Ships//" + name + ".png"));
 	
 	ShipTypes.setOwnType(type, image, name);
+	
 }
 
 public void createdirectory(){

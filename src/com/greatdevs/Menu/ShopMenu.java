@@ -32,11 +32,11 @@ public class ShopMenu extends Menu{
 		g.setColor(Color.WHITE);
 		g.setFont(new Font("Arial", Font.BOLD, 25));
 		g.drawString("Shop", 25, 50);
-		g.drawString("Player1", 25, 100);
-		g.drawString("Player2", 25, 150);	
-		g.drawString("Player3", 25, 200);	
-		g.drawString("Player4", 25, 250);	
-		g.drawString("Player5", 25, 300);	
+		g.drawString("Killer", 25, 100);
+		g.drawString("Small One", 25, 150);	
+		g.drawString("Boomerang", 25, 200);	
+		g.drawString("Cool Ship", 25, 250);	
+		g.drawString("Gold Dealer", 25, 300);	
 		g.drawString("Drakula", 25, 350);
 		g.drawString("Custom ship", 25, 400);
 		g.drawString("Exit", 25, 450);	

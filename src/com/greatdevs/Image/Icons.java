@@ -68,8 +68,8 @@ public class Icons {
     	   fire[3] = ss.grabSprite(50 * 3, 200, 50, 50);
     	   
     	   boss[0] = ss.grabSprite(0, 250, 200, 100);
-    	   boss[1] = null;
-    	   boss[2] = null;
+    	   boss[1] = ss.grabSprite(0, 350, 100, 100);
+    	   boss[2] = ss.grabSprite(0, 450, 100, 70);
        }
        catch(Exception e){
     	   e.printStackTrace();

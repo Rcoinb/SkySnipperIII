@@ -6,17 +6,13 @@ import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.Graphics;
-
 import com.greatdevs.Menu.*;
 import com.greatdevs.Save.Save;
-
 import java.awt.image.BufferStrategy;
 import java.awt.image.BufferedImage;
-
 import javax.swing.JFrame;
 
 import com.greatdevs.Entity.Player;
-import com.greatdevs.Entity.ShipTypes;
 import com.greatdevs.GameUpdate.Update;
 import com.greatdevs.Image.Icons;
 import com.greatdevs.Image.ShipIcons;
@@ -189,7 +185,7 @@ public class Game extends Canvas implements Runnable {
 		bs.show();
 	}
 
-	public static void main(String[] args) {
+	public static void SetupGame(){
 		Game game = new Game();
 		game.setMinimumSize(new Dimension(WIDTH * SCALE, HEIGHT * SCALE));
 		game.setMaximumSize(new Dimension(WIDTH * SCALE, HEIGHT * SCALE));
@@ -205,5 +201,9 @@ public class Game extends Canvas implements Runnable {
 		
 		game.save.createdirectory();
 		game.start();
+	}
+	
+	public static void main(String[] args) {
+		SetupGame();
 	}
 }

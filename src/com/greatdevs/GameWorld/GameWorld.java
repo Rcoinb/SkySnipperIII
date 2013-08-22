@@ -52,7 +52,7 @@ public class GameWorld {
 			bossspawntime ++;
 		}
 		if (bossspawntime >= 3500){
-            addBoss((new Random().nextInt(1) + 1), game);
+            addBoss((new Random().nextInt(3) + 1), game);
 			bossspawntime = 0;
 		}
 		if (spawntime > maxspawntime){
@@ -95,6 +95,8 @@ public class GameWorld {
 	
 	public void addBoss(int type, Game game){
 		if (type == 1) game.update.entity.bossarray.add(new Boss1());
+		if (type == 2) game.update.entity.bossarray.add(new Boss2());
+		if (type == 3) game.update.entity.bossarray.add(new Boss3());
 	}
 	
 	public void restartGame(Game game){
@@ -104,8 +106,6 @@ public class GameWorld {
 		speeddown = false; speeddowntime = 0; speedcash = objectspeed; shopshipspawntime = 0; bossspawntime = 0;
 		game.setMenu(null);
 		game.update.entity.playerarray.add(new Player(0, (((Game.HEIGHT * Game.SCALE) / 2)) - (game.update.entity.playerheight / 2)));
-	
-		game.update.entity.bossarray.add(new Boss2());
 	}
 	
 	public void lose(Game game){

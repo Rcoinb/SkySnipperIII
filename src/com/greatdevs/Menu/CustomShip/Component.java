@@ -6,7 +6,7 @@ import java.awt.image.BufferedImage;
 public class Component {
 	public int hp, maxspeed, reloadtime, price, id;
 	public Rectangle rect;
-	public boolean selected = false;
+	public boolean selected = false, used = false;
 	public BufferedImage image = null;
 	
 	public Component(int hp, int maxspeed, int reloadtime, int price, BufferedImage image, int id){

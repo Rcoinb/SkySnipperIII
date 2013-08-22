@@ -12,6 +12,7 @@ import com.greatdevs.Entity.Bullet;
 import com.greatdevs.Entity.Explosion;
 import com.greatdevs.Entity.Player;
 import com.greatdevs.Entity.Star;
+import com.greatdevs.Image.Icons;
 
 public class Boss2 extends Boss{
 	public int x = 1000, y, width = 150, height = 150, firetime = 0, gensp1 = 0;
@@ -19,6 +20,8 @@ public class Boss2 extends Boss{
 	
 	ArrayList<bullet> bbulletarray = new ArrayList<bullet>();
 	ArrayList<sp1> sp1array = new ArrayList<sp1>();
+	
+	Icons icons = new Icons();
 	
 	public Boss2(){
 		hp = 75;
@@ -29,7 +32,7 @@ public class Boss2 extends Boss{
 	}
 	
 	public void render(Graphics g){
-		g.fillRect(getRect().x, getRect().y, getRect().width, getRect().height);
+		g.drawImage(icons.boss[1], getRect().x, getRect().y, getRect().width, getRect().height, null);
 		
 		for (final bullet bull : bbulletarray){
 			bull.render(g);

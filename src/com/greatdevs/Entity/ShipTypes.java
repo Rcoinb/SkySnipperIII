@@ -64,8 +64,8 @@ public class ShipTypes{
 	public static String getShowPowerString(){
 		if (getShowType().equals(type1)) return "Kill all stars";
 		if (getShowType().equals(type2)) return "Small ship, HP from stars";
-		if (getShowType().equals(type3)) return "Something &s";
-		if (getShowType().equals(type4)) return "Something &s";
+		if (getShowType().equals(type3)) return "Shield and mangnet";
+		if (getShowType().equals(type4)) return "Star killer";
 		if (getShowType().equals(type5)) return "Stars to coins";
 		if (getShowType().equals(type6)) return "Drakula laser";
 		return "Something &s";

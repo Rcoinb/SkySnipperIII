@@ -5,7 +5,6 @@ import java.awt.Font;
 import java.awt.Graphics;
 
 import com.greatdevs.Game;
-import com.greatdevs.Menu.ShopMenu;
 
 public class AskSizeMenu extends CSMenu{
 	public int select = 1;

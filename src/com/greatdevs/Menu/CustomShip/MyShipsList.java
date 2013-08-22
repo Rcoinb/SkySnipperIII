@@ -12,6 +12,7 @@ import java.util.ArrayList;
 import javax.imageio.ImageIO;
 
 import com.greatdevs.Game;
+import com.greatdevs.InputHandler;
 import com.greatdevs.Entity.ShipTypes;
 import com.greatdevs.Menu.DrawStats;
 import com.greatdevs.Menu.Menu;
@@ -27,6 +28,12 @@ public class MyShipsList extends Menu{
 	ArrayList<ship> ships = new ArrayList<ship>();
 	
 	public MyShipsList(){
+		
+	}
+	
+	public void init(Game game, InputHandler input) {
+		this.input = input;
+		this.game = game;
 		try {
 			readlist();
 		} catch (Exception e) {
@@ -38,7 +45,6 @@ public class MyShipsList extends Menu{
 		try{ 
         String inputLine;      
         BufferedReader reader = new BufferedReader(new FileReader(new File("C://Users//Public//SkySnipperIII//Ships//list.txt")));
-     //   BufferedReader reader = new BufferedReader(new FileReader(new File("C://Users//Public//SkySnipperIII//Ships//list.txt")));
         inputLine = reader.readLine();          
        while (null != (inputLine = reader.readLine()))   
        {  
@@ -47,6 +53,7 @@ public class MyShipsList extends Menu{
        reader.close();
 	    }
 		catch(Exception e){
+			game.setMenu(new FirstMenu());
 			e.printStackTrace();
 		}
 	}
@@ -167,6 +174,7 @@ public class MyShipsList extends Menu{
 			    type[3] = Integer.parseInt(saveFile.readLine());
 			    
 			    image = ImageIO.read(new File("C://Users//Public//SkySnipperIII//Ships//" + name + ".png"));
+			    saveFile.close();
 		}
 	}
 	
