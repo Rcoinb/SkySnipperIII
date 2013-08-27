@@ -12,6 +12,7 @@ import com.greatdevs.Entity.Explosion;
 import com.greatdevs.Entity.Player;
 import com.greatdevs.Entity.Star;
 import com.greatdevs.Image.Icons;
+import com.greatdevs.Sound.Sound;
 
 public class Boss1 extends Boss{
 	public int x = 1000, y, width = 200, height = 100, firetime = 0, gensp1 = 0, gensp2 = 0;
@@ -115,6 +116,7 @@ public class Boss1 extends Boss{
 					bbulletarray.remove(i);
 					player.hp --;
 					player.printhp();
+					Sound.shoot.play();
 				}
 			}
 			if (bull.x < 0 - (bull.getRect().width)) bbulletarray.remove(i);
@@ -122,7 +124,10 @@ public class Boss1 extends Boss{
 		for(Player player : game.update.entity.playerarray){
 			if (y < player.y) y += 5;
 			if ((y + height) > player.y + player.height) y -= 5;		
-			if ((new Rectangle(player.x, y, width, height).intersects(player.getRect())) && canfire) bbulletarray.add(new bullet(x, y + (height / 2) - 1, 25, this)); 
+			if ((new Rectangle(player.x, y, width, height).intersects(player.getRect())) && canfire){
+				bbulletarray.add(new bullet(x, y + (height / 2) - 1, 25, this)); 
+				Sound.shootpressed.play();
+			}
 		}
 		
 		for (int i = 0; i < game.update.entity.bulletarray.size(); i ++){
@@ -131,6 +136,7 @@ public class Boss1 extends Boss{
 				game.update.entity.explosionarray.add(new Explosion(bullet.x, bullet.y));
 				game.update.entity.bulletarray.remove(i);
 				hp --;
+				Sound.shoot.play();
 			}
 		}
 	}
@@ -157,6 +163,9 @@ public class Boss1 extends Boss{
 	
 	class sp1{
 		public int spx, spy, spw, sph, timer;
+		public sp1(){
+			Sound.bosssuperpower.play();
+		}
 		public Rectangle getSPRect(){
 			return new Rectangle(spx, spy, spw, sph);
 		}
@@ -182,6 +191,9 @@ public class Boss1 extends Boss{
 	
 	class sp2{
 		public int spx, spy, spw = 2000, sph = 2000;
+		public sp2(){
+			Sound.bosssuperpower.play();
+		}
 		public Rectangle getSPRect(){
 			return new Rectangle(spx, spy, spw, sph);
 		}

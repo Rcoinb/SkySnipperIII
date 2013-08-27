@@ -10,6 +10,7 @@ import java.util.Random;
 import com.greatdevs.Game;
 import com.greatdevs.Entity.SuperPower.*;
 import com.greatdevs.Image.Icons;
+import com.greatdevs.Sound.Sound;
 
 public class Player{
 	public int x, y, width, height, speed, maxspeed, hp, maxhp, reloadtime;
@@ -108,6 +109,7 @@ public class Player{
 		if (regun > reloadtime && game.input.attack.clicked){		
 		firebullet();
 		regun = 0;
+		Sound.shootpressed.play();
 		}
 		
 		if (x <= 350) speed = maxspeed;
@@ -227,6 +229,7 @@ public class Player{
 				if (i == 5) setsuperpower(new P5Power());
 			    if (i == 6) setsuperpower(new P6Power()); 
 			}
+			Sound.superpower.play();
 		}
 	}
 }

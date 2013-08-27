@@ -4,7 +4,10 @@ import java.awt.Graphics;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.net.URL;
+
 import javax.imageio.ImageIO;
+
+import com.greatdevs.Sound.Sound;
 
 public class GDMenu extends Menu{
 	
@@ -25,6 +28,7 @@ public class GDMenu extends Menu{
 			game.setMenu(new MainMenu());
 		}
 		if (input.menu.clicked || input.enter.clicked || input.attack.clicked) game.setMenu(new MainMenu());
+		if (input.attack.clicked) Sound.button.play();
 	}
 	
     public BufferedImage loadImage(String way){

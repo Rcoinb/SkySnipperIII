@@ -13,6 +13,7 @@ import com.greatdevs.Entity.Explosion;
 import com.greatdevs.Entity.Player;
 import com.greatdevs.Entity.Star;
 import com.greatdevs.Image.Icons;
+import com.greatdevs.Sound.Sound;
 
 public class Boss2 extends Boss{
 	public int x = 1000, y, width = 150, height = 150, firetime = 0, gensp1 = 0;
@@ -98,6 +99,7 @@ public class Boss2 extends Boss{
 					bbulletarray.remove(i);
 					player.hp --;
 					player.printhp();
+					Sound.shoot.play();
 				}
 			}
 			if (bull.x < 0 - (bull.getRect().width)) bbulletarray.remove(i);
@@ -108,6 +110,7 @@ public class Boss2 extends Boss{
 			if ((new Rectangle(player.x, y, width, height).intersects(player.getRect())) && canfire){
 				bbulletarray.add(new bullet(x, y + (height / 2) - 25, 25, this)); 
 				bbulletarray.add(new bullet(x, y + (height / 2) + 25, 25, this)); 
+				Sound.shootpressed.play();
 			}
 		}
 		
@@ -117,6 +120,7 @@ public class Boss2 extends Boss{
 				game.update.entity.explosionarray.add(new Explosion(bullet.x, bullet.y));
 				game.update.entity.bulletarray.remove(i);
 				hp --;
+				Sound.shoot.play();
 			}
 		}
 	}
@@ -144,6 +148,9 @@ public class Boss2 extends Boss{
 	
 	class sp1{
 		boolean finish = false;
+		public sp1(){
+			Sound.bosssuperpower.play();
+		}
 		public void render(Graphics g){
 		
 		}		

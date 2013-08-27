@@ -6,10 +6,14 @@ import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.Graphics;
+
 import com.greatdevs.Menu.*;
 import com.greatdevs.Save.Save;
+import com.greatdevs.Sound.Sound;
+
 import java.awt.image.BufferStrategy;
 import java.awt.image.BufferedImage;
+
 import javax.swing.JFrame;
 
 import com.greatdevs.Entity.Player;
@@ -119,6 +123,8 @@ public class Game extends Canvas implements Runnable {
 	        save.saveallgame(this);
 	        if (MENU){
 				menu.update();
+		        if (input.up.clicked || input.down.clicked || input.left.clicked || input.right.clicked) Sound.select.play();
+		        if (input.enter.clicked || input.menu.clicked) Sound.button.play();
 			}
 	        else if (!MENU){
 		        update.update(this);

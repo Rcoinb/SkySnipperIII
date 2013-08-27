@@ -3,6 +3,7 @@ package com.greatdevs.Entity.Boss;
 import java.awt.Graphics;
 
 import com.greatdevs.Game;
+import com.greatdevs.Sound.Sound;
 
 public class Boss {
 	public int hp;
@@ -16,6 +17,6 @@ public class Boss {
 	}
 	
 	public void die(Game game){
-		
+		Sound.explosion.play();
 	}
 }

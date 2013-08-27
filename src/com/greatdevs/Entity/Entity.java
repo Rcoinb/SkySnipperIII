@@ -2,9 +2,11 @@ package com.greatdevs.Entity;
 
 import java.awt.Graphics;
 import java.util.ArrayList;
+
 import com.greatdevs.Game;
 import com.greatdevs.Entity.Boss.*;
 import com.greatdevs.Menu.ShopShipMenu;
+import com.greatdevs.Sound.Sound;
 
 public class Entity {
 	public ArrayList<Player> playerarray = new ArrayList<Player>();
@@ -61,6 +63,7 @@ public class Entity {
 			player.update(game);
 			playerheight = player.height;
 			if (player.hp <= 0){
+				Sound.explosion.play();
 				playerarray.remove(i);
 				game.update.gameworld.lose(game);
 			}
@@ -117,11 +120,13 @@ public class Entity {
 					player.hp --;
 					player.printhp();
 					stararray.remove(i);
+					Sound.explosion.play();
 				}
 				if (player.shield){
 					if (player.getShieldRect().intersects(star.getRect())){
 						explosionarray.add(new Explosion(star.x, star.y));
 						stararray.remove(i);
+						Sound.explosion.play();
 					}
 				}
 			}
@@ -132,9 +137,10 @@ public class Entity {
 				Star star = (Star) stararray.get(w);
 				if (bullet.getRect().intersects(star.getRect())){
 					explosionarray.add(new Explosion(star.x, star.y));
-					stararray.remove(w);
-					bulletarray.remove(i);
+					if (stararray.size() != 0) stararray.remove(w);
+					if (bulletarray.size() != 0) bulletarray.remove(i);
 					game.update.gameworld.SCORE += 25;
+					Sound.explosion.play();
 				}
 			}
 		}
@@ -144,6 +150,7 @@ public class Entity {
 				Player player = (Player) playerarray.get(w);
 				if (player.getRect().intersects(bonus.getRect())){
 					bonusarray.remove(i);
+					Sound.coin.play();
 					if (bonus.type == 1){
 						hpbonus();
 						labelarray.add(new Label("+2 HP"));
@@ -172,10 +179,12 @@ public class Entity {
 					coinarray.remove(i);
 					game.update.gameworld.COINS ++;
 					game.update.gameworld.SCORE += 5;
+					Sound.coin.play();
 				}
 				if (player.magnet){
 					if (player.getMagnetRect().intersects(coin.getRect())){
 						coinarray.remove(i);
+						Sound.coin.play();
 						game.update.gameworld.COINS ++;
 					}
 				}
@@ -189,6 +198,7 @@ public class Entity {
 					shopshiparray.remove(i);
 					game.setMenu(new ShopShipMenu());
 					game.update.gameworld.SCORE += 10;
+					Sound.coin.play();
 				}
 			}
 		}

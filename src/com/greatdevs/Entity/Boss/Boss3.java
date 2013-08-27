@@ -11,6 +11,7 @@ import com.greatdevs.Entity.Bullet;
 import com.greatdevs.Entity.Explosion;
 import com.greatdevs.Entity.Player;
 import com.greatdevs.Image.Icons;
+import com.greatdevs.Sound.Sound;
 
 public class Boss3 extends Boss{
 	public int x = 1000, y, width = 100, height = 70, firetime = 0, gensp1 = 0;
@@ -97,6 +98,7 @@ public class Boss3 extends Boss{
 					bbulletarray.remove(i);
 					player.hp --;
 					player.printhp();
+					Sound.shoot.play();
 				}
 			}
 			if (bull.x < 0 - (bull.getRect().width)) bbulletarray.remove(i);
@@ -108,6 +110,7 @@ public class Boss3 extends Boss{
 				bbulletarray.add(new bullet(x, y + (height / 2) - 1, 25, this));
 				bbulletarray.add(new bullet(x, y + 5, 25, this)); 
 				bbulletarray.add(new bullet(x, y + height - 5, 25, this)); 
+				Sound.shootpressed.play();
 			}
 		}
 		
@@ -117,6 +120,7 @@ public class Boss3 extends Boss{
 				game.update.entity.explosionarray.add(new Explosion(bullet.x, bullet.y));
 				game.update.entity.bulletarray.remove(i);
 				hp --;
+				Sound.shoot.play();
 			}
 		}
 	}
@@ -144,6 +148,9 @@ public class Boss3 extends Boss{
 	class sp1{
 		public int spx, spy, spw = 2000, sph = 2000;
 		public double hpr;
+		public sp1(){
+			Sound.bosssuperpower.play();
+		}
 		public Rectangle getSPRect(){
 			return new Rectangle(spx, spy, spw, sph);
 		}
