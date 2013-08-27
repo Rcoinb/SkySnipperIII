@@ -5,7 +5,6 @@ import java.awt.Rectangle;
 import java.awt.image.BufferedImage;
 
 import com.greatdevs.Game;
-import com.greatdevs.Sound.Sound;
 
 public class Explosion {
 	public int x, y;

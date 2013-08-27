@@ -31,7 +31,7 @@ public class Game extends Canvas implements Runnable {
 	public static final int HEIGHT = 10;
 	public static final int SCALE = 50;
 	
-	public static boolean MENU = false;
+	public static boolean MENU = false, CONSOLE = false;
 	
 	private boolean running = false;
 	
@@ -39,6 +39,7 @@ public class Game extends Canvas implements Runnable {
 	public Icons icons = new Icons();
 	public ShipIcons shipicons = new ShipIcons();
 	public Menu menu;
+	public Console console;
 	public Update update = new Update();
 	public Save save = new Save();
 	
@@ -53,6 +54,13 @@ public class Game extends Canvas implements Runnable {
 		if (menu != null) menu.init(this, input);
 		if (menu != null) MENU = true;
 		if (menu == null) MENU = false;
+	}
+	
+	public void setConsoleMenu(Console console) {
+		this.console = console;
+		if (console != null) console.init(this, input);
+		if (console != null) CONSOLE = true;
+		if (console == null) CONSOLE = false;
 	}
 	
 	public void start() {
@@ -120,6 +128,8 @@ public class Game extends Canvas implements Runnable {
 	public void update() {
 		if (hasFocus()){
 	        input.update();
+			if (!CONSOLE){
+			if (input.console.clicked) setConsoleMenu(new Console());
 	        save.saveallgame(this);
 	        if (MENU){
 				menu.update();
@@ -129,6 +139,10 @@ public class Game extends Canvas implements Runnable {
 	        else if (!MENU){
 		        update.update(this);
 		        if (input.menu.clicked) setMenu(new PauseMenu());
+			}
+			}
+			else if (CONSOLE){
+				console.update();
 			}
 		}
 		else if (!hasFocus()){
@@ -162,6 +176,10 @@ public class Game extends Canvas implements Runnable {
 		
 		if (MENU){
 			menu.render(g);
+		}
+		
+		if (CONSOLE){
+			console.render(g);
 		}
 		
 		if (!hasFocus()){

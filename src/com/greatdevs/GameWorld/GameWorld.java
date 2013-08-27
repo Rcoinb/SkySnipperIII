@@ -106,8 +106,6 @@ public class GameWorld {
 		speeddown = false; speeddowntime = 0; speedcash = objectspeed; shopshipspawntime = 0; bossspawntime = 0;
 		game.setMenu(null);
 		game.update.entity.playerarray.add(new Player(0, (((Game.HEIGHT * Game.SCALE) / 2)) - (game.update.entity.playerheight / 2)));
-		
-		game.update.entity.bossarray.add(new Boss1());
 	}
 	
 	public void lose(Game game){
