@@ -61,6 +61,7 @@ public class ComponentsList {
 		cssm.imagecomponents.add(new ImageComponent(shipicons.component[16], new Rectangle(0, 0, shipicons.component[16].getWidth(), shipicons.component[16].getHeight()), 350));
 		cssm.imagecomponents.add(new ImageComponent(shipicons.component[17], new Rectangle(0, 0, shipicons.component[17].getWidth(), shipicons.component[17].getHeight()), 500));
 		
+		cssm.imagecomponents.add(new ImageComponent(shipicons.component[shipicons.component.length - 2], new Rectangle(0, 0, shipicons.component[shipicons.component.length - 2].getWidth(), shipicons.component[shipicons.component.length - 2].getHeight()), 150));
 		cssm.imagecomponents.add(new ImageComponent(shipicons.component[shipicons.component.length - 1], new Rectangle(0, 0, shipicons.component[shipicons.component.length - 1].getWidth(), shipicons.component[shipicons.component.length - 1].getHeight()), 0));
 	}
 }

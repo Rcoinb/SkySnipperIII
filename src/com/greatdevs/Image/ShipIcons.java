@@ -6,7 +6,7 @@ public class ShipIcons {
 	SpriteSheet ss;
 	
 	public BufferedImage bg, used;
-	public BufferedImage[] component = new BufferedImage[19];
+	public BufferedImage[] component = new BufferedImage[20];
 	public BufferedImage[] chip = new BufferedImage[3];
 	
 	public ShipIcons(){
@@ -35,6 +35,8 @@ public class ShipIcons {
     	   component[15] = ss.grabSprite(0, 60, 100, 50);
     	   component[16] = ss.grabSprite(0, 110, 100, 50);
     	   component[17] = ss.grabSprite(100, 60, 100, 50);
+    	   
+    	   component[component.length - 2] = ss.grabSprite(950, 50, 50, 50);
     	   component[component.length - 1] = ss.grabSprite(950, 0, 50, 50);
     	   
     	   chip[0] = ss.grabSprite(0, 800, 50, 50);

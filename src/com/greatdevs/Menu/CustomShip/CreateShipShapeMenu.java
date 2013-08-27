@@ -70,13 +70,17 @@ public class CreateShipShapeMenu extends CSMenu{
 		if (select >= shipicons.component.length - 1) select = shipicons.component.length - 1;
 		if (select <= 0) select = 0;
 		ImageComponent imagecomponent = (ImageComponent) imagecomponents.get(select);
-			if (input.enter.clicked && game.update.gameworld.COINS >= imagecomponent.price && select != 18){
+			if (input.enter.clicked && game.update.gameworld.COINS >= imagecomponent.price && select != (shipicons.component.length - 1) && select != (shipicons.component.length - 2)){
 				game.update.gameworld.COINS -= imagecomponent.price;
 				csm.setMenu(new PlaceComponentMenu(imagecomponent.image));
 				imagecomponents.removeAll(imagecomponents);
 			}
 			else if (input.enter.clicked && select == shipicons.component.length - 1){
 				csm.setMenu(null);
+			}
+			else if (input.enter.clicked && game.update.gameworld.COINS >= imagecomponent.price && select == shipicons.component.length - 2){
+				game.update.gameworld.COINS -= imagecomponent.price;
+				csm.setMenu(new DrawComponent());
 			}
 	}
 }
