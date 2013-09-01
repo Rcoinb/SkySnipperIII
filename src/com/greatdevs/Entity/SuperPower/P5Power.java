@@ -6,6 +6,7 @@ import java.awt.Rectangle;
 
 import com.greatdevs.Game;
 import com.greatdevs.Entity.*;
+import com.greatdevs.Sound.Sound;
 
 public class P5Power extends SuperPower{
 	public int width, height, timer;
@@ -31,6 +32,7 @@ public class P5Power extends SuperPower{
 			if (rect().intersects(star.getRect())){
 				game.update.entity.coinarray.add(new Coin(star.x, star.y, game.update.gameworld.objectspeed));
 				game.update.entity.stararray.remove(i);
+				Sound.play("coin.wav");
 			}
 		}
 	}

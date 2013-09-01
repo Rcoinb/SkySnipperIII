@@ -22,7 +22,7 @@ public class DrawComponent extends CSMenu{
 	public Rectangle rectangle;
 	
 	public DrawComponent(){
-		rectangle = new Rectangle(((Game.WIDTH * Game.SCALE) / 2) - 25, ((Game.HEIGHT * Game.SCALE) / 2) - 25, 25, 25);
+		rectangle = new Rectangle(((Game.WIDTH * Game.SCALE) / 2) - 10, ((Game.HEIGHT * Game.SCALE) / 2) - 10, 20, 20);
 		image = new BufferedImage(rectangle.width, rectangle.height, BufferedImage.TYPE_INT_RGB);
 	}
 	

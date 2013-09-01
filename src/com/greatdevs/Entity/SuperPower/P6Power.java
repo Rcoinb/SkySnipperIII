@@ -9,6 +9,7 @@ import java.awt.image.BufferedImage;
 import com.greatdevs.Game;
 import com.greatdevs.Entity.Explosion;
 import com.greatdevs.Entity.Star;
+import com.greatdevs.Sound.Sound;
 
 public class P6Power extends SuperPower{
 	
@@ -43,6 +44,7 @@ public class P6Power extends SuperPower{
 		    	   hpadded = 0;
 		       }
 		       player.printhp();
+		       Sound.play("exploison.wav");
 			}
 		}
 		if (timer > 500){

@@ -10,7 +10,7 @@ import com.greatdevs.Entity.Boss.Boss;
 public class ShopShipMenu extends Menu{
 	private int select = 1;
 	private int sy = 400;
-	
+	private int hpadded = 0;
 	public int u1p = 25, u2p = 50, u3p = 75, u4p = 65, u5p = 100, u6p = 250;
 	
 	public ShopShipMenu(){
@@ -29,6 +29,10 @@ public class ShopShipMenu extends Menu{
 		if (u1p != 0) g.setColor(Color.WHITE);
 		if (u1p == 0) g.setColor(Color.GRAY);
 		g.drawString("HP bonus " + u1p, 25, 150);
+		g.setFont(new Font("Arial", Font.BOLD, 12));
+		g.setColor(Color.LIGHT_GRAY);
+		g.drawString("You've already bought " + hpadded + " HP", 27, 165);
+		g.setFont(new Font("Arial", Font.BOLD, 25));
 		if (u2p != 0) g.setColor(Color.WHITE);
 		if (u2p == 0) g.setColor(Color.GRAY);
 		g.drawString("Speed down " + u2p, 25, 200);	
@@ -79,7 +83,7 @@ public class ShopShipMenu extends Menu{
 		if (input.enter.clicked && select == 1 && game.update.gameworld.COINS >= u1p && u1p != 0){
 			game.update.gameworld.COINS -= u1p;
 			game.update.entity.hpbonus();
-			u1p = 0;
+			hpadded += 2;
 		}
 		
 		if (input.enter.clicked && select == 2 && game.update.gameworld.COINS >= u2p && u2p != 0){ 

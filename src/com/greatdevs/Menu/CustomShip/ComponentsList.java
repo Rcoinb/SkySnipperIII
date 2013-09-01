@@ -39,6 +39,7 @@ public class ComponentsList {
 		shipcomponents.components.add(new Component(-2, 5, 5, 50, shipicons.chip[new Random().nextInt(3)], 28));
 		shipcomponents.components.add(new Component(4, 8, -1, 75, shipicons.chip[new Random().nextInt(3)], 29));
 		
+		//Part of GUI
 		shipcomponents.components.add(new Component(0, 0, 0, 0, shipicons.component[shipicons.component.length - 1], 0));
 	}
 	public void loadImageComponents(CreateShipShapeMenu cssm, ShipIcons shipicons){
@@ -61,7 +62,8 @@ public class ComponentsList {
 		cssm.imagecomponents.add(new ImageComponent(shipicons.component[16], new Rectangle(0, 0, shipicons.component[16].getWidth(), shipicons.component[16].getHeight()), 350));
 		cssm.imagecomponents.add(new ImageComponent(shipicons.component[17], new Rectangle(0, 0, shipicons.component[17].getWidth(), shipicons.component[17].getHeight()), 500));
 		
-		cssm.imagecomponents.add(new ImageComponent(shipicons.component[shipicons.component.length - 2], new Rectangle(0, 0, shipicons.component[shipicons.component.length - 2].getWidth(), shipicons.component[shipicons.component.length - 2].getHeight()), 150));
+		//Part of GUI
+		cssm.imagecomponents.add(new ImageComponent(shipicons.component[shipicons.component.length - 2], new Rectangle(0, 0, shipicons.component[shipicons.component.length - 2].getWidth(), shipicons.component[shipicons.component.length - 2].getHeight()), 25));
 		cssm.imagecomponents.add(new ImageComponent(shipicons.component[shipicons.component.length - 1], new Rectangle(0, 0, shipicons.component[shipicons.component.length - 1].getWidth(), shipicons.component[shipicons.component.length - 1].getHeight()), 0));
 	}
 }

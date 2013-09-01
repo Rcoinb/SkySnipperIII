@@ -63,7 +63,7 @@ public class Entity {
 			player.update(game);
 			playerheight = player.height;
 			if (player.hp <= 0){
-				Sound.explosion.play();
+				Sound.play("explosion.wav");
 				playerarray.remove(i);
 				game.update.gameworld.lose(game);
 			}
@@ -120,13 +120,13 @@ public class Entity {
 					player.hp --;
 					player.printhp();
 					stararray.remove(i);
-					Sound.explosion.play();
+					Sound.play("explosion.wav");
 				}
 				if (player.shield){
 					if (player.getShieldRect().intersects(star.getRect())){
 						explosionarray.add(new Explosion(star.x, star.y));
 						stararray.remove(i);
-						Sound.explosion.play();
+						Sound.play("explosion.wav");
 					}
 				}
 			}
@@ -140,7 +140,7 @@ public class Entity {
 					if (stararray.size() != 0) stararray.remove(w);
 					if (bulletarray.size() != 0) bulletarray.remove(i);
 					game.update.gameworld.SCORE += 25;
-					Sound.explosion.play();
+					Sound.play("explosion.wav");
 				}
 			}
 		}
@@ -150,7 +150,7 @@ public class Entity {
 				Player player = (Player) playerarray.get(w);
 				if (player.getRect().intersects(bonus.getRect())){
 					bonusarray.remove(i);
-					Sound.coin.play();
+					Sound.play("coin.wav");
 					if (bonus.type == 1){
 						hpbonus();
 						labelarray.add(new Label("+2 HP"));
@@ -179,12 +179,12 @@ public class Entity {
 					coinarray.remove(i);
 					game.update.gameworld.COINS ++;
 					game.update.gameworld.SCORE += 5;
-					Sound.coin.play();
+					Sound.play("coin.wav");
 				}
 				if (player.magnet){
 					if (player.getMagnetRect().intersects(coin.getRect())){
 						coinarray.remove(i);
-						Sound.coin.play();
+						Sound.play("coin.wav");
 						game.update.gameworld.COINS ++;
 					}
 				}
@@ -198,7 +198,7 @@ public class Entity {
 					shopshiparray.remove(i);
 					game.setMenu(new ShopShipMenu());
 					game.update.gameworld.SCORE += 10;
-					Sound.coin.play();
+					Sound.play("coin.wav");
 				}
 			}
 		}

@@ -8,6 +8,7 @@ import java.awt.Rectangle;
 import com.greatdevs.Game;
 import com.greatdevs.Entity.Explosion;
 import com.greatdevs.Entity.Star;
+import com.greatdevs.Sound.Sound;
 
 public class P4Power extends SuperPower{
 	
@@ -32,6 +33,7 @@ public class P4Power extends SuperPower{
 			if (rect().intersects(star.getRect())){
 				game.update.entity.explosionarray.add(new Explosion(star.x, star.y));
 				game.update.entity.stararray.remove(i);
+				Sound.play("explosion.wav");
 			}
 		}
 		

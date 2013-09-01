@@ -116,7 +116,7 @@ public class Boss1 extends Boss{
 					bbulletarray.remove(i);
 					player.hp --;
 					player.printhp();
-					Sound.shoot.play();
+					Sound.play("shoot.wav");
 				}
 			}
 			if (bull.x < 0 - (bull.getRect().width)) bbulletarray.remove(i);
@@ -126,7 +126,7 @@ public class Boss1 extends Boss{
 			if ((y + height) > player.y + player.height) y -= 5;		
 			if ((new Rectangle(player.x, y, width, height).intersects(player.getRect())) && canfire){
 				bbulletarray.add(new bullet(x, y + (height / 2) - 1, 25, this)); 
-				Sound.shootpressed.play();
+				Sound.play("shootpressed.wav");
 			}
 		}
 		
@@ -136,7 +136,7 @@ public class Boss1 extends Boss{
 				game.update.entity.explosionarray.add(new Explosion(bullet.x, bullet.y));
 				game.update.entity.bulletarray.remove(i);
 				hp --;
-				Sound.shoot.play();
+				Sound.play("shoot.wav");
 			}
 		}
 	}
@@ -164,7 +164,7 @@ public class Boss1 extends Boss{
 	class sp1{
 		public int spx, spy, spw, sph, timer;
 		public sp1(){
-			Sound.bosssuperpower.play();
+			Sound.play("bosssuperpower.wav");
 		}
 		public Rectangle getSPRect(){
 			return new Rectangle(spx, spy, spw, sph);
@@ -192,7 +192,7 @@ public class Boss1 extends Boss{
 	class sp2{
 		public int spx, spy, spw = 2000, sph = 2000;
 		public sp2(){
-			Sound.bosssuperpower.play();
+			Sound.play("bosssuperpower.wav");
 		}
 		public Rectangle getSPRect(){
 			return new Rectangle(spx, spy, spw, sph);

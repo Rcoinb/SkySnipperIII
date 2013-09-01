@@ -1,18 +1,13 @@
 package com.greatdevs.Sound;
 
 import java.applet.Applet;
-import java.applet.AudioClip;
 
-public class Sound {
-	public static final Sound button = new Sound("button.wav");
-	public static final Sound coin = new Sound("coin.wav");
-	public static final Sound explosion = new Sound("explosion.wav");
-	public static final Sound select = new Sound("select.wav");
-	public static final Sound shoot = new Sound("shoot.wav");
-	public static final Sound shootpressed = new Sound("shootpressed.wav");
-	public static final Sound superpower = new Sound("superpower.wav");
-	public static final Sound bosssuperpower = new Sound("bosssuperpower.wav");
-	
+import javax.sound.sampled.*;
+
+import java.applet.AudioClip;
+import java.io.File;
+
+public class Sound {	
 	private AudioClip clip;
 
 	private Sound(String name) {
@@ -23,14 +18,15 @@ public class Sound {
 		}
 	}
 
-	public void play() {
-		try {
-			new Thread() {
-				public void run() {
-					clip.play();
-				}
-			}.start();
-		} catch (Throwable e) {
+	public static void play(String path) {
+		try{
+		AudioInputStream audioInputStream = AudioSystem.getAudioInputStream(
+			    new File(Sound.class.getResource(path).toURI()));
+			Clip clip = AudioSystem.getClip();
+			clip.open(audioInputStream);
+			clip.start();
+		}
+		catch(Exception e){
 			e.printStackTrace();
 		}
 	}
@@ -43,6 +39,22 @@ public class Sound {
 				}
 			}.start();
 		} catch (Throwable e) {
+			e.printStackTrace();
+		}
+	}
+	
+	public static void PlayMusic(String path, float Valmue){
+		try{
+		AudioInputStream audioInputStream = AudioSystem.getAudioInputStream(
+			    new File(Sound.class.getResource(path).toURI()));
+			Clip clip = AudioSystem.getClip();
+			clip.open(audioInputStream);
+			FloatControl gainControl = 
+			    (FloatControl) clip.getControl(FloatControl.Type.MASTER_GAIN);
+			gainControl.setValue(Valmue); // Reduce volume by 10 decibels.
+			clip.loop(Clip.LOOP_CONTINUOUSLY);
+		}
+		catch(Exception e){
 			e.printStackTrace();
 		}
 	}

@@ -17,6 +17,6 @@ public class Boss {
 	}
 	
 	public void die(Game game){
-		Sound.explosion.play();
+		Sound.play("explosion.wav");
 	}
 }

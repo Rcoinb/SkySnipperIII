@@ -1,5 +1,7 @@
 package com.greatdevs.Menu;
 
+import java.awt.Color;
+import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
@@ -7,11 +9,12 @@ import java.net.URL;
 
 import javax.imageio.ImageIO;
 
+import com.greatdevs.Game;
 import com.greatdevs.Sound.Sound;
 
 public class GDMenu extends Menu{
 	
-	public int timer;
+	public int timer, timerend = 100;
 	BufferedImage image;
 	
 	public GDMenu(){
@@ -20,15 +23,22 @@ public class GDMenu extends Menu{
 	
 	public void render(Graphics g){
 		g.drawImage(image, 0, 0, null);
+		
+		g.setFont(new Font("Arial", Font.BOLD, 15));
+		g.setColor(Color.WHITE);
+		String musicinfo = "Music: Revolution (by Reactor) mix.";
+		int titlew = (int) g.getFontMetrics().getStringBounds(musicinfo, g).getWidth();
+		int titleh = (int) g.getFontMetrics().getStringBounds(musicinfo, g).getHeight();
+		g.drawString(musicinfo, (Game.WIDTH * Game.SCALE) - titlew - 10, (Game.HEIGHT * Game.SCALE) - titleh + 5);
 	}
 	
 	public void update(){
 		timer ++;
-		if (timer >= 100){
+		if (timer >= timerend){
 			game.setMenu(new MainMenu());
 		}
 		if (input.menu.clicked || input.enter.clicked || input.attack.clicked) game.setMenu(new MainMenu());
-		if (input.attack.clicked) Sound.button.play();
+		if (input.attack.clicked) Sound.play("button.wav");
 	}
 	
     public BufferedImage loadImage(String way){

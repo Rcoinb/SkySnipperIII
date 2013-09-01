@@ -31,7 +31,9 @@ public class Game extends Canvas implements Runnable {
 	public static final int HEIGHT = 10;
 	public static final int SCALE = 50;
 	
-	public static boolean MENU = false, CONSOLE = false;
+	public static final int minWidth = 500, minHeight = 250;
+	
+	public static boolean MENU = false;
 	
 	private boolean running = false;
 	
@@ -39,7 +41,6 @@ public class Game extends Canvas implements Runnable {
 	public Icons icons = new Icons();
 	public ShipIcons shipicons = new ShipIcons();
 	public Menu menu;
-	public Console console;
 	public Update update = new Update();
 	public Save save = new Save();
 	
@@ -54,13 +55,6 @@ public class Game extends Canvas implements Runnable {
 		if (menu != null) menu.init(this, input);
 		if (menu != null) MENU = true;
 		if (menu == null) MENU = false;
-	}
-	
-	public void setConsoleMenu(Console console) {
-		this.console = console;
-		if (console != null) console.init(this, input);
-		if (console != null) CONSOLE = true;
-		if (console == null) CONSOLE = false;
 	}
 	
 	public void start() {
@@ -80,6 +74,7 @@ public class Game extends Canvas implements Runnable {
 		}
 		save.loadallgame(this);
 		setMenu(new GDMenu());
+		Sound.PlayMusic("music.wav", -7.5f);
 	}
 
 	public void run() {
@@ -100,6 +95,7 @@ public class Game extends Canvas implements Runnable {
 			while (unprocessed >= 1) {
 				updates++;
 				update();
+				resolutionUpdate();
 				unprocessed -= 1;
 				shouldRender = true;
 			}
@@ -125,24 +121,27 @@ public class Game extends Canvas implements Runnable {
 		}
 	}
 	
+	public void resolutionUpdate(){
+		if (frame.getWidth() < minWidth){
+			frame.setSize(minWidth, minHeight);
+		}
+		if (frame.getHeight() < minHeight){
+			frame.setSize(minWidth, minHeight);
+		}
+	}
+	
 	public void update() {
 		if (hasFocus()){
 	        input.update();
-			if (!CONSOLE){
-			if (input.console.clicked) setConsoleMenu(new Console());
 	        save.saveallgame(this);
 	        if (MENU){
 				menu.update();
-		        if (input.up.clicked || input.down.clicked || input.left.clicked || input.right.clicked) Sound.select.play();
-		        if (input.enter.clicked || input.menu.clicked) Sound.button.play();
+		        if (input.up.clicked || input.down.clicked || input.left.clicked || input.right.clicked) Sound.play("select.wav");
+		        if (input.enter.clicked || input.menu.clicked) Sound.play("button.wav");
 			}
 	        else if (!MENU){
 		        update.update(this);
 		        if (input.menu.clicked) setMenu(new PauseMenu());
-			}
-			}
-			else if (CONSOLE){
-				console.update();
 			}
 		}
 		else if (!hasFocus()){
@@ -176,10 +175,6 @@ public class Game extends Canvas implements Runnable {
 		
 		if (MENU){
 			menu.render(g);
-		}
-		
-		if (CONSOLE){
-			console.render(g);
 		}
 		
 		if (!hasFocus()){

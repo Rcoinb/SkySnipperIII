@@ -35,7 +35,7 @@ public class P1Power extends SuperPower{
 			if (rect().intersects(star.getRect())){
 				game.update.entity.explosionarray.add(new Explosion(star.x, star.y));
 				game.update.entity.stararray.remove(i);
-				Sound.explosion.play();
+				Sound.play("explosion.wav");
 			}
 		}
 	}
