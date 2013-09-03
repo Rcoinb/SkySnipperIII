@@ -36,6 +36,8 @@ public class Game extends Canvas implements Runnable {
 	
 	public static boolean MENU = false;
 	
+	public String FPSinfo = "updates: updates, fps: frames";
+	
 	private boolean running = false;
 	
 	public InputHandler input = new InputHandler(this);
@@ -57,6 +59,7 @@ public class Game extends Canvas implements Runnable {
 		if (menu != null) menu.init(this, input);
 		if (menu != null) MENU = true;
 		if (menu == null) MENU = false;
+		System.out.println("Menu was set: " + menu);
 	}
 	
 	public void start() {
@@ -72,12 +75,14 @@ public class Game extends Canvas implements Runnable {
 		try {
 			save.loadgame();
 			saveoptions.loadOptions();
+			System.out.println("Saves: loaded");
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 		save.loadallgame(this);
 		setMenu(new GDMenu());
 		Sound.PlayMusic("music.wav", StaticGameOptions.MUSIC_VOLUME);
+		System.out.println("Ready");
 	}
 
 	public void run() {
@@ -118,7 +123,7 @@ public class Game extends Canvas implements Runnable {
 
 			if (System.currentTimeMillis() - lastTimer1 > 1000) {
 				lastTimer1 += 1000;
-				System.out.println("updates: " + updates + ", fps: " + frames);
+				FPSinfo = ("updates: " + updates + ", fps: " + frames);
 				frames = 0;
 				updates = 0;
 			}
@@ -228,6 +233,8 @@ public class Game extends Canvas implements Runnable {
 		frame.setLocationRelativeTo(null);
 		frame.setIconImage(Icons.frameicon);
 		frame.setVisible(true);
+		
+		System.out.println("Display: loaded");
 		
 		game.save.createdirectory();
 		game.start();

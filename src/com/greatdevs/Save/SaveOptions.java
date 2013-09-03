@@ -41,6 +41,7 @@ public class SaveOptions {
 				StaticGameOptions.MUSIC_VOLUME = Float.parseFloat(saveFile.readLine());
 				saveFile.readLine();
 				saveFile.close();
+				System.out.println("Options: loaded, PLAY_MUSIC: " + StaticGameOptions.PLAY_MUSIC + ", PLAY_SOUNDS: " + StaticGameOptions.PLAY_SOUNDS + ", MUSIC_VOLUME: " + StaticGameOptions.MUSIC_VOLUME);
 			} else if (!file.exists()) {
 				file.createNewFile();
 				saveOptions();

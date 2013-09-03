@@ -4,6 +4,7 @@ import java.awt.Color;
 import java.awt.Font;
 import java.awt.Graphics;
 import java.util.ArrayList;
+import java.util.Random;
 
 import com.greatdevs.Game;
 
@@ -11,7 +12,7 @@ public class RenderNews {
 	
 	ArrayList<info> news = new ArrayList<info>();
 	
-	private int change, maxchange = 350, id = 0, color = 255;
+	private int change, maxchange = 500, id = 0, color = 255;
 
 	public RenderNews(){
 		news.add(new info
@@ -63,6 +64,8 @@ public class RenderNews {
 				(new TextContainer
 						("Looking at these stars suddenly dwarfed my own troubles and all the gravities of terrestrial life. I thought of their unfathomable distance, and the slow inevitable drift of their movements out of the unknown past into the unknown future.",
 			                    275, 75), "-H. G. Wells"));
+		
+		id = new Random().nextInt(news.size() - 1);
 	}
 
 	public void render(Graphics g) {
@@ -92,7 +95,6 @@ public class RenderNews {
 			if (color < 255) color += 5;
 			if (color >= 255) color = 255;
 		}
-		System.out.println(color);
 	}
 	
 	class info{

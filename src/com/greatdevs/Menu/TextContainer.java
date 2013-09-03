@@ -1,7 +1,6 @@
 package com.greatdevs.Menu;
 
 import java.awt.Dimension;
-import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.font.FontRenderContext;
@@ -14,7 +13,9 @@ import javax.swing.JPanel;
 
 class TextContainer extends JPanel
 {
-    public int m_width;
+	private static final long serialVersionUID = 1L;
+	
+	public int m_width;
     public int m_height;
     private String m_text;
     private AttributedCharacterIterator m_iterator;

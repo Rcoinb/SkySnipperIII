@@ -137,8 +137,10 @@ public class Entity {
 				Star star = (Star) stararray.get(w);
 				if (bullet.getRect().intersects(star.getRect())){
 					explosionarray.add(new Explosion(star.x, star.y));
-					if (stararray.size() != 0) stararray.remove(w);
-					if (bulletarray.size() != 0) bulletarray.remove(i);
+					if (i < bulletarray.size()){
+						bulletarray.remove(i);
+					}
+					if (stararray.get(w) != null) stararray.remove(w);
 					game.update.gameworld.SCORE += 25;
 					Sound.play("explosion.wav");
 				}
