@@ -12,6 +12,8 @@ public class MainMenu extends Menu{
 	private int sy = 0;
 	private double backgroundx = 0;
 	
+	RenderNews rendernews = new RenderNews();
+	
 	public MainMenu(){
 		
 	}
@@ -33,6 +35,9 @@ public class MainMenu extends Menu{
 		g.drawString("Options", 25, 400);
 		g.drawString("Exit", 25, 450);	
 		g.drawString(">                 <", 3, sy);
+		
+		rendernews.render(g);
+		
 		if (select >= 5) select = 5;
 		if (select <= 1) select = 1;
 		sy = select * 50 + 200;
@@ -40,6 +45,7 @@ public class MainMenu extends Menu{
 	
 	public void update(){
 		backgroundx += 0.5;
+		rendernews.update();
 		if (input.up.clicked) select --;
 		if (input.down.clicked) select ++;
 		if (input.enter.clicked && select == 1) {
