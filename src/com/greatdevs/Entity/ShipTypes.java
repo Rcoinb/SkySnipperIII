@@ -51,7 +51,7 @@ public class ShipTypes{
 		if (type.equals(type4)) return 4;
 		if (type.equals(type5)) return 5;
 		if (type.equals(type6)) return 6;
-		return 1;
+		return 0;
 	}
 	
 	public static void setOwnType(int[] type, BufferedImage image, String name){

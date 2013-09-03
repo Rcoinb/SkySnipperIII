@@ -20,7 +20,6 @@ public class StatsMenu extends Menu{
 		g.setColor(new Color(0,0,0,225));
 		g.fillRect(0, 0, (Game.WIDTH * Game.SCALE) / 4, Game.HEIGHT * Game.SCALE);
 		g.setColor(Color.WHITE);
-		g.setFont(new Font("Arial", Font.BOLD, 100));
 		g.setFont(new Font("Arial", Font.BOLD, 25));
 		g.drawString("Stats", 25, 50);
 		g.drawString("Best score " + game.update.gameworld.BESTSCORE, 25, 350);

@@ -38,7 +38,7 @@ public class FirstMenu extends Menu{
 		if (input.up.clicked) select --;
 		if (input.down.clicked) select ++;
 		
-		if (input.enter.clicked && select == 1) game.setMenu(new MyShipsList());;
+		if (input.enter.clicked && select == 1) game.setMenu(new MyShipsList());
 		if (input.enter.clicked && select == 2) game.setMenu(new CustomShipMenu());
 		if (input.enter.clicked && select == 3) game.setMenu(new ShopMenu());
 	}

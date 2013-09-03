@@ -42,7 +42,10 @@ public class MainMenu extends Menu{
 		backgroundx += 0.5;
 		if (input.up.clicked) select --;
 		if (input.down.clicked) select ++;
-		if (input.enter.clicked && select == 1) {game.setMenu(null); game.update.gameworld.restartGame(game);}
+		if (input.enter.clicked && select == 1) {
+			game.setMenu(null); 
+			game.update.gameworld.restartGame(game);
+		}
 		if (input.enter.clicked && select == 2) game.setMenu(new ShopMenu());
 		if (input.enter.clicked && select == 3) game.setMenu(new StatsMenu());
 		if (input.enter.clicked && select == 4) game.setMenu(new OptionsMenu());

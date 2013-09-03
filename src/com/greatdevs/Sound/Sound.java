@@ -1,21 +1,17 @@
 package com.greatdevs.Sound;
 
-import java.applet.Applet;
-
 import javax.sound.sampled.*;
 
-import java.applet.AudioClip;
+import com.greatdevs.StaticGameOptions;
+
 import java.io.File;
 
 public class Sound {	
-	private AudioClip clip;
-
-	private Sound(String name) {
-		try {
-			clip = Applet.newAudioClip(Sound.class.getResource(name));
-		} catch (Throwable e) {
-			e.printStackTrace();
-		}
+	
+	public static Clip MusicClip;
+	
+	private Sound() {
+		
 	}
 
 	public static void play(String path) {
@@ -24,42 +20,31 @@ public class Sound {
 			    new File(Sound.class.getResource(path).toURI()));
 			Clip clip = AudioSystem.getClip();
 			clip.open(audioInputStream);
-			clip.start();
+			if (StaticGameOptions.PLAY_SOUNDS) clip.start();
 		}
 		catch(Exception e){
 			e.printStackTrace();
 		}
 	}
 	
-	public void loop() {
-		try {
-			new Thread() {
-				public void run() {
-					clip.loop();
-				}
-			}.start();
-		} catch (Throwable e) {
-			e.printStackTrace();
-		}
-	}
-	
-	public static void PlayMusic(String path, float Valmue){
+	public static void PlayMusic(String path, float Volume){
 		try{
 		AudioInputStream audioInputStream = AudioSystem.getAudioInputStream(
 			    new File(Sound.class.getResource(path).toURI()));
 			Clip clip = AudioSystem.getClip();
 			clip.open(audioInputStream);
+			MusicClip = clip;
 			FloatControl gainControl = 
-			    (FloatControl) clip.getControl(FloatControl.Type.MASTER_GAIN);
-			gainControl.setValue(Valmue); // Reduce volume by 10 decibels.
-			clip.loop(Clip.LOOP_CONTINUOUSLY);
+			    (FloatControl) MusicClip.getControl(FloatControl.Type.MASTER_GAIN);
+			gainControl.setValue(Volume); // Reduce volume by 10 decibels.
+			MusicClip.loop(Clip.LOOP_CONTINUOUSLY);
 		}
 		catch(Exception e){
 			e.printStackTrace();
 		}
 	}
 	
-	public void stop(){
-		clip.stop();
+	public static void StopMusic(){
+		MusicClip.stop();
 	}
 }

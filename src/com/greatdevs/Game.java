@@ -9,6 +9,7 @@ import java.awt.Graphics;
 
 import com.greatdevs.Menu.*;
 import com.greatdevs.Save.Save;
+import com.greatdevs.Save.SaveOptions;
 import com.greatdevs.Sound.Sound;
 
 import java.awt.image.BufferStrategy;
@@ -43,6 +44,7 @@ public class Game extends Canvas implements Runnable {
 	public Menu menu;
 	public Update update = new Update();
 	public Save save = new Save();
+	public SaveOptions saveoptions = new SaveOptions();
 	
 	public static JFrame frame;
 	
@@ -69,12 +71,13 @@ public class Game extends Canvas implements Runnable {
 	private void init() {
 		try {
 			save.loadgame();
+			saveoptions.loadOptions();
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 		save.loadallgame(this);
 		setMenu(new GDMenu());
-		Sound.PlayMusic("music.wav", -7.5f);
+		Sound.PlayMusic("music.wav", StaticGameOptions.MUSIC_VOLUME);
 	}
 
 	public void run() {
@@ -96,6 +99,7 @@ public class Game extends Canvas implements Runnable {
 				updates++;
 				update();
 				resolutionUpdate();
+				MusicUpdate();
 				unprocessed -= 1;
 				shouldRender = true;
 			}
@@ -118,6 +122,12 @@ public class Game extends Canvas implements Runnable {
 				frames = 0;
 				updates = 0;
 			}
+		}
+	}
+	
+	public void MusicUpdate(){
+		if (!StaticGameOptions.PLAY_MUSIC){
+			Sound.StopMusic();
 		}
 	}
 	
@@ -181,7 +191,6 @@ public class Game extends Canvas implements Runnable {
 			noFocusRender(g);
 		}
         //Paint
-        
 		g.dispose();
 	}
 	
@@ -204,7 +213,8 @@ public class Game extends Canvas implements Runnable {
 		bs.show();
 	}
 
-	public static void SetupGame(){
+	
+	private static void SetupGame(){
 		Game game = new Game();
 		game.setMinimumSize(new Dimension(WIDTH * SCALE, HEIGHT * SCALE));
 		game.setMaximumSize(new Dimension(WIDTH * SCALE, HEIGHT * SCALE));
@@ -216,6 +226,7 @@ public class Game extends Canvas implements Runnable {
 		frame.pack();
 		frame.setResizable(true);
 		frame.setLocationRelativeTo(null);
+		frame.setIconImage(Icons.frameicon);
 		frame.setVisible(true);
 		
 		game.save.createdirectory();
