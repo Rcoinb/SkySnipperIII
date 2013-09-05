@@ -5,6 +5,8 @@ import java.util.ArrayList;
 
 import com.greatdevs.Game;
 import com.greatdevs.Entity.Boss.*;
+import com.greatdevs.GameWorld.SinglePlayer;
+import com.greatdevs.Menu.LoseMenu;
 import com.greatdevs.Menu.ShopShipMenu;
 import com.greatdevs.Sound.Sound;
 
@@ -65,7 +67,7 @@ public class Entity {
 			if (player.hp <= 0){
 				Sound.play("explosion.wav");
 				playerarray.remove(i);
-				game.update.gameworld.lose(game);
+				game.setMenu(new LoseMenu());
 			}
 		}
 		for(int i = 0; i < bonusarray.size(); i ++){
@@ -141,7 +143,7 @@ public class Entity {
 						bulletarray.remove(i);
 					}
 					if (stararray.get(w) != null) stararray.remove(w);
-					game.update.gameworld.SCORE += 25;
+					SinglePlayer.SCORE += 25;
 					Sound.play("explosion.wav");
 				}
 			}
@@ -158,7 +160,7 @@ public class Entity {
 						labelarray.add(new Label("+2 HP"));
 					}
 					if (bonus.type == 2){
-						game.update.gameworld.speeddown();
+						game.gamemode.speeddown();
 						labelarray.add(new Label("Speed down"));
 					}
 					if (bonus.type == 3){
@@ -169,7 +171,7 @@ public class Entity {
 						magnetbonus();
 						labelarray.add(new Label("Magnet bonus"));
 					}
-					game.update.gameworld.SCORE += 15;
+					SinglePlayer.SCORE += 15;
 				}
 			}
 		}
@@ -179,15 +181,15 @@ public class Entity {
 				Player player = (Player) playerarray.get(w);
 				if (player.getRect().intersects(coin.getRect())){
 					coinarray.remove(i);
-					game.update.gameworld.COINS ++;
-					game.update.gameworld.SCORE += 5;
+					SinglePlayer.COINS ++;
+					SinglePlayer.SCORE += 5;
 					Sound.play("coin.wav");
 				}
 				if (player.magnet){
 					if (player.getMagnetRect().intersects(coin.getRect())){
 						coinarray.remove(i);
 						Sound.play("coin.wav");
-						game.update.gameworld.COINS ++;
+						SinglePlayer.COINS ++;
 					}
 				}
 			}
@@ -199,7 +201,7 @@ public class Entity {
 				if (player.getRect().intersects(shopship.getRect())){
 					shopshiparray.remove(i);
 					game.setMenu(new ShopShipMenu());
-					game.update.gameworld.SCORE += 10;
+					SinglePlayer.SCORE += 10;
 					Sound.play("coin.wav");
 				}
 			}

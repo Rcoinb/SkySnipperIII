@@ -19,6 +19,9 @@ import javax.swing.JFrame;
 
 import com.greatdevs.Entity.Player;
 import com.greatdevs.GameUpdate.Update;
+import com.greatdevs.GameWorld.GameMode;
+import com.greatdevs.GameWorld.MultiPlayer;
+import com.greatdevs.GameWorld.SinglePlayer;
 import com.greatdevs.Image.Icons;
 import com.greatdevs.Image.ShipIcons;
 
@@ -44,9 +47,12 @@ public class Game extends Canvas implements Runnable {
 	public Icons icons = new Icons();
 	public ShipIcons shipicons = new ShipIcons();
 	public Menu menu;
+	public GameMode gamemode;
 	public Update update = new Update();
 	public Save save = new Save();
 	public SaveOptions saveoptions = new SaveOptions();
+	
+	public static int GAME_MODE;
 	
 	public static JFrame frame;
 	
@@ -57,9 +63,20 @@ public class Game extends Canvas implements Runnable {
 	public void setMenu(Menu menu) {
 		this.menu = menu;
 		if (menu != null) menu.init(this, input);
-		if (menu != null) MENU = true;
+		if (menu != null){
+			MENU = true;
+		}
 		if (menu == null) MENU = false;
 		System.out.println("Menu was set: " + menu);
+	}
+	
+	public void setGameMode(GameMode gamemode) {
+		this.gamemode = gamemode;
+		setMenu(null);
+		if (gamemode != null) gamemode.init(this, input);
+		GAME_MODE = GameMode.GAMEMODE;
+		if (gamemode == null) GAME_MODE = 0;
+		System.out.println("GameMode was set: " + gamemode);
 	}
 	
 	public void start() {
@@ -155,8 +172,9 @@ public class Game extends Canvas implements Runnable {
 		        if (input.enter.clicked || input.menu.clicked) Sound.play("button.wav");
 			}
 	        else if (!MENU){
-		        update.update(this);
-		        if (input.menu.clicked) setMenu(new PauseMenu());
+		        if (GAME_MODE != 0){
+		        	gamemode.update();
+		        }
 			}
 		}
 		else if (!hasFocus()){
@@ -170,14 +188,19 @@ public class Game extends Canvas implements Runnable {
         g.fillRect(0, 0, WIDTH * SCALE, HEIGHT * SCALE);
         
         //Paint            
-		update.render.render(g, update);
+        if (GAME_MODE != 0){
+        	gamemode.render(g);
+        }
 		g.setFont(new Font("Arial", Font.BOLD, 25));
-		int strw1 = (int) g.getFontMetrics().getStringBounds("Score " + update.gameworld.SCORE, g).getWidth();
+        if (GAME_MODE != MultiPlayer.MULTIPLAYER){
+		g.setFont(new Font("Arial", Font.BOLD, 25));
+		int strw1 = (int) g.getFontMetrics().getStringBounds("Score " + SinglePlayer.SCORE, g).getWidth();
 		g.setColor(Color.WHITE);
-		g.drawString("Score " + update.gameworld.SCORE, (((Game.WIDTH  * Game.SCALE) - strw1) - 25), 25);
-		int strw2 = (int) g.getFontMetrics().getStringBounds("Coins " + update.gameworld.COINS, g).getWidth();
+		g.drawString("Score " + SinglePlayer.SCORE, (((Game.WIDTH  * Game.SCALE) - strw1) - 25), 25);
+		int strw2 = (int) g.getFontMetrics().getStringBounds("Coins " + SinglePlayer.COINS, g).getWidth();
 		g.setColor(Color.WHITE);
-		g.drawString("Coins " + update.gameworld.COINS, (((Game.WIDTH  * Game.SCALE) - strw2) - 25), 490);
+		g.drawString("Coins " + SinglePlayer.COINS, (((Game.WIDTH  * Game.SCALE) - strw2) - 25), 490);
+        }
 		
 		for (final Player player : update.entity.playerarray){
 			if (player.superpower && !player.superpowerinuse){

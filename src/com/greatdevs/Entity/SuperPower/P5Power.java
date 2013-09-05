@@ -30,7 +30,7 @@ public class P5Power extends SuperPower{
 		for (int i = 0;i < game.update.entity.stararray.size(); i ++){
 			Star star = (Star) game.update.entity.stararray.get(i);
 			if (rect().intersects(star.getRect())){
-				game.update.entity.coinarray.add(new Coin(star.x, star.y, game.update.gameworld.objectspeed));
+				game.update.entity.coinarray.add(new Coin(star.x, star.y, game.gamemode.objectspeed));
 				game.update.entity.stararray.remove(i);
 				Sound.play("coin.wav");
 			}

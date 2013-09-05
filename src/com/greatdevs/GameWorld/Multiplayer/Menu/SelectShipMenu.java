@@ -1,4 +1,4 @@
-package com.greatdevs.Menu;
+package com.greatdevs.GameWorld.Multiplayer.Menu;
 
 import java.awt.Color;
 import java.awt.Font;
@@ -7,10 +7,12 @@ import java.awt.image.BufferedImage;
 
 import com.greatdevs.Game;
 import com.greatdevs.Entity.ShipTypes;
-import com.greatdevs.GameWorld.SinglePlayer;
-import com.greatdevs.Menu.CustomShip.FirstMenu;
+import com.greatdevs.GameWorld.MultiPlayer;
+import com.greatdevs.GameWorld.Multiplayer.PlayerMP;
+import com.greatdevs.Menu.MainMenu;
+import com.greatdevs.Menu.Menu;
 
-public class ShopMenu extends Menu{
+public class SelectShipMenu extends Menu{
 	private int select = 1;
 	private int sy = 0;
 	private int imagew, imageh;
@@ -18,10 +20,12 @@ public class ShopMenu extends Menu{
 	private boolean drawimage = true;
 	public BufferedImage image;
 	
-	public DrawStats drawstats = new DrawStats();
+	public DrawMPStats drawstats = new DrawMPStats();
 	
-	public ShopMenu(){
-		
+	MultiPlayer mp;
+	
+	public SelectShipMenu(MultiPlayer mp){
+		this.mp = mp;
 	}
 	
 	public void render(Graphics g){
@@ -33,17 +37,16 @@ public class ShopMenu extends Menu{
 		g.setColor(Color.WHITE);
 		g.setFont(new Font("Arial", Font.BOLD, 25));
 		g.drawString("Shop", 25, 50);
-		g.drawString("Killer", 25, 100);
-		g.drawString("Small One", 25, 150);	
-		g.drawString("Boomerang", 25, 200);	
-		g.drawString("Cool Ship", 25, 250);	
-		g.drawString("Gold Dealer", 25, 300);	
-		g.drawString("Drakula", 25, 350);
-		g.drawString("Custom ship", 25, 400);
+		g.drawString("Killer", 25, 150);
+		g.drawString("Small One", 25, 200);	
+		g.drawString("Boomerang", 25, 250);	
+		g.drawString("Cool Ship", 25, 300);	
+		g.drawString("Gold Dealer", 25, 350);	
+		g.drawString("Drakula", 25, 400);;
 		g.drawString("Exit", 25, 450);	
 		g.drawString(">                        <", 3, sy);
 		if (drawimage) g.drawImage(image, 500 - imagew / 2, 250 - imageh / 2, null);
-		if (select >= 8) select = 8;
+		if (select >= 7) select = 7;
 		if (select <= 1) select = 1;
 		if (select < 7) {
 			image = game.icons.player[(select - 1)]; 
@@ -53,32 +56,19 @@ public class ShopMenu extends Menu{
 			ShipTypes.setShowType(select);
 	 		drawstats.render(g, game, ShipTypes.getShowType(), image, ShipTypes.getShowPowerString(), false);   
 		}
-		if (select == 7){
-			if (ShipTypes.ownType){
-				image = ShipTypes.playerimage; 
-				imagew = image.getWidth();
-				imageh = image.getHeight();
-				g.drawImage(image, 500 - imagew / 2, 250 - imageh / 2, null);
-				drawstats.render(g, game, ShipTypes.getType(), image, "Random", true);   
-			}
-		}
 		if (select == 7) drawimage = false;
-		sy = select * 50 + 50;
+		sy = select * 50 + 100;
 	}
 	
 	public void update(){
 		backgroundx += 0.5;
 		if (input.up.clicked) select --;
 		if (input.down.clicked) select ++;
-		if (input.enter.clicked && select != 7 && select != 8){
-			if (SinglePlayer.COINS >= ShipTypes.getShowType()[3]){
-			ShipTypes.setType(select);
-			SinglePlayer.COINS -= ShipTypes.getShowType()[3];
-			ShipTypes.getShowType()[3] = 0;
-			}
+		if (input.enter.clicked && select != 7 ){
+			mp.thisplayer = new PlayerMP(mp, ShipTypes.getShowType(), input,  0, 0);
+			game.setMenu(null);
 		}
-		if (input.enter.clicked && select == 7) game.setMenu(new FirstMenu());
-		if (input.enter.clicked && select == 8) game.setMenu(new MainMenu());
+		if (input.enter.clicked && select == 7) game.setMenu(new MainMenu());
 	}
 	
 	public void BackGroundrender(Graphics g){

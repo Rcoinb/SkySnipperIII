@@ -3,25 +3,36 @@ package com.greatdevs.GameWorld;
 import java.awt.Graphics;
 import java.awt.image.BufferedImage;
 import java.util.Random;
+
 import com.greatdevs.Game;
+import com.greatdevs.InputHandler;
 import com.greatdevs.Entity.*;
 import com.greatdevs.Entity.Boss.*;
-import com.greatdevs.Menu.LoseMenu;
+import com.greatdevs.Menu.PauseMenu;
 
-public class GameWorld {
+public class SinglePlayer extends GameMode{
 	
-	public int gametime = 0, spawntime = 0, lowspawntime = 0, maxspawntime = 35, objectspeed = 3, bonusspawntime,
-			maxbonusspawntime = 750, coinspawntime, maxcoinspawntime = 35, speeddowntime = 0, speedcash,
-			shopshipspawntime = 0, bossspawntime;
+	public int gametime = 0, spawntime = 0, lowspawntime = 0, maxspawntime = 35, bonusspawntime = 0,
+			maxbonusspawntime = 750, coinspawntime = 0, maxcoinspawntime = 35, speeddowntime = 0, speedcash = objectspeed,
+			shopshipspawntime = 0, bossspawntime = 0;
 	public double backgroundx;
 	
 	public boolean speeddown = false;
-	
-	public int SCORE, BESTSCORE, COINS;
+	public static final int SINGLEPLAYER = 1;
+	public static int SCORE = 0, BESTSCORE, COINS;
 	public BufferedImage background;
 	
-	public GameWorld(){
-		
+	public SinglePlayer(){
+		SCORE = 0;
+		objectspeed = 3;
+	}
+	
+	public void init(Game game, InputHandler input){
+		this.game = game;
+		this.input = input;
+		game.update.entity.removeAllArrays();
+		game.update.entity.playerarray.add(new Player(0, (((Game.HEIGHT * Game.SCALE) / 2)) - (game.update.entity.playerheight / 2)));
+		GAMEMODE = SINGLEPLAYER;
 	}
 	
 	public void render(Graphics g){
@@ -38,9 +49,10 @@ public class GameWorld {
 		         g.drawImage(background, 250 * w - (int) backgroundx + 1000, 250 * h, null);
 			}
 		}
+		game.update.entity.render(g);
 	}
 	
-	public void update(Game game){
+	public void update(){
 		backgroundx += 0.5;
 		gametime ++;
 		spawntime ++;
@@ -91,25 +103,14 @@ public class GameWorld {
 			}
 		}
 		background = game.icons.background;
+		game.update.entity.update(game);
+        if (input.menu.clicked) game.setMenu(new PauseMenu());
 	}
 	
 	public void addBoss(int type, Game game){
 		if (type == 1) game.update.entity.bossarray.add(new Boss1());
 		if (type == 2) game.update.entity.bossarray.add(new Boss2());
 		if (type == 3) game.update.entity.bossarray.add(new Boss3());
-	}
-	
-	public void restartGame(Game game){
-		game.update.entity.removeAllArrays();
-		gametime = 0; spawntime = 0; lowspawntime = 0; maxspawntime = 35; objectspeed = 3; backgroundx = 0;
-		SCORE = 0; bonusspawntime = 0; maxbonusspawntime = 750; coinspawntime = 0; maxcoinspawntime = 35;
-		speeddown = false; speeddowntime = 0; speedcash = objectspeed; shopshipspawntime = 0; bossspawntime = 0;
-		game.setMenu(null);
-		game.update.entity.playerarray.add(new Player(0, (((Game.HEIGHT * Game.SCALE) / 2)) - (game.update.entity.playerheight / 2)));
-	}
-	
-	public void lose(Game game){
-		game.setMenu(new LoseMenu());
 	}
 	
 	public void speeddown(){

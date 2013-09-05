@@ -5,7 +5,9 @@ import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Rectangle;
 import java.util.ArrayList;
+
 import com.greatdevs.Game;
+import com.greatdevs.GameWorld.SinglePlayer;
 import com.greatdevs.Image.ShipIcons;
 
 public class CreateShipShapeMenu extends CSMenu{
@@ -39,13 +41,13 @@ public class CreateShipShapeMenu extends CSMenu{
 		g.drawString("Price " + imagecomponent.price, (((Game.WIDTH  * Game.SCALE) / 2) - (titlepw / 2)), imagecomponent.rectangle.y - 25);
 		}
 		
-		if (game.update.gameworld.COINS < imagecomponent.price){
+		if (SinglePlayer.COINS < imagecomponent.price){
 			g.setColor(Color.RED);
 			g.setFont(new Font("Arial", Font.BOLD, 25));
 			int title2w = (int) g.getFontMetrics().getStringBounds("No money", g).getWidth();
 			g.drawString("No money", (((Game.WIDTH  * Game.SCALE) / 2) - (title2w / 2)), 30);
 	}
-	if (game.update.gameworld.COINS >= imagecomponent.price){
+	if (SinglePlayer.COINS >= imagecomponent.price){
 		g.setColor(Color.YELLOW);
 		g.setFont(new Font("Arial", Font.BOLD, 25));
 		int title5w = (int) g.getFontMetrics().getStringBounds("You can buy it", g).getWidth();
@@ -60,8 +62,8 @@ public class CreateShipShapeMenu extends CSMenu{
 		
 		g.setColor(Color.WHITE);
 		g.setFont(new Font("Arial", Font.BOLD, 25));
-		int cstrw = (int) g.getFontMetrics().getStringBounds("Coins " + game.update.gameworld.COINS, g).getWidth();
-		g.drawString("Coins " + game.update.gameworld.COINS, (((Game.WIDTH  * Game.SCALE) / 2) - (cstrw / 2)), 75);
+		int cstrw = (int) g.getFontMetrics().getStringBounds("Coins " + SinglePlayer.COINS, g).getWidth();
+		g.drawString("Coins " + SinglePlayer.COINS, (((Game.WIDTH  * Game.SCALE) / 2) - (cstrw / 2)), 75);
 	}
 	
 	public void update(){
@@ -70,16 +72,16 @@ public class CreateShipShapeMenu extends CSMenu{
 		if (select >= shipicons.component.length - 1) select = shipicons.component.length - 1;
 		if (select <= 0) select = 0;
 		ImageComponent imagecomponent = (ImageComponent) imagecomponents.get(select);
-			if (input.enter.clicked && game.update.gameworld.COINS >= imagecomponent.price && select != (shipicons.component.length - 1) && select != (shipicons.component.length - 2)){
-				game.update.gameworld.COINS -= imagecomponent.price;
+			if (input.enter.clicked && SinglePlayer.COINS >= imagecomponent.price && select != (shipicons.component.length - 1) && select != (shipicons.component.length - 2)){
+				SinglePlayer.COINS -= imagecomponent.price;
 				csm.setMenu(new PlaceComponentMenu(imagecomponent.image));
 				imagecomponents.removeAll(imagecomponents);
 			}
 			else if (input.enter.clicked && select == shipicons.component.length - 1){
 				csm.setMenu(null);
 			}
-			else if (input.enter.clicked && game.update.gameworld.COINS >= imagecomponent.price && select == shipicons.component.length - 2){
-				game.update.gameworld.COINS -= imagecomponent.price;
+			else if (input.enter.clicked && SinglePlayer.COINS >= imagecomponent.price && select == shipicons.component.length - 2){
+				SinglePlayer.COINS -= imagecomponent.price;
 				csm.setMenu(new DrawComponent());
 			}
 	}

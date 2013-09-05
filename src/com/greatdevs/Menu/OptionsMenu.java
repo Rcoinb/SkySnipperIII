@@ -55,7 +55,6 @@ public class OptionsMenu extends Menu{
 			if (StaticGameOptions.PLAY_MUSIC) StaticGameOptions.PLAY_MUSIC = false;
 			else if (!StaticGameOptions.PLAY_MUSIC){
 				StaticGameOptions.PLAY_MUSIC = true;
-				Sound.PlayMusic("music.wav", StaticGameOptions.MUSIC_VOLUME);
 			}
 		}
 		

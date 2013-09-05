@@ -1,16 +1,18 @@
 package com.greatdevs.Menu;
 
 import java.awt.Color;
-import java.awt.Font;
 import java.awt.Graphics;
 
 import com.greatdevs.Game;
+import com.greatdevs.GameWorld.MultiPlayer;
 import com.greatdevs.GameWorld.SinglePlayer;
 
-public class StatsMenu extends Menu{
+public class SelectGameMode extends Menu{
+	private int select = 1;
+	private int sy = 400;
 	private double backgroundx = 0;
 	
-	public StatsMenu(){
+	public SelectGameMode(){
 		
 	}
 	
@@ -21,17 +23,30 @@ public class StatsMenu extends Menu{
 		g.setColor(new Color(0,0,0,225));
 		g.fillRect(0, 0, (Game.WIDTH * Game.SCALE) / 4, Game.HEIGHT * Game.SCALE);
 		g.setColor(Color.WHITE);
-		g.setFont(new Font("Arial", Font.BOLD, 25));
-		g.drawString("Stats", 25, 50);
-		g.drawString("Best score " + SinglePlayer.BESTSCORE, 25, 350);
-		g.drawString("Coins " + SinglePlayer.COINS, 25, 400);
+		g.drawString("Select gamemode", 25, 50);
+		if (select >= 3) select = 3;
+		if (select <= 1) select = 1;
+		g.drawString("Singleplayer", 25, 350);	
+		g.drawString("Co-op", 25, 400);	
 		g.drawString("Exit", 25, 450);	
-		g.drawString(">                 <", 3, 450);
+		g.drawString(">                        <", 3, sy);
+		sy = select * 50 + 300;
 	}
 	
 	public void update(){
 		backgroundx += 0.5;
-		if (input.enter.clicked) game.setMenu(new MainMenu());
+		if (input.up.clicked) select --;
+		if (input.down.clicked) select ++;
+		
+		if (input.enter.clicked && select == 1) {
+			game.setGameMode(new SinglePlayer());
+		}
+		if (input.enter.clicked && select == 2) {
+			game.setGameMode(new MultiPlayer());
+		}
+		if (input.enter.clicked && select == 3){
+			game.setMenu(new MainMenu());
+		}
 	}
 	
 	public void BackGroundrender(Graphics g){

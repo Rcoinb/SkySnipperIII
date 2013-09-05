@@ -8,6 +8,7 @@ import java.util.ArrayList;
 
 import com.greatdevs.Game;
 import com.greatdevs.InputHandler;
+import com.greatdevs.GameWorld.SinglePlayer;
 import com.greatdevs.Image.Icons;
 import com.greatdevs.Image.ShipIcons;
 
@@ -79,13 +80,13 @@ public class ShipComponents {
 				
 				
 				
-				if (game.update.gameworld.COINS < component.getComponentStats()[3]){
+				if (SinglePlayer.COINS < component.getComponentStats()[3]){
 						g.setColor(Color.RED);
 						g.setFont(new Font("Arial", Font.BOLD, 25));
 						int title2w = (int) g.getFontMetrics().getStringBounds("No money", g).getWidth();
 						g.drawString("No money", (((Game.WIDTH  * Game.SCALE) / 2) - (title2w / 2)), 30);
 				}
-				if (game.update.gameworld.COINS >= component.getComponentStats()[3] && !component.used){
+				if (SinglePlayer.COINS >= component.getComponentStats()[3] && !component.used){
 					g.setColor(Color.YELLOW);
 					g.setFont(new Font("Arial", Font.BOLD, 25));
 					int title5w = (int) g.getFontMetrics().getStringBounds("You can buy it", g).getWidth();
@@ -111,8 +112,8 @@ public class ShipComponents {
 			Component component = (Component) components.get(i);
 			if (component.isSelected(getSelectRect())){
 				if (component.getID() != 0){
-				if (input.enter.clicked && game.update.gameworld.COINS >= component.getComponentStats()[3] && !component.used){
-					game.update.gameworld.COINS -= component.getComponentStats()[3];
+				if (input.enter.clicked && SinglePlayer.COINS >= component.getComponentStats()[3] && !component.used){
+					SinglePlayer.COINS -= component.getComponentStats()[3];
 					csm.addComponentsStats(component.getComponentStats());
 					if (csm.shiptype[0] <= 1) csm.shiptype[0] = 1;
 					if (csm.shiptype[1] <= 1) csm.shiptype[1] = 1;

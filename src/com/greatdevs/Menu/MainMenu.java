@@ -38,7 +38,7 @@ public class MainMenu extends Menu{
 		
 		rendernews.render(g);
 		
-		if (select >= 5) select = 5;
+		if (select >= 6) select = 6;
 		if (select <= 1) select = 1;
 		sy = select * 50 + 200;
 	}
@@ -49,8 +49,7 @@ public class MainMenu extends Menu{
 		if (input.up.clicked) select --;
 		if (input.down.clicked) select ++;
 		if (input.enter.clicked && select == 1) {
-			game.setMenu(null); 
-			game.update.gameworld.restartGame(game);
+			game.setMenu(new SelectGameMode());
 		}
 		if (input.enter.clicked && select == 2) game.setMenu(new ShopMenu());
 		if (input.enter.clicked && select == 3) game.setMenu(new StatsMenu());

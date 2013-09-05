@@ -11,6 +11,7 @@ import com.greatdevs.Entity.Bullet;
 import com.greatdevs.Entity.Explosion;
 import com.greatdevs.Entity.Player;
 import com.greatdevs.Entity.Star;
+import com.greatdevs.GameWorld.SinglePlayer;
 import com.greatdevs.Image.Icons;
 import com.greatdevs.Sound.Sound;
 
@@ -69,7 +70,7 @@ public class Boss1 extends Boss{
 			game.update.entity.explosionarray.add(new Explosion(x + width, y + height));
 			game.update.entity.bossarray.remove(this);
 		}
-		game.update.gameworld.SCORE += 1250;
+		SinglePlayer.SCORE += 1250;
 	}
 	
 	public void update(Game game){	

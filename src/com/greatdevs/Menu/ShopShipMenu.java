@@ -3,9 +3,11 @@ package com.greatdevs.Menu;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.Graphics;
+
 import com.greatdevs.Game;
 import com.greatdevs.Entity.Player;
 import com.greatdevs.Entity.Boss.Boss;
+import com.greatdevs.GameWorld.SinglePlayer;
 
 public class ShopShipMenu extends Menu{
 	private int select = 1;
@@ -51,10 +53,10 @@ public class ShopShipMenu extends Menu{
 		
 		g.setColor(Color.WHITE);
 		g.setFont(new Font("Arial", Font.BOLD, 25));
-		int titlew = (int) g.getFontMetrics().getStringBounds("Coins " + game.update.gameworld.COINS, g).getWidth();
-		g.drawString("Coins " + game.update.gameworld.COINS, (((Game.WIDTH  * Game.SCALE) / 2) - (titlew / 2)), 470);
+		int titlew = (int) g.getFontMetrics().getStringBounds("Coins " + SinglePlayer.COINS, g).getWidth();
+		g.drawString("Coins " + SinglePlayer.COINS, (((Game.WIDTH  * Game.SCALE) / 2) - (titlew / 2)), 470);
 		
-		if (game.update.gameworld.COINS < getprice()){
+		if (SinglePlayer.COINS < getprice()){
 			g.setColor(Color.RED);
 			g.setFont(new Font("Arial", Font.BOLD, 25));
 			int title2w = (int) g.getFontMetrics().getStringBounds("No money", g).getWidth();
@@ -80,32 +82,32 @@ public class ShopShipMenu extends Menu{
 	}
 	
 	public void buy(){
-		if (input.enter.clicked && select == 1 && game.update.gameworld.COINS >= u1p && u1p != 0){
-			game.update.gameworld.COINS -= u1p;
+		if (input.enter.clicked && select == 1 && SinglePlayer.COINS >= u1p && u1p != 0){
+			SinglePlayer.COINS -= u1p;
 			game.update.entity.hpbonus();
 			hpadded += 2;
 		}
 		
-		if (input.enter.clicked && select == 2 && game.update.gameworld.COINS >= u2p && u2p != 0){ 
-			game.update.gameworld.COINS -= u2p;
-			game.update.gameworld.speeddown();	
+		if (input.enter.clicked && select == 2 && SinglePlayer.COINS >= u2p && u2p != 0){ 
+			SinglePlayer.COINS -= u2p;
+			game.gamemode.speeddown();	
 			u2p = 0;
 		}
 		
-		if (input.enter.clicked && select == 3 && game.update.gameworld.COINS >= u3p && u3p != 0){ 
-			game.update.gameworld.COINS -= u3p;
+		if (input.enter.clicked && select == 3 && SinglePlayer.COINS >= u3p && u3p != 0){ 
+			SinglePlayer.COINS -= u3p;
 			game.update.entity.shieldbonus();
 			u3p = 0;
 		}
 		
-		if (input.enter.clicked && select == 4 && game.update.gameworld.COINS >= u4p && u4p != 0){ 
-			game.update.gameworld.COINS -= u4p;
+		if (input.enter.clicked && select == 4 && SinglePlayer.COINS >= u4p && u4p != 0){ 
+			SinglePlayer.COINS -= u4p;
 			game.update.entity.magnetbonus();
 			u4p = 0;
 		}
 		
-		if (input.enter.clicked && select == 5 && game.update.gameworld.COINS >= u5p && u5p != 0){ 
-			game.update.gameworld.COINS -= u5p;
+		if (input.enter.clicked && select == 5 && SinglePlayer.COINS >= u5p && u5p != 0){ 
+			SinglePlayer.COINS -= u5p;
 			for (final Player player : game.update.entity.playerarray){
 				player.superpower = true;
 				player.superpowertime = 0;
@@ -113,8 +115,8 @@ public class ShopShipMenu extends Menu{
 			u5p = 0;
 		}
 		
-		if (input.enter.clicked && select == 6 && game.update.gameworld.COINS >= u6p && u6p != 0){ 
-			game.update.gameworld.COINS -= u6p;
+		if (input.enter.clicked && select == 6 && SinglePlayer.COINS >= u6p && u6p != 0){ 
+			SinglePlayer.COINS -= u6p;
 			for (int i = 0; i < game.update.entity.bossarray.size(); i ++){
 				Boss boss = (Boss) game.update.entity.bossarray.get(i);
 				boss.die(game);

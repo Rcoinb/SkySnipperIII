@@ -5,14 +5,18 @@ import java.awt.Font;
 import java.awt.Graphics;
 
 import com.greatdevs.Game;
+import com.greatdevs.GameWorld.SinglePlayer;
 
 public class LoseMenu extends Menu{
+	
+	public double backgroundx = 0;
 	
 	public LoseMenu(){
 		
 	}
 	
 	public void render(Graphics g){
+		BackGroundrender(g);
 		g.setColor(new Color(0,0,0,200));
 		g.fillRect(0, 0, Game.WIDTH * Game.SCALE, Game.HEIGHT * Game.SCALE);
 		g.setColor(new Color(0,0,0,225));
@@ -20,12 +24,32 @@ public class LoseMenu extends Menu{
 		g.setFont(new Font("Arial", Font.BOLD, 25));
 		g.setColor(Color.WHITE);
 		g.drawString("Game Over", 25, 50);
-		g.drawString("Score " + game.update.gameworld.SCORE, 25, 400);
+		g.drawString("Score " + SinglePlayer.SCORE, 25, 400);
 		g.drawString("Exit", 25, 435);	
 		g.drawString(">                 <", 3, 435);
 	}
 	
 	public void update(){
-		if (input.enter.clicked) game.setMenu(new MainMenu());
+		backgroundx += 0.5;
+		if (input.enter.clicked){
+			game.setMenu(new MainMenu());
+			SinglePlayer.SCORE = 0;
+		}
+	}
+	
+	public void BackGroundrender(Graphics g){
+		if (backgroundx > 1000){
+			backgroundx = 0;
+		}
+		for (int h = 0; h < 2; h ++){
+			for (int w = 0; w < 4; w ++){
+		         g.drawImage(game.icons.background, 250 * w - (int) backgroundx, 250 * h, null);
+			}
+		}
+		for (int h = 0; h < 2; h ++){
+			for (int w = 0; w < 4; w ++){
+		         g.drawImage(game.icons.background, 250 * w - (int) backgroundx + 1000, 250 * h, null);
+			}
+		}
 	}
 }

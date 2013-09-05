@@ -5,6 +5,7 @@ import java.awt.Font;
 import java.awt.Graphics;
 
 import com.greatdevs.Game;
+import com.greatdevs.GameWorld.SinglePlayer;
 
 public class AskSizeMenu extends CSMenu{
 	public int select = 1;
@@ -34,15 +35,15 @@ public class AskSizeMenu extends CSMenu{
 		
 		g.setColor(Color.WHITE);
 		g.setFont(new Font("Arial", Font.BOLD, 25));
-		int titlew = (int) g.getFontMetrics().getStringBounds("Coins " + game.update.gameworld.COINS, g).getWidth();
-		g.drawString("Coins " + game.update.gameworld.COINS, (((Game.WIDTH  * Game.SCALE) / 2) - (titlew / 2)), 470);
+		int titlew = (int) g.getFontMetrics().getStringBounds("Coins " + SinglePlayer.COINS, g).getWidth();
+		g.drawString("Coins " + SinglePlayer.COINS, (((Game.WIDTH  * Game.SCALE) / 2) - (titlew / 2)), 470);
 		
 		g.setColor(Color.WHITE);
 		g.setFont(new Font("Arial", Font.BOLD, 25));
 		int title2w = (int) g.getFontMetrics().getStringBounds("Price " + price, g).getWidth();
 		g.drawString("Price " +price, (((Game.WIDTH  * Game.SCALE) / 2) - (title2w / 2)), 30);
 		
-		if (game.update.gameworld.COINS < price){
+		if (SinglePlayer.COINS < price){
 			g.setColor(Color.RED);
 			g.setFont(new Font("Arial", Font.BOLD, 25));
 			int title3w = (int) g.getFontMetrics().getStringBounds("No money", g).getWidth();
@@ -54,8 +55,8 @@ public class AskSizeMenu extends CSMenu{
 		if (input.up.clicked) select --;
 		if (input.down.clicked) select ++;
 		if (input.enter.clicked && select == 3){
-			if (game.update.gameworld.COINS >= price){
-			game.update.gameworld.COINS -= price;
+			if (SinglePlayer.COINS >= price){
+			SinglePlayer.COINS -= price;
 			csm.setMenu(new CreateShipShapeMenu());
 			csm.setSize(width, height);
 			}

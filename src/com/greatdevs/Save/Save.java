@@ -7,6 +7,7 @@ import javax.imageio.ImageIO;
 
 import com.greatdevs.Game;
 import com.greatdevs.Entity.ShipTypes;
+import com.greatdevs.GameWorld.SinglePlayer;
 
 public class Save {
 
@@ -115,15 +116,15 @@ public class Save {
 	}
 
 	public void loadallgame(Game game) {
-		game.update.gameworld.BESTSCORE = game.save.bestscore;
-		game.update.gameworld.COINS = game.save.coins;
+		SinglePlayer.BESTSCORE = game.save.bestscore;
+		SinglePlayer.COINS = game.save.coins;
 	}
 
 	public void saveallgame(Game game) {
-		game.save.coins = game.update.gameworld.COINS;
-		if (game.update.gameworld.SCORE > game.update.gameworld.BESTSCORE) {
-			game.update.gameworld.BESTSCORE = game.update.gameworld.SCORE;
-			game.save.bestscore = game.update.gameworld.BESTSCORE;
+		game.save.coins = SinglePlayer.COINS;
+		if (SinglePlayer.SCORE > SinglePlayer.BESTSCORE) {
+			SinglePlayer.BESTSCORE = SinglePlayer.SCORE;
+			game.save.bestscore = SinglePlayer.BESTSCORE;
 		}
 		try {
 			game.save.savegame();
