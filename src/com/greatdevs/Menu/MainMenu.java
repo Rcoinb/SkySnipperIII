@@ -38,7 +38,7 @@ public class MainMenu extends Menu{
 		
 		rendernews.render(g);
 		
-		if (select >= 6) select = 6;
+		if (select >= 5) select = 5;
 		if (select <= 1) select = 1;
 		sy = select * 50 + 200;
 	}
