@@ -10,6 +10,7 @@ import java.util.Random;
 import com.greatdevs.Game;
 import com.greatdevs.Entity.Bullet;
 import com.greatdevs.Entity.Explosion;
+import com.greatdevs.Entity.Particle;
 import com.greatdevs.Entity.Player;
 import com.greatdevs.Entity.Star;
 import com.greatdevs.GameWorld.SinglePlayer;
@@ -144,6 +145,7 @@ public class Boss2 extends Boss{
 		}
 		public void update(Game game){
 			x -= speed;
+			game.update.entity.particlearray.add(new Particle(Color.RED, 10, 5, x, y));
 		}
 	}
 	

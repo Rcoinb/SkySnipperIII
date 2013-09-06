@@ -22,6 +22,7 @@ public class SaveOptions {
 		saveFile.write(StaticGameOptions.PLAY_MUSIC + "\n");
 		saveFile.write(StaticGameOptions.PLAY_SOUNDS + "\n");
 		saveFile.write(StaticGameOptions.MUSIC_VOLUME + "\n");
+		saveFile.write(StaticGameOptions.PARTICLES + "\n");
 		saveFile.write("\n");
 
 		// All done, close the FileWriter.
@@ -39,9 +40,10 @@ public class SaveOptions {
 				StaticGameOptions.PLAY_MUSIC = Boolean.parseBoolean(saveFile.readLine());
 				StaticGameOptions.PLAY_SOUNDS = Boolean.parseBoolean(saveFile.readLine());
 				StaticGameOptions.MUSIC_VOLUME = Float.parseFloat(saveFile.readLine());
+				StaticGameOptions.PARTICLES = Boolean.parseBoolean(saveFile.readLine());
 				saveFile.readLine();
 				saveFile.close();
-				System.out.println("Options: loaded, PLAY_MUSIC: " + StaticGameOptions.PLAY_MUSIC + ", PLAY_SOUNDS: " + StaticGameOptions.PLAY_SOUNDS + ", MUSIC_VOLUME: " + StaticGameOptions.MUSIC_VOLUME);
+				System.out.println("Options: loaded, PLAY_MUSIC: " + StaticGameOptions.PLAY_MUSIC + ", PLAY_SOUNDS: " + StaticGameOptions.PLAY_SOUNDS + ", MUSIC_VOLUME: " + StaticGameOptions.MUSIC_VOLUME + ", PARTICLES: " + StaticGameOptions.PARTICLES);
 			} else if (!file.exists()) {
 				file.createNewFile();
 				saveOptions();

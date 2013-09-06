@@ -20,7 +20,6 @@ public class ErrorMenu extends Menu{
 
 	}
 	
-	
 	public void render(Graphics g){
 		g.setColor(new Color(0,0,0,200));
 		g.fillRect(0, 0, (Game.WIDTH * Game.SCALE), Game.HEIGHT * Game.SCALE);

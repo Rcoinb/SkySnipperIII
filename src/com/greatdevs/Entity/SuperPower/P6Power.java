@@ -44,7 +44,7 @@ public class P6Power extends SuperPower{
 		    	   hpadded = 0;
 		       }
 		       player.printhp();
-		       Sound.play("exploison.wav");
+		       Sound.play("explosion.wav");
 			}
 		}
 		if (timer > 500){

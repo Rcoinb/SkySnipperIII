@@ -10,6 +10,7 @@ import com.greatdevs.Game;
 import com.greatdevs.InputHandler;
 import com.greatdevs.GameWorld.MultiPlayer;
 import com.greatdevs.Menu.Menu;
+import com.greatdevs.Menu.SelectGameMode;
 
 public class CreateServer extends Menu{
 	public String ip = "", port = "";
@@ -51,15 +52,16 @@ public class CreateServer extends Menu{
 		g.fillRect(0, 0, (Game.WIDTH * Game.SCALE), Game.HEIGHT * Game.SCALE);
 		g.setColor(new Color(0,0,0,225));
 		g.fillRect(0, 0, (Game.WIDTH * Game.SCALE) / 3, Game.HEIGHT * Game.SCALE);
-		if (select >= 3) select = 3;
+		if (select >= 4) select = 4;
 		if (select <= 1) select = 1;
-		sy = select * 50 + 300;
+		sy = select * 50 + 250;
 		g.setColor(Color.WHITE);
 		g.setFont(new Font("Arial", Font.BOLD, 25));
 		g.drawString("Create server", 25, 50);
-		g.drawString("IP " + ip, 25, 350);
-		g.drawString("Port " + port, 25, 400);
-		g.drawString("Create server", 25, 450);
+		g.drawString("IP " + ip, 25, 300);
+		g.drawString("Port " + port, 25, 350);
+		g.drawString("Create server", 25, 400);
+		g.drawString("Exit", 25, 450);
 		g.drawString(">                                        <", 3, sy);
 		
 		if (error){
@@ -97,5 +99,6 @@ public class CreateServer extends Menu{
 		}
 		if (input.enter.clicked && select == 3 && !ip.equals("")) connect();
 		else if (ip.equals("")) select = 1;
+		if (input.enter.clicked && select == 4) game.setMenu(new SelectGameMode());
 	}
 }

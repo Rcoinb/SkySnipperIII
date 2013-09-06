@@ -14,15 +14,21 @@ import com.greatdevs.Sound.Sound;
 
 public class GDMenu extends Menu{
 	
-	public int timer, timerend = 100;
+	public int timer, timerend = 500;
 	BufferedImage image;
+	
+	public boolean restore = false;
+	
+	public double backgroundx;
 	
 	public GDMenu(){
 		image = loadImage("/gdlogo.png");
 	}
 	
 	public void render(Graphics g){
-		g.drawImage(image, 0, 0, null);
+		BackGroundrender(g);
+		
+		g.drawImage(image, 250, 125, 500, 250, null);
 		
 		g.setFont(new Font("Arial", Font.BOLD, 15));
 		g.setColor(Color.WHITE);
@@ -33,12 +39,31 @@ public class GDMenu extends Menu{
 	}
 	
 	public void update(){
+		backgroundx += 0.5;
 		timer ++;
+		
+		
 		if (timer >= timerend){
 			game.setMenu(new MainMenu());
 		}
 		if (input.menu.clicked || input.enter.clicked || input.attack.clicked) game.setMenu(new MainMenu());
 		if (input.attack.clicked) Sound.play("button.wav");
+	}
+	
+	public void BackGroundrender(Graphics g){
+		if (backgroundx > 1000){
+			backgroundx = 0;
+		}
+		for (int h = 0; h < 2; h ++){
+			for (int w = 0; w < 4; w ++){
+		         g.drawImage(game.icons.background, 250 * w - (int) backgroundx, 250 * h, null);
+			}
+		}
+		for (int h = 0; h < 2; h ++){
+			for (int w = 0; w < 4; w ++){
+		         g.drawImage(game.icons.background, 250 * w - (int) backgroundx + 1000, 250 * h, null);
+			}
+		}
 	}
 	
     public BufferedImage loadImage(String way){

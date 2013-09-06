@@ -29,6 +29,9 @@ public class MultiPlayer extends GameMode{
 	
 	public boolean SERVER = false;
 	
+	public static int SCORE;
+	public static int BESTSCORE;
+	
 	public BufferedImage background;
 	
 	public PlayerMP opponent;
@@ -44,6 +47,7 @@ public class MultiPlayer extends GameMode{
 		this.game = game;
 		this.input = input;
 		GAMEMODE = MULTIPLAYER;
+		SCORE = 0;
 		game.setMenu(new AskMenuToRunServer(this));
 		serverwork = new ServerWork();
 		thisplayer = new PlayerMP(this, ShipTypes.type1, input,  0, 0);

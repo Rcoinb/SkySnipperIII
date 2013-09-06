@@ -7,11 +7,12 @@ import javax.imageio.ImageIO;
 
 import com.greatdevs.Game;
 import com.greatdevs.Entity.ShipTypes;
+import com.greatdevs.GameWorld.MultiPlayer;
 import com.greatdevs.GameWorld.SinglePlayer;
 
 public class Save {
 
-	public int bestscore, coins;
+	public int bestscore, coins, coopbestscore;
 	public File file = new File("C://Users//Public//SkySnipperIII//Save.txt");
 
 	public void savegame() throws Exception {
@@ -23,6 +24,7 @@ public class Save {
 		// Write the data to the file.
 		saveFile.write("\n");
 		saveFile.write(bestscore + "\n");
+		saveFile.write(coopbestscore + "\n");
 		saveFile.write(coins + "\n");
 		saveFile.write(ShipTypes.type1[3] + "\n");
 		saveFile.write(ShipTypes.type2[3] + "\n");
@@ -51,6 +53,7 @@ public class Save {
 			saveFile = new BufferedReader(new FileReader(file));
 			saveFile.readLine();
 			bestscore = Integer.parseInt(saveFile.readLine());
+			coopbestscore = Integer.parseInt(saveFile.readLine());
 			coins = Integer.parseInt(saveFile.readLine());
 			ShipTypes.type1[3] = Integer.parseInt(saveFile.readLine());
 			ShipTypes.type2[3] = Integer.parseInt(saveFile.readLine());
@@ -117,6 +120,7 @@ public class Save {
 
 	public void loadallgame(Game game) {
 		SinglePlayer.BESTSCORE = game.save.bestscore;
+		MultiPlayer.BESTSCORE = game.save.coopbestscore;
 		SinglePlayer.COINS = game.save.coins;
 	}
 
@@ -125,6 +129,10 @@ public class Save {
 		if (SinglePlayer.SCORE > SinglePlayer.BESTSCORE) {
 			SinglePlayer.BESTSCORE = SinglePlayer.SCORE;
 			game.save.bestscore = SinglePlayer.BESTSCORE;
+		}
+		if (MultiPlayer.SCORE > MultiPlayer.BESTSCORE) {
+			MultiPlayer.BESTSCORE = MultiPlayer.SCORE;
+			game.save.coopbestscore = MultiPlayer.BESTSCORE;
 		}
 		try {
 			game.save.savegame();

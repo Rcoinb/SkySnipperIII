@@ -1,5 +1,6 @@
 package com.greatdevs.Entity;
 
+import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Rectangle;
 import java.awt.image.BufferedImage;
@@ -28,6 +29,10 @@ public class Explosion {
 	}
 	
 	public void update(Game game){	
+		if (animation == 0) {
+			game.update.entity.particlearray.add(new Particle(Color.RED, 25, 25, x, y));
+			game.update.entity.particlearray.add(new Particle(Color.LIGHT_GRAY, 30, 25, x, y));
+		}
 		animation += 0.3;
 		
 		if (animation > 5){

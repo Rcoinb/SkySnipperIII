@@ -1,5 +1,6 @@
 package com.greatdevs.Entity;
 
+import java.awt.Color;
 import java.awt.Graphics;
 import java.util.ArrayList;
 
@@ -20,6 +21,7 @@ public class Entity {
 	public ArrayList<Label> labelarray = new ArrayList<Label>();
 	public ArrayList<ShopShip> shopshiparray = new ArrayList<ShopShip>();
 	public ArrayList<Boss> bossarray = new ArrayList<Boss>();
+	public ArrayList<Particle> particlearray = new ArrayList<Particle>();
 	
 	public int playerheight;
 	
@@ -48,6 +50,9 @@ public class Entity {
 		}
 		for(final Boss boss : bossarray){
 			boss.render(g);
+		}
+		for(final Particle particle : particlearray){
+			particle.render(g);
 		}
 		
 		//keep it here!
@@ -109,6 +114,11 @@ public class Entity {
 			Boss boss = (Boss) bossarray.get(i);
 			boss.update(game);
 		}
+		for (int i = 0; i < particlearray.size(); i ++){
+			Particle particle = (Particle) particlearray.get(i);
+			particle.update(game);
+			if (particle.removed) particlearray.remove(i);
+		}
 		if (!Game.MENU) collision(game);
 	}
 	
@@ -153,6 +163,7 @@ public class Entity {
 			for(int w = 0; w < playerarray.size(); w ++){
 				Player player = (Player) playerarray.get(w);
 				if (player.getRect().intersects(bonus.getRect())){
+					game.update.entity.particlearray.add(new Particle(Color.GREEN, 250, 25, bonus.x, bonus.y));
 					bonusarray.remove(i);
 					Sound.play("coin.wav");
 					if (bonus.type == 1){
@@ -180,6 +191,7 @@ public class Entity {
 			for(int w = 0; w < playerarray.size(); w ++){
 				Player player = (Player) playerarray.get(w);
 				if (player.getRect().intersects(coin.getRect())){
+					game.update.entity.particlearray.add(new Particle(Color.YELLOW, 25, 25, coin.x, coin.y));
 					coinarray.remove(i);
 					SinglePlayer.COINS ++;
 					SinglePlayer.SCORE += 5;
@@ -187,6 +199,7 @@ public class Entity {
 				}
 				if (player.magnet){
 					if (player.getMagnetRect().intersects(coin.getRect())){
+						game.update.entity.particlearray.add(new Particle(Color.YELLOW, 25, 25, coin.x, coin.y));
 						coinarray.remove(i);
 						Sound.play("coin.wav");
 						SinglePlayer.COINS ++;
@@ -237,5 +250,6 @@ public class Entity {
 		labelarray.removeAll(labelarray);
 		shopshiparray.removeAll(shopshiparray);
 		bossarray.removeAll(bossarray);
+		particlearray.removeAll(particlearray);
 	}
 }

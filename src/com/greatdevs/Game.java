@@ -163,7 +163,7 @@ public class Game extends Canvas implements Runnable {
 	}
 	
 	public void update() {
-		if (hasFocus()){
+		if (hasFocus() || (GAME_MODE == MultiPlayer.MULTIPLAYER)){
 	        input.update();
 	        save.saveallgame(this);
 	        if (MENU){
@@ -192,7 +192,7 @@ public class Game extends Canvas implements Runnable {
         	gamemode.render(g);
         }
 		g.setFont(new Font("Arial", Font.BOLD, 25));
-        if (GAME_MODE != MultiPlayer.MULTIPLAYER){
+        if (GAME_MODE == SinglePlayer.SINGLEPLAYER){
 		g.setFont(new Font("Arial", Font.BOLD, 25));
 		int strw1 = (int) g.getFontMetrics().getStringBounds("Score " + SinglePlayer.SCORE, g).getWidth();
 		g.setColor(Color.WHITE);
@@ -200,6 +200,12 @@ public class Game extends Canvas implements Runnable {
 		int strw2 = (int) g.getFontMetrics().getStringBounds("Coins " + SinglePlayer.COINS, g).getWidth();
 		g.setColor(Color.WHITE);
 		g.drawString("Coins " + SinglePlayer.COINS, (((Game.WIDTH  * Game.SCALE) - strw2) - 25), 490);
+        }
+        else if (GAME_MODE == MultiPlayer.MULTIPLAYER){
+    		g.setFont(new Font("Arial", Font.BOLD, 25));
+    		int strw1 = (int) g.getFontMetrics().getStringBounds("Score " + MultiPlayer.SCORE, g).getWidth();
+    		g.setColor(Color.WHITE);
+    		g.drawString("Score " + MultiPlayer.SCORE, (((Game.WIDTH  * Game.SCALE) - strw1) - 25), 25);
         }
 		
 		for (final Player player : update.entity.playerarray){

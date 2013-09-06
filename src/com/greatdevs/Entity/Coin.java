@@ -3,6 +3,7 @@ package com.greatdevs.Entity;
 import java.awt.Graphics;
 import java.awt.Rectangle;
 import java.awt.image.BufferedImage;
+
 import com.greatdevs.Game;
 
 public class Coin {
@@ -34,7 +35,6 @@ public class Coin {
 		if (animation > 7){
 			animation = 0;
 		}
-		
 		image = game.icons.coin[(int) animation];
 	}
 }

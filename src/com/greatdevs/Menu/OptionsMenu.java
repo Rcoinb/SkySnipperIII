@@ -28,22 +28,26 @@ public class OptionsMenu extends Menu{
 		
 		g.drawString("Options", 25, 50);
 		
-		if (StaticGameOptions.PLAY_MUSIC) g.drawString("Music ON", 25, 300);
-		else if (!StaticGameOptions.PLAY_MUSIC) g.drawString("Music OFF", 25, 300);
+		if (StaticGameOptions.PLAY_MUSIC) g.drawString("Music ON", 25, 250);
+		else if (!StaticGameOptions.PLAY_MUSIC) g.drawString("Music OFF", 25, 250);
 		
 		if (StaticGameOptions.PLAY_MUSIC) g.setColor(Color.WHITE);
 		else if (!StaticGameOptions.PLAY_MUSIC) g.setColor(Color.GRAY);;
-		g.drawString("Volume " + StaticGameOptions.MUSIC_VOLUME, 25, 350);
+		g.drawString("Volume " + StaticGameOptions.MUSIC_VOLUME, 25, 300);
 		
 		g.setColor(Color.WHITE);
 		
-		if (StaticGameOptions.PLAY_SOUNDS) g.drawString("Sounds ON", 25, 400);
-		else if (!StaticGameOptions.PLAY_SOUNDS) g.drawString("Sounds OFF", 25, 400);
+		if (StaticGameOptions.PLAY_SOUNDS) g.drawString("Sounds ON", 25, 350);
+		else if (!StaticGameOptions.PLAY_SOUNDS) g.drawString("Sounds OFF", 25, 350);
+		
+		if (StaticGameOptions.PARTICLES) g.drawString("Particles ON", 25, 400);
+		else if (!StaticGameOptions.PARTICLES) g.drawString("Particles OFF", 25, 400);
+		
 		g.drawString("Exit", 25, 450);	
 		g.drawString(">                         <", 3, sy);
-		if (select >= 4) select = 4;
+		if (select >= 5) select = 5;
 		if (select <= 1) select = 1;
-		sy = select * 50 + 250;
+		sy = select * 50 + 200;
 	}
 	
 	public void update(){
@@ -71,7 +75,12 @@ public class OptionsMenu extends Menu{
 			else if (!StaticGameOptions.PLAY_SOUNDS) StaticGameOptions.PLAY_SOUNDS = true;
 		}
 		
-		if (input.enter.clicked && select == 4){ 
+		if (input.enter.clicked && select == 4){
+			if (StaticGameOptions.PARTICLES) StaticGameOptions.PARTICLES = false;
+			else if (!StaticGameOptions.PARTICLES) StaticGameOptions.PARTICLES = true;
+		}
+		
+		if (input.enter.clicked && select == 5){ 
 			game.setMenu(new MainMenu());
 			try {
 				game.saveoptions.saveOptions();

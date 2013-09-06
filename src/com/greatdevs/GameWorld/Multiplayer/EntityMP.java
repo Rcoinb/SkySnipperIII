@@ -98,6 +98,7 @@ public class EntityMP {
 					if (i < bulletarray.size()){
 						bulletarray.remove(i);
 					}
+					MultiPlayer.SCORE += 25;
 				}
 			}
 		}

@@ -21,7 +21,7 @@ public class SaveShipMenu extends CSMenu{
 	public boolean namewriting = true;
 	public String listfilepath = "C://Users//Public//SkySnipperIII//Ships//list.txt";
 	public int select = 1;
-	public int sy;
+	public int sy, timer;
 	
 	public SaveShipMenu(){
 
@@ -52,7 +52,10 @@ public class SaveShipMenu extends CSMenu{
 		sy = select * 50 + 350;
 		g.setColor(Color.WHITE);
 		g.setFont(new Font("Arial", Font.BOLD, 25));
+		g.drawString("Enter name", 25, 50);
 		g.drawString("Name " + name, 25, 400);
+		int commandw = (int) g.getFontMetrics().getStringBounds(name, g).getWidth();
+		if (timer % 60 > 30 && namewriting) g.drawString("|",commandw + 100, 398);
 		g.drawString("Save", 25, 450);
 		g.drawString(">                               <", 3, sy);
 	}
@@ -129,6 +132,7 @@ public class SaveShipMenu extends CSMenu{
 	}
 	
 	public void update(){
+		timer ++;
 		if (!namewriting){
 		if (input.up.clicked) select --;
 		if (input.down.clicked) select ++;

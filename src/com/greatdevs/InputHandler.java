@@ -83,8 +83,14 @@ public class InputHandler implements KeyListener {
 		if (ke.getKeyCode() == KeyEvent.VK_S) down.toggle(pressed);
 		if (ke.getKeyCode() == KeyEvent.VK_A) left.toggle(pressed);
 		if (ke.getKeyCode() == KeyEvent.VK_D) right.toggle(pressed);
-		if (ke.getKeyCode() == KeyEvent.VK_UP) up.toggle(pressed);
-		if (ke.getKeyCode() == KeyEvent.VK_DOWN) down.toggle(pressed);
+		if (ke.getKeyCode() == KeyEvent.VK_UP){
+			up.toggle(pressed);
+			arrowup.toggle(pressed);
+		}
+		if (ke.getKeyCode() == KeyEvent.VK_DOWN){
+			down.toggle(pressed);
+			arrowdown.toggle(pressed);
+		}
 		if (ke.getKeyCode() == KeyEvent.VK_LEFT) left.toggle(pressed);
 		if (ke.getKeyCode() == KeyEvent.VK_RIGHT) right.toggle(pressed);
 		if (ke.getKeyCode() == KeyEvent.VK_ESCAPE) menu.toggle(pressed);
@@ -93,8 +99,6 @@ public class InputHandler implements KeyListener {
 		if (ke.getKeyCode() == KeyEvent.VK_X) power.toggle(pressed);
 		if (ke.getKeyCode() == KeyEvent.VK_BACK_SPACE) backspace.toggle(pressed);
 		if (ke.getKeyChar() == '/') console.toggle(pressed);
-		if (ke.getKeyCode() == KeyEvent.VK_UP) arrowup.toggle(pressed);
-		if (ke.getKeyCode() == KeyEvent.VK_DOWN) arrowdown.toggle(pressed);
 	}
 
 	public void keyTyped(KeyEvent ke) {
