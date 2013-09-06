@@ -25,7 +25,9 @@ public class StatsMenu extends Menu{
 		g.setFont(new Font("Arial", Font.BOLD, 25));
 		g.drawString("Stats", 25, 50);
 		g.drawString("Best score " + SinglePlayer.BESTSCORE, 25, 300);
+		g.setFont(new Font("Arial", Font.BOLD, 20));
 		g.drawString("Best co-op score " + MultiPlayer.BESTSCORE, 25, 350);
+		g.setFont(new Font("Arial", Font.BOLD, 25));
 		g.drawString("Coins " + SinglePlayer.COINS, 25, 400);
 		g.drawString("Exit", 25, 450);	
 		g.drawString(">                 <", 3, 450);

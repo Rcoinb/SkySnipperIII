@@ -9,17 +9,19 @@ import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
+
 import javax.imageio.ImageIO;
 
 import com.greatdevs.Game;
 import com.greatdevs.InputHandler;
+import com.greatdevs.StaticGameOptions;
 
 public class SaveShipMenu extends CSMenu{
 
 	public String name = "";
 	
 	public boolean namewriting = true;
-	public String listfilepath = "C://Users//Public//SkySnipperIII//Ships//list.txt";
+	public String listfilepath = StaticGameOptions.PATH + "SkySnipperIII//Ships//list.dat";
 	public int select = 1;
 	public int sy, timer;
 	
@@ -61,7 +63,7 @@ public class SaveShipMenu extends CSMenu{
 	}
 	
 	public void SaveShipStats() throws Exception{
-		File file = new File("C://Users//Public//SkySnipperIII//Ships//" + name + ".txt");
+		File file = new File(StaticGameOptions.PATH + "SkySnipperIII//Ships//" + name + ".dat");
 		if (!file.exists()){
 			file.createNewFile();
 		}
@@ -117,7 +119,7 @@ public class SaveShipMenu extends CSMenu{
 	public void SaveShip(){
 		try {
 			SaveShipStats();
-		    File outputfile = new File("C://Users//Public//SkySnipperIII//Ships//" + name + ".png");
+		    File outputfile = new File(StaticGameOptions.PATH + "SkySnipperIII//Ships//" + name + ".png");
 		    ImageIO.write(csm.shipimage, "png", outputfile);
 		    updatelist();
 		    game.setMenu(new FirstMenu());

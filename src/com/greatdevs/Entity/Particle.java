@@ -14,9 +14,9 @@ public class Particle {
 	
 	ArrayList<particle> particlearray = new ArrayList<particle>();
 	
-	public Particle(Color color, int size, int life, int x, int y){
-		for (int i = 0; i < size; i ++){
-			if (StaticGameOptions.PARTICLES) particlearray.add(new particle(color, life, x, y));
+	public Particle(Color color, int value, int life, int x, int y, int size){
+		for (int i = 0; i < value; i ++){
+			if (StaticGameOptions.PARTICLES) particlearray.add(new particle(color, life, x, y, size));
 			else if (!StaticGameOptions.PARTICLES){
 				removed = true;
 			}
@@ -45,14 +45,14 @@ public class Particle {
 		public Color color;
 		public int size, life, x, y;
 		private double xs, ys;
-		public particle(Color color, int life, int x, int y){
+		public particle(Color color, int life, int x, int y, int size){
 			this.color = color;
 			this.life = life + (new Random().nextInt(10) * (new Random().nextInt(3) - 1));
 			this.x = x;
 			this.y = y;
 			xs = new Random().nextGaussian();
 			ys = new Random().nextGaussian();
-			size = new Random().nextInt(4) + 1;
+			this.size = size + new Random().nextInt(4) - 1;
 		}
 		
 		public void render(Graphics g){

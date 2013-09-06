@@ -26,7 +26,7 @@ public class Bullet {
 	}
 	
 	public void update(Game game){	
-		game.update.entity.particlearray.add(new Particle(Color.LIGHT_GRAY, 10, 5, x, y));
+		game.update.entity.particlearray.add(new Particle(Color.LIGHT_GRAY, 10, 5, x, y, 2));
 		x += speed;
 	}
 }

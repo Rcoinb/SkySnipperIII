@@ -30,8 +30,8 @@ public class Explosion {
 	
 	public void update(Game game){	
 		if (animation == 0) {
-			game.update.entity.particlearray.add(new Particle(Color.RED, 25, 25, x, y));
-			game.update.entity.particlearray.add(new Particle(Color.LIGHT_GRAY, 30, 25, x, y));
+			game.update.entity.particlearray.add(new Particle(Color.RED, 25, 25, x + 25, y + 25, 3));
+			game.update.entity.particlearray.add(new Particle(Color.LIGHT_GRAY, 30, 25, x + 25, y + 25, 2));
 		}
 		animation += 0.3;
 		

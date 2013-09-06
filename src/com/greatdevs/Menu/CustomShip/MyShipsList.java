@@ -13,6 +13,7 @@ import javax.imageio.ImageIO;
 
 import com.greatdevs.Game;
 import com.greatdevs.InputHandler;
+import com.greatdevs.StaticGameOptions;
 import com.greatdevs.Entity.ShipTypes;
 import com.greatdevs.Menu.DrawStats;
 import com.greatdevs.Menu.Menu;
@@ -44,7 +45,7 @@ public class MyShipsList extends Menu{
 	public void readlist() throws Exception{
 		try{ 
         String inputLine;      
-        BufferedReader reader = new BufferedReader(new FileReader(new File("C://Users//Public//SkySnipperIII//Ships//list.txt")));
+        BufferedReader reader = new BufferedReader(new FileReader(new File(StaticGameOptions.PATH + "SkySnipperIII//Ships//list.dat")));
         inputLine = reader.readLine();          
        while (null != (inputLine = reader.readLine()))   
        {  
@@ -166,14 +167,14 @@ public class MyShipsList extends Menu{
 		}
 		
 		public void loadship(String name) throws Exception{
-		        BufferedReader saveFile =  new BufferedReader(new FileReader(new File("C://Users//Public//SkySnipperIII//Ships//" + name + ".txt")));
+		        BufferedReader saveFile =  new BufferedReader(new FileReader(new File(StaticGameOptions.PATH + "SkySnipperIII//Ships//" + name + ".dat")));
 				saveFile.readLine(); 
 			    type[0] = Integer.parseInt(saveFile.readLine());
 			    type[1] = Integer.parseInt(saveFile.readLine());
 			    type[2] = Integer.parseInt(saveFile.readLine());
 			    type[3] = Integer.parseInt(saveFile.readLine());
 			    
-			    image = ImageIO.read(new File("C://Users//Public//SkySnipperIII//Ships//" + name + ".png"));
+			    image = ImageIO.read(new File(StaticGameOptions.PATH + "SkySnipperIII//Ships//" + name + ".png"));
 			    saveFile.close();
 		}
 	}

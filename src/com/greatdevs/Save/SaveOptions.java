@@ -4,12 +4,13 @@ import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
 import java.io.FileWriter;
+
 import com.greatdevs.StaticGameOptions;
 
 public class SaveOptions {
 
 	public File file = new File(
-			"C://Users//Public//SkySnipperIII//GameOptions.txt");
+			StaticGameOptions.PATH + "SkySnipperIII//GameOptions.dat");
 
 	public void saveOptions() throws Exception {
 		if (!file.exists()) {

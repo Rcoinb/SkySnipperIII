@@ -6,6 +6,7 @@ import java.io.*;
 import javax.imageio.ImageIO;
 
 import com.greatdevs.Game;
+import com.greatdevs.StaticGameOptions;
 import com.greatdevs.Entity.ShipTypes;
 import com.greatdevs.GameWorld.MultiPlayer;
 import com.greatdevs.GameWorld.SinglePlayer;
@@ -13,7 +14,7 @@ import com.greatdevs.GameWorld.SinglePlayer;
 public class Save {
 
 	public int bestscore, coins, coopbestscore;
-	public File file = new File("C://Users//Public//SkySnipperIII//Save.txt");
+	public File file = new File(StaticGameOptions.PATH + "SkySnipperIII//Save.save");
 
 	public void savegame() throws Exception {
 		if (!file.exists()) {
@@ -44,12 +45,13 @@ public class Save {
 		saveFile.close();
 	}
 
-	public void loadgame() throws Exception {
+	public void loadgame() {
 		BufferedReader saveFile;
 
 		// Throw away the blank line at the top.
 		// Get the integer value from the String.
 		if (file.exists()) {
+			try{
 			saveFile = new BufferedReader(new FileReader(file));
 			saveFile.readLine();
 			bestscore = Integer.parseInt(saveFile.readLine());
@@ -67,10 +69,22 @@ public class Save {
 			else if (t == 7) {
 				loadtype(saveFile.readLine());
 			}
+			else if (t == 0){
+				ShipTypes.setType(1);
+			}
 			saveFile.readLine();
 			saveFile.close();
+			}
+			catch(Exception e){
+				e.printStackTrace();
+				ShipTypes.setType(1);
+			}
 		} else if (!file.exists()) {
-			file.createNewFile();
+			try {
+				file.createNewFile();
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
 			ShipTypes.setType(1);
 		}
 		// Not needed, but read blank line at the bottom.
@@ -78,7 +92,7 @@ public class Save {
 
 	public void loadtype(String name) throws Exception {
 		BufferedReader saveFile = new BufferedReader(new FileReader(new File(
-				"C://Users//Public//SkySnipperIII//Ships//" + name + ".txt")));
+				StaticGameOptions.PATH + "SkySnipperIII//Ships//" + name + ".dat")));
 		saveFile.readLine();
 		int[] type = new int[4];
 
@@ -90,14 +104,14 @@ public class Save {
 		saveFile.close();
 
 		BufferedImage image = ImageIO.read(new File(
-				"C://Users//Public//SkySnipperIII//Ships//" + name + ".png"));
+				StaticGameOptions.PATH + "SkySnipperIII//Ships//" + name + ".png"));
 
 		ShipTypes.setOwnType(type, image, name);
 
 	}
 
 	public void createdirectory() {
-		File ff = new File("C://Users//Public//SkySnipperIII");
+		File ff = new File(StaticGameOptions.PATH + "SkySnipperIII");
 		try {
 			if (ff.mkdir())
 				System.out.println("Directory SkySnipperIII Created");
@@ -107,7 +121,7 @@ public class Save {
 			e.fillInStackTrace();
 		}
 
-		File fff = new File("C://Users//Public//SkySnipperIII//Ships");
+		File fff = new File(StaticGameOptions.PATH + "SkySnipperIII//Ships");
 		try {
 			if (fff.mkdir())
 				System.out.println("Directory Ships Created");

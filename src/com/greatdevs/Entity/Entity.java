@@ -163,7 +163,7 @@ public class Entity {
 			for(int w = 0; w < playerarray.size(); w ++){
 				Player player = (Player) playerarray.get(w);
 				if (player.getRect().intersects(bonus.getRect())){
-					game.update.entity.particlearray.add(new Particle(Color.GREEN, 250, 25, bonus.x, bonus.y));
+					game.update.entity.particlearray.add(new Particle(Color.GREEN, 25, 25, bonus.x, bonus.y, 2));
 					bonusarray.remove(i);
 					Sound.play("coin.wav");
 					if (bonus.type == 1){
@@ -191,7 +191,7 @@ public class Entity {
 			for(int w = 0; w < playerarray.size(); w ++){
 				Player player = (Player) playerarray.get(w);
 				if (player.getRect().intersects(coin.getRect())){
-					game.update.entity.particlearray.add(new Particle(Color.YELLOW, 25, 25, coin.x, coin.y));
+					game.update.entity.particlearray.add(new Particle(Color.YELLOW, 25, 25, coin.x + 16, coin.y + 16, 2));
 					coinarray.remove(i);
 					SinglePlayer.COINS ++;
 					SinglePlayer.SCORE += 5;
@@ -199,7 +199,7 @@ public class Entity {
 				}
 				if (player.magnet){
 					if (player.getMagnetRect().intersects(coin.getRect())){
-						game.update.entity.particlearray.add(new Particle(Color.YELLOW, 25, 25, coin.x, coin.y));
+						game.update.entity.particlearray.add(new Particle(Color.YELLOW, 25, 25, coin.x + 16, coin.y + 16, 2));
 						coinarray.remove(i);
 						Sound.play("coin.wav");
 						SinglePlayer.COINS ++;

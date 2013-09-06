@@ -8,6 +8,7 @@ import com.greatdevs.Game;
 import com.greatdevs.InputHandler;
 import com.greatdevs.Entity.*;
 import com.greatdevs.Entity.Boss.*;
+import com.greatdevs.Menu.LoadingMenu;
 import com.greatdevs.Menu.PauseMenu;
 
 public class SinglePlayer extends GameMode{
@@ -33,6 +34,7 @@ public class SinglePlayer extends GameMode{
 		game.update.entity.removeAllArrays();
 		game.update.entity.playerarray.add(new Player(0, (((Game.HEIGHT * Game.SCALE) / 2)) - (game.update.entity.playerheight / 2)));
 		GAMEMODE = SINGLEPLAYER;
+		game.setMenu(new LoadingMenu(50 + (new Random().nextInt(10) * (new Random().nextInt(2) - 1))));
 	}
 	
 	public void render(Graphics g){

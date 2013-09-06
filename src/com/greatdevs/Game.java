@@ -89,8 +89,8 @@ public class Game extends Canvas implements Runnable {
 	}
 
 	private void init() {
+		save.loadgame();
 		try {
-			save.loadgame();
 			saveoptions.loadOptions();
 			System.out.println("Saves: loaded");
 		} catch (Exception e) {
@@ -220,6 +220,10 @@ public class Game extends Canvas implements Runnable {
 		if (MENU){
 			menu.render(g);
 		}
+		
+		/*g.setFont(new Font("Arial", Font.BOLD, 12));
+		g.setColor(Color.WHITE);
+		g.drawString(FPSinfo, 2, 10);*/
 		
 		if (!hasFocus()){
 			noFocusRender(g);
