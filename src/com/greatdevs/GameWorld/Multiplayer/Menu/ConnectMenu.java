@@ -92,8 +92,18 @@ public class ConnectMenu extends Menu{
 
 			}
 		}
-		if (input.enter.clicked && select == 3 && !ip.equals("")) connect();
-		else if (ip.equals("")) select = 1;
-		if (input.enter.clicked && select == 4) game.setMenu(new SelectGameMode());
+		if (input.enter.clicked && select == 3) connect();
+		if (input.enter.clicked && select == 4){
+			try {
+				mp.serverwork.client.close();
+				mp.serverwork.server.close();
+				mp.serverwork.socket.close();
+				mp.serverwork.in.reset();
+				mp.serverwork.out.reset();
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+			game.setMenu(new SelectGameMode());
+		}
 	}
 }

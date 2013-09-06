@@ -57,7 +57,7 @@ public class Particle {
 		
 		public void render(Graphics g){
 			g.setColor(color);
-			g.fillRect(x, y, size, size);
+			g.fillOval(x, y, size, size);
 		}
 		
 		public void update(Game game){

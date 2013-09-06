@@ -31,11 +31,12 @@ public class ThreadReceive extends Thread {
 			    boolean fire = Boolean.parseBoolean((String)in.readObject());
 			    if (!world.SERVER){
 			    int star = Integer.parseInt((String)in.readObject());
-			    int stary = Integer.parseInt((String)in.readObject());
-			    int stars = Integer.parseInt((String)in.readObject());
+				 int stary = Integer.parseInt((String)in.readObject());
+				 int stars = Integer.parseInt((String)in.readObject());
 			    if (star != 0){
-			     world.entity.stararray.add(new StarMP(world, 1000, stary, world.objectspeed, stars));
-			     star = 0;
+			     StarMP starclass = new StarMP(world, 1000, stary, world.objectspeed, stars);
+			     world.entity.stararray.add(starclass);
+			     //System.out.println(stary + " : " + stars);
 			    }
 		    	}
 			    if (fire){

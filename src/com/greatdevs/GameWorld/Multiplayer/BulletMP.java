@@ -5,6 +5,7 @@ import java.awt.Graphics;
 import java.awt.Rectangle;
 
 import com.greatdevs.Game;
+import com.greatdevs.Entity.Particle;
 
 public class BulletMP {
 	public int x, y, speed;
@@ -25,7 +26,8 @@ public class BulletMP {
 		g.fillRect(x, y, getRect().width, getRect().height);
 	}
 	
-	public void update(Game game){	
+	public void update(Game game, EntityMP e){	
+		e.particlearray.add(new Particle(Color.LIGHT_GRAY, 10, 5, x, y, 2));
 		x += speed;
 	}
 }

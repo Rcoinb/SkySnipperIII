@@ -68,7 +68,18 @@ public class SelectShipMenu extends Menu{
 			mp.thisplayer = new PlayerMP(mp, ShipTypes.getShowType(), input,  0, 0);
 			game.setMenu(null);
 		}
-		if (input.enter.clicked && select == 7) game.setMenu(new MainMenu());
+		if (input.enter.clicked && select == 7){
+			try {
+				mp.serverwork.client.close();
+				mp.serverwork.server.close();
+				mp.serverwork.socket.close();
+				mp.serverwork.in.reset();
+				mp.serverwork.out.reset();
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+			game.setMenu(new MainMenu());
+		}
 	}
 	
 	public void BackGroundrender(Graphics g){

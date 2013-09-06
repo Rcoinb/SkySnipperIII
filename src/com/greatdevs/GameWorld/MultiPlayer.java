@@ -12,7 +12,7 @@ import com.greatdevs.GameWorld.Multiplayer.PlayerMP;
 import com.greatdevs.GameWorld.Multiplayer.StarMP;
 import com.greatdevs.GameWorld.Multiplayer.Menu.AskMenuToRunServer;
 import com.greatdevs.GameWorld.Multiplayer.Server.ServerWork;
-import com.greatdevs.Menu.PauseMenu;
+import com.greatdevs.Menu.ServerPauseMenu;
 
 public class MultiPlayer extends GameMode{
 
@@ -41,6 +41,7 @@ public class MultiPlayer extends GameMode{
 	
 	public MultiPlayer(){
 		objectspeed = 3;
+		serverwork = new ServerWork();
 	}
 	
 	public void init(Game game, InputHandler input){
@@ -49,7 +50,6 @@ public class MultiPlayer extends GameMode{
 		GAMEMODE = MULTIPLAYER;
 		SCORE = 0;
 		game.setMenu(new AskMenuToRunServer(this));
-		serverwork = new ServerWork();
 		thisplayer = new PlayerMP(this, ShipTypes.type1, input,  0, 0);
 		opponent = new PlayerMP(this, ShipTypes.type1, null,  0, 0);
 		background = game.icons.background;
@@ -91,7 +91,6 @@ public class MultiPlayer extends GameMode{
 		starspawntime++;
 		
 		if (starspawntime > maxstarspawntime){
-			System.out.println("SPAWN");
 			for (int i = 0;i < (new Random().nextInt(5) + 1); i ++){
 				spawnstar = true;
 				stary =  new Random().nextInt((Game.HEIGHT * Game.SCALE));
@@ -106,7 +105,7 @@ public class MultiPlayer extends GameMode{
 		entity.update(game);
 		opponent.update(game);
 		thisplayer.update(game);
-        if (input.menu.clicked) game.setMenu(new PauseMenu());
+        if (input.menu.clicked) game.setMenu(new ServerPauseMenu(entity, serverwork));
 	}
 	
 }
