@@ -40,6 +40,15 @@ public class ErrorMenu extends Menu{
 
 	public void update(){
 		if (input.enter.clicked){
+			try {
+				mp.serverwork.client.close();
+				mp.serverwork.server.close();
+				mp.serverwork.socket.close();
+				mp.serverwork.in.reset();
+				mp.serverwork.out.reset();
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
 			game.setGameMode(null);
 			game.setMenu(new MainMenu());
 		}

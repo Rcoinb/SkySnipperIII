@@ -33,7 +33,7 @@ public class CreateServer extends Menu{
 		game.addKeyListener(new KeyAdapter(){
 			public void keyTyped(KeyEvent e){
 		        char c = e.getKeyChar();
-		        if (c != '/' && c != KeyEvent.VK_BACK_SPACE && c != KeyEvent.VK_ENTER && ip.length() < 17){ 
+		        if (c != '/' && c != KeyEvent.VK_BACK_SPACE && c != KeyEvent.VK_ENTER){ 
 		        	if (select == 1)
 		        ip += c;
 		        	else if (select == 2)

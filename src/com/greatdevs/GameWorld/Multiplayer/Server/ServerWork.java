@@ -29,6 +29,15 @@ public class ServerWork {
 
 	public void runServer(MultiPlayer w, String ip, int port) {
 		try {
+			client.close();
+			server.close();
+			socket.close();
+			in.reset();
+			out.reset();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		try {
 			this.serverIP = ip;
 			this.port = port;
 			System.out.println("Hosting...");
@@ -61,6 +70,15 @@ public class ServerWork {
 
 	public void Connect(MultiPlayer w, String ip, int port) {
 		try {
+			client.close();
+			server.close();
+			socket.close();
+			in.reset();
+			out.reset();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		try {
 			this.connectIP = ip;
 			this.port = port;
 			System.out.println("Connecting...");
@@ -85,7 +103,7 @@ public class ServerWork {
 		} catch (Exception e) {
 			e.printStackTrace();
 			w.game.setMenu(new ConnectMenu(w));
-			ConnectMenu.error = true;
+			ConnectMenu.ERROR();
 		}
 	}
 }

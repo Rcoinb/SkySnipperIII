@@ -60,6 +60,11 @@ public class SaveShipMenu extends CSMenu{
 		if (timer % 60 > 30 && namewriting) g.drawString("|",commandw + 100, 398);
 		g.drawString("Save", 25, 450);
 		g.drawString(">                               <", 3, sy);
+		
+		g.setColor(Color.YELLOW);
+		g.setFont(new Font("Arial", Font.BOLD, 25));
+		int title2w = (int) g.getFontMetrics().getStringBounds("If you have ship with this name, it will be replaced", g).getWidth();
+		g.drawString("If you have ship with this name, it will be replaced", (((Game.WIDTH  * Game.SCALE) / 2) - (title2w / 2)), 30);
 	}
 	
 	public void SaveShipStats() throws Exception{

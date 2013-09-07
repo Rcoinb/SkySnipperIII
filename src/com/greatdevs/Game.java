@@ -39,7 +39,7 @@ public class Game extends Canvas implements Runnable {
 	
 	public static boolean MENU = false;
 	
-	public String FPSinfo = "updates: updates, fps: frames";
+	public String FPSinfo = "updates: 0, fps: 0";
 	
 	private boolean running = false;
 	

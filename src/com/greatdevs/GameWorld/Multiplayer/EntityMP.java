@@ -8,7 +8,7 @@ import com.greatdevs.Game;
 import com.greatdevs.Entity.Explosion;
 import com.greatdevs.Entity.Particle;
 import com.greatdevs.GameWorld.MultiPlayer;
-import com.greatdevs.Menu.LoseMenu;
+import com.greatdevs.GameWorld.Multiplayer.Menu.MultiPlayerLoseMenu;
 import com.greatdevs.Sound.Sound;
 
 public class EntityMP {
@@ -51,12 +51,12 @@ public class EntityMP {
 	public void update(Game game){
 		if (mp.thisplayer.hp <= 0){
 			game.setGameMode(null);
-			game.setMenu(new LoseMenu());
+			game.setMenu(new MultiPlayerLoseMenu(mp));
 			dead = true;
 		}
 		if (opponentdead){
 			game.setGameMode(null);
-			game.setMenu(new LoseMenu());
+			game.setMenu(new MultiPlayerLoseMenu(mp));
 			dead = true;
 		}
 		for(int i = 0; i < stararray.size(); i ++){

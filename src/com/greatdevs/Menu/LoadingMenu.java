@@ -17,7 +17,6 @@ public class LoadingMenu extends Menu{
 	
 	public LoadingMenu(int endtime){
 		this.endtime = endtime;
-		System.out.println(endtime);
 	}
 	
 	public void render(Graphics g) {
