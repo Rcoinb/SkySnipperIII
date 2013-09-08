@@ -60,6 +60,7 @@ public class Entity {
 		for(final Player player : playerarray){
 			player.render(g);
 		}
+		
 		for(final Label label : labelarray){
 			label.render(g);
 		}

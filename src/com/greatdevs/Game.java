@@ -273,7 +273,23 @@ public class Game extends Canvas implements Runnable {
 		game.start();
 	}
 	
+	public static void PathUpdate(){
+		if (Verify.isWindows()){
+			StaticGameOptions.PATH = (System.getProperty("user.home") + "\\AppData\\Roaming\\");
+			System.out.println("Windows\nFile path: " + StaticGameOptions.PATH);
+		}
+		else if (Verify.isMac()){
+			StaticGameOptions.PATH = (System.getProperty("user.home") + "/Documents/");
+			System.out.println("Mac\nFile path: " + StaticGameOptions.PATH);
+		}
+		else {
+			StaticGameOptions.PATH = (System.getProperty("user.home") + "");
+			System.out.println("Another OS\nFile path: " + StaticGameOptions.PATH);
+		}
+	}
+	
 	public static void main(String[] args) {
+		PathUpdate();
 		SetupGame();
 	}
 }

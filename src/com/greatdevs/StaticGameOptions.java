@@ -6,5 +6,5 @@ public class StaticGameOptions {
 	public static boolean PARTICLES = true;
 	public static float MUSIC_VOLUME = -7.5f;
 	
-	public static final String PATH = (System.getProperty("user.home") + "\\AppData\\Roaming\\");
+	public static String PATH = "";
 }

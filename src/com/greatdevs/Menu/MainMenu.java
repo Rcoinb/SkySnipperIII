@@ -5,6 +5,7 @@ import java.awt.Font;
 import java.awt.Graphics;
 
 import com.greatdevs.Game;
+import com.greatdevs.Verify;
 
 public class MainMenu extends Menu{
 	
@@ -41,6 +42,13 @@ public class MainMenu extends Menu{
 		if (select >= 5) select = 5;
 		if (select <= 1) select = 1;
 		sy = select * 50 + 200;
+		
+		if (!Verify.isJava7()){
+			g.setColor(Color.RED);
+			g.setFont(new Font("Arial", Font.BOLD, 25));
+			int title2w = (int) g.getFontMetrics().getStringBounds("Warning: Your java version is not 1.7", g).getWidth();
+			g.drawString("Warning: Your java version is not 1.7", (((Game.WIDTH  * Game.SCALE) / 2) - (title2w / 2)), 30);
+		}
 	}
 	
 	public void update(){

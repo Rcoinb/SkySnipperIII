@@ -14,21 +14,21 @@ import com.greatdevs.Sound.Sound;
 
 public class GDMenu extends Menu{
 	
-	public int timer, timerend = 500;
-	BufferedImage image;
+	public int timer, timerend = 400, logotype;
+	BufferedImage logo;
 	
 	public boolean restore = false;
 	
-	public double backgroundx;
+	public double backgroundx, size = 1;
 	
 	public GDMenu(){
-		image = loadImage("/gdlogo.png");
+		logo = loadImage("/gdlogo.png");
 	}
 	
 	public void render(Graphics g){
 		BackGroundrender(g);
 		
-		g.drawImage(image, 250, 125, 500, 250, null);
+		g.drawImage(logo, (Game.WIDTH * Game.SCALE) / 2 - (int) (logo.getWidth() * size) / 2, (Game.HEIGHT * Game.SCALE) / 2 - (int) (logo.getHeight() * size) / 2, (int) (logo.getWidth() * size), (int) (logo.getHeight() * size), null);
 		
 		g.setFont(new Font("Arial", Font.BOLD, 15));
 		g.setColor(Color.WHITE);
@@ -42,6 +42,15 @@ public class GDMenu extends Menu{
 		backgroundx += 0.5;
 		timer ++;
 		
+		if (timer >= timerend / 2){
+			logo = loadImage("/orangeablogo.png");
+		}
+		
+		size -= 0.0025;
+		
+		if (size <= 0){
+			size = 0;
+		}
 		
 		if (timer >= timerend){
 			game.setMenu(new MainMenu());
