@@ -5,8 +5,8 @@ import java.awt.Graphics;
 
 import com.greatdevs.Game;
 import com.greatdevs.GameWorld.MultiPlayer;
-import com.greatdevs.Menu.MainMenu;
 import com.greatdevs.Menu.Menu;
+import com.greatdevs.Menu.SelectGameMode;
 
 public class AskMenuToRunServer extends Menu{
 	private int select = 1;
@@ -45,7 +45,7 @@ public class AskMenuToRunServer extends Menu{
 			game.setMenu(new ConnectMenu(mp));
 		}
 		if (input.enter.clicked && select == 3){
-			game.setMenu(new MainMenu());
+			game.setMenu(new SelectGameMode());
 		}
 	}
 }

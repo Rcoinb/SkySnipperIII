@@ -12,6 +12,7 @@ import com.greatdevs.Entity.Bullet;
 import com.greatdevs.Entity.Explosion;
 import com.greatdevs.Entity.Particle;
 import com.greatdevs.Entity.Player;
+import com.greatdevs.Entity.RenderPlus;
 import com.greatdevs.Entity.Star;
 import com.greatdevs.GameWorld.SinglePlayer;
 import com.greatdevs.Image.Icons;
@@ -100,6 +101,7 @@ public class Boss2 extends Boss{
 					game.update.entity.explosionarray.add(new Explosion(bull.x, bull.y));
 					bbulletarray.remove(i);
 					player.hp --;
+					game.update.entity.renderplusarray.add(new RenderPlus("-1 HP", player.x, player.y));
 					player.printhp();
 					Sound.play("shoot.wav");
 				}

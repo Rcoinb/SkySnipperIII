@@ -23,6 +23,7 @@ public class Entity {
 	public ArrayList<ShopShip> shopshiparray = new ArrayList<ShopShip>();
 	public ArrayList<Boss> bossarray = new ArrayList<Boss>();
 	public ArrayList<Particle> particlearray = new ArrayList<Particle>();
+	public ArrayList<RenderPlus> renderplusarray = new ArrayList<RenderPlus>();
 	
 	public int playerheight;
 	
@@ -63,6 +64,9 @@ public class Entity {
 		
 		for(final Label label : labelarray){
 			label.render(g);
+		}
+		for(final RenderPlus renderplus : renderplusarray){
+			renderplus.render(g);
 		}
 	}
 	
@@ -121,6 +125,11 @@ public class Entity {
 			particle.update(game);
 			if (particle.removed) particlearray.remove(i);
 		}
+		for (int i = 0; i < renderplusarray.size(); i ++){
+			RenderPlus renderplus = (RenderPlus) renderplusarray.get(i);
+			renderplus.update(game);
+			if (renderplus.removed) renderplusarray.remove(i);
+		}
 		if (!Game.MENU) collision(game);
 	}
 	
@@ -131,6 +140,7 @@ public class Entity {
 				Player player = (Player) playerarray.get(w);
 				if (player.getRect().intersects(star.getRect())){
 					explosionarray.add(new Explosion(star.x, star.y));
+					renderplusarray.add(new RenderPlus("-1 HP", star.x, star.y));
 					player.hp --;
 					player.printhp();
 					stararray.remove(i);
@@ -198,6 +208,7 @@ public class Entity {
 				Player player = (Player) playerarray.get(w);
 				if (player.getRect().intersects(coin.getRect())){
 					game.update.entity.particlearray.add(new Particle(Color.YELLOW, 25, 25, coin.x + 16, coin.y + 16, 2));
+					renderplusarray.add(new RenderPlus("+1 Coin", coin.x, coin.y));
 					coinarray.remove(i);
 					SinglePlayer.COINS ++;
 					SinglePlayer.SCORE += 5;
@@ -206,6 +217,7 @@ public class Entity {
 				if (player.magnet){
 					if (player.getMagnetRect().intersects(coin.getRect())){
 						game.update.entity.particlearray.add(new Particle(Color.YELLOW, 25, 25, coin.x + 16, coin.y + 16, 2));
+						renderplusarray.add(new RenderPlus("+1 Coin", coin.x, coin.y));
 						coinarray.remove(i);
 						Sound.play("coin.wav");
 						SinglePlayer.COINS ++;
@@ -257,5 +269,6 @@ public class Entity {
 		shopshiparray.removeAll(shopshiparray);
 		bossarray.removeAll(bossarray);
 		particlearray.removeAll(particlearray);
+		renderplusarray.removeAll(renderplusarray);
 	}
 }

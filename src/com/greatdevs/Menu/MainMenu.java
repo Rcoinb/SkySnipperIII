@@ -43,11 +43,11 @@ public class MainMenu extends Menu{
 		if (select <= 1) select = 1;
 		sy = select * 50 + 200;
 		
-		if (!Verify.isJava7()){
+		if (Verify.JavaVersion() < 1.7F){
 			g.setColor(Color.RED);
 			g.setFont(new Font("Arial", Font.BOLD, 25));
-			int title2w = (int) g.getFontMetrics().getStringBounds("Warning: Your java version is not 1.7", g).getWidth();
-			g.drawString("Warning: Your java version is not 1.7", (((Game.WIDTH  * Game.SCALE) / 2) - (title2w / 2)), 30);
+			int title2w = (int) g.getFontMetrics().getStringBounds("Warning: Your java version is lower then 1.7", g).getWidth();
+			g.drawString("Warning: Your java version is lower then 1.7", (((Game.WIDTH  * Game.SCALE) / 2) - (title2w / 2)), 30);
 		}
 	}
 	

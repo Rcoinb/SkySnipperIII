@@ -6,6 +6,7 @@ import java.awt.Graphics;
 import java.awt.Rectangle;
 
 import com.greatdevs.Game;
+import com.greatdevs.Entity.RenderPlus;
 import com.greatdevs.Entity.Star;
 
 public class P2Power extends SuperPower{
@@ -59,6 +60,7 @@ public class P2Power extends SuperPower{
 			bhp += 0.1;
 			if (bhp >= 1){
 				player.hp += (int) bhp;
+				game.update.entity.renderplusarray.add(new RenderPlus("+1 HP", player.x, player.y));
 				bhp = 0;
 			}
 			player.printhp();

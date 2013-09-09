@@ -7,8 +7,10 @@ import java.awt.Rectangle;
 
 import com.greatdevs.Game;
 import com.greatdevs.Entity.Coin;
+import com.greatdevs.Entity.RenderPlus;
 import com.greatdevs.Entity.Star;
 import com.greatdevs.GameWorld.SinglePlayer;
+import com.greatdevs.Sound.Sound;
 
 public class P3Power extends SuperPower{
 	
@@ -43,6 +45,8 @@ public class P3Power extends SuperPower{
 			Coin coinclass = (Coin) game.update.entity.coinarray.get(i);
 			if (getRect().intersects(coinclass.getRect())){
 				SinglePlayer.COINS ++;
+				game.update.entity.renderplusarray.add(new RenderPlus("+1 Coin", coinclass.x, coinclass.y));
+				Sound.play("coin.wav");
 				game.update.entity.coinarray.remove(i);
 			}
 		}

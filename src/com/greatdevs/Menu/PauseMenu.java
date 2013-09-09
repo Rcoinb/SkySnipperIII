@@ -32,6 +32,7 @@ public class PauseMenu extends Menu{
 	public void update(){
 		if (input.up.clicked) select --;
 		if (input.down.clicked) select ++;
+		if (input.menu.clicked) game.setMenu(null);
 		
 		if (input.enter.clicked && select == 1) game.setMenu(null);
 		if (input.enter.clicked && select == 2){

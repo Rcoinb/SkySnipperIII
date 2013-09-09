@@ -8,12 +8,13 @@ import java.awt.event.KeyEvent;
 
 import com.greatdevs.Game;
 import com.greatdevs.InputHandler;
+import com.greatdevs.StaticGameOptions;
 import com.greatdevs.GameWorld.MultiPlayer;
 import com.greatdevs.Menu.Menu;
 import com.greatdevs.Menu.SelectGameMode;
 
 public class CreateServer extends Menu{
-	public String ip = "", port = "";
+	public String ip = "", port = StaticGameOptions.DefaultPort;
 	public int select = 1;
 	public int sy;
 	

@@ -8,6 +8,7 @@ import java.awt.image.BufferedImage;
 
 import com.greatdevs.Game;
 import com.greatdevs.Entity.Explosion;
+import com.greatdevs.Entity.RenderPlus;
 import com.greatdevs.Entity.Star;
 import com.greatdevs.Sound.Sound;
 
@@ -41,6 +42,7 @@ public class P6Power extends SuperPower{
 		       hpadded += 0.2;
 		       if (hpadded >= 1){
 		    	   player.hp += (int) hpadded;
+				   game.update.entity.renderplusarray.add(new RenderPlus("+1 HP", player.x, player.y));
 		    	   hpadded = 0;
 		       }
 		       player.printhp();

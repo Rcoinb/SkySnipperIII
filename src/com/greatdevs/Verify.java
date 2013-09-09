@@ -2,7 +2,7 @@ package com.greatdevs;
 
 public class Verify {
 	private static String OS = System.getProperty("os.name").toLowerCase();
-	private static String JavaVersion = System.getProperty("java.version").toLowerCase();
+	private static String JavaVersion = System.getProperty("java.version");
 
 	public static boolean isWindows() {
 		return (OS.indexOf("win") >= 0);
@@ -17,9 +17,9 @@ public class Verify {
 				.indexOf("aix") > 0);
 
 	}
-
-	public static boolean isJava7(){
-		return (JavaVersion.indexOf("1.7") >= 0);
+	
+	public static float JavaVersion(){
+		return Float.parseFloat(JavaVersion.substring(0, 3));
 	}
 	
 	public static boolean isSolaris() {
