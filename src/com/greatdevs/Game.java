@@ -4,7 +4,6 @@ import java.awt.BorderLayout;
 import java.awt.Canvas;
 import java.awt.Color;
 import java.awt.Dimension;
-import java.awt.Font;
 import java.awt.Graphics;
 
 import com.greatdevs.Menu.*;
@@ -17,11 +16,9 @@ import java.awt.image.BufferedImage;
 
 import javax.swing.JFrame;
 
-import com.greatdevs.Entity.Player;
 import com.greatdevs.GameUpdate.Update;
 import com.greatdevs.GameWorld.GameMode;
 import com.greatdevs.GameWorld.MultiPlayer;
-import com.greatdevs.GameWorld.SinglePlayer;
 import com.greatdevs.Image.Icons;
 import com.greatdevs.Image.ShipIcons;
 
@@ -190,32 +187,8 @@ public class Game extends Canvas implements Runnable {
         //Paint            
         if (GAME_MODE != 0){
         	gamemode.render(g);
+        	gamemode.renderGUI(g);
         }
-		g.setFont(new Font("Arial", Font.BOLD, 25));
-        if (GAME_MODE == SinglePlayer.SINGLEPLAYER){
-		g.setFont(new Font("Arial", Font.BOLD, 25));
-		int strw1 = (int) g.getFontMetrics().getStringBounds("Score " + SinglePlayer.SCORE, g).getWidth();
-		g.setColor(Color.WHITE);
-		g.drawString("Score " + SinglePlayer.SCORE, (((Game.WIDTH  * Game.SCALE) - strw1) - 25), 25);
-		int strw2 = (int) g.getFontMetrics().getStringBounds("Coins " + SinglePlayer.COINS, g).getWidth();
-		g.setColor(Color.WHITE);
-		g.drawString("Coins " + SinglePlayer.COINS, (((Game.WIDTH  * Game.SCALE) - strw2) - 25), 490);
-        }
-        else if (GAME_MODE == MultiPlayer.MULTIPLAYER){
-    		g.setFont(new Font("Arial", Font.BOLD, 25));
-    		int strw1 = (int) g.getFontMetrics().getStringBounds("Score " + MultiPlayer.SCORE, g).getWidth();
-    		g.setColor(Color.WHITE);
-    		g.drawString("Score " + MultiPlayer.SCORE, (((Game.WIDTH  * Game.SCALE) - strw1) - 25), 25);
-        }
-		
-		for (final Player player : update.entity.playerarray){
-			if (player.superpower && !player.superpowerinuse){
-					g.setColor(Color.YELLOW);
-					g.setFont(new Font("Arial", Font.BOLD, 25));
-					int title5w = (int) g.getFontMetrics().getStringBounds("Press x to use super power", g).getWidth();
-					g.drawString("Press x to use super power", (((Game.WIDTH  * Game.SCALE) / 2) - (title5w / 2)), 30);
-			}
-		}
 		
 		if (MENU){
 			menu.render(g);

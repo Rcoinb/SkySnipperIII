@@ -91,6 +91,7 @@ public class MyShipsList extends Menu{
 		g.setColor(new Color(0,0,0,225));
 		g.fillRect(0, 0, (Game.WIDTH * Game.SCALE) / 4, Game.HEIGHT * Game.SCALE);
 		g.setColor(Color.WHITE);
+		g.setFont(new Font("Arial", Font.BOLD, 25));
 		
 		for (int i = 0; i < ships.size(); i ++){
 			ship shipclass = (ship) ships.get(i);

@@ -23,6 +23,7 @@ public class AskSizeMenu extends CSMenu{
 		g.setColor(new Color(0,0,0,225));
 		g.fillRect(0, 0, (Game.WIDTH * Game.SCALE) / 4, Game.HEIGHT * Game.SCALE);
 		g.setColor(Color.WHITE);
+		g.setFont(new Font("Arial", Font.BOLD, 25));
 		g.drawString("Select size", 25, 50);
 		if (select >= 4) select = 4;
 		if (select <= 1) select = 1;

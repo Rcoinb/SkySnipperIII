@@ -1,21 +1,20 @@
-package com.greatdevs.Menu;
+package com.greatdevs.GameWorld.Contract.Menu;
 
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.Graphics;
 
 import com.greatdevs.Game;
-import com.greatdevs.GameWorld.MultiPlayer;
 import com.greatdevs.GameWorld.SinglePlayer;
-import com.greatdevs.GameWorld.Contract.Menu.SelectContractMenu;
+import com.greatdevs.Menu.Menu;
 
-public class SelectGameMode extends Menu{
-	private int select = 1;
-	private int sy = 400;
-	private double backgroundx = 0;
+public class WinContractMenu extends Menu{
+	public double backgroundx = 0;
 	
-	public SelectGameMode(){
-		
+	int get;
+	
+	public WinContractMenu(int get){
+		this.get = get;
 	}
 	
 	public void render(Graphics g){
@@ -24,35 +23,20 @@ public class SelectGameMode extends Menu{
 		g.fillRect(0, 0, Game.WIDTH * Game.SCALE, Game.HEIGHT * Game.SCALE);
 		g.setColor(new Color(0,0,0,225));
 		g.fillRect(0, 0, (Game.WIDTH * Game.SCALE) / 4, Game.HEIGHT * Game.SCALE);
+		g.setFont(new Font("Arial", Font.BOLD, 20));
 		g.setColor(Color.WHITE);
+		g.drawString("Contract completed", 25, 50);
+		g.drawString("You've got " + get + " coins", 25, 400);
 		g.setFont(new Font("Arial", Font.BOLD, 25));
-		g.drawString("Select gamemode", 25, 50);
-		if (select >= 4) select = 4;
-		if (select <= 1) select = 1;
-		g.drawString("Singleplayer", 25, 300);	
-		g.drawString("Contract mode", 25, 350);	
-		g.drawString("Co-op mode", 25, 400);	
-		g.drawString("Exit", 25, 450);	
-		g.drawString(">                           <", 3, sy);
-		sy = select * 50 + 250;
+		g.drawString("Exit", 25, 435);	
+		g.drawString(">                 <", 3, 435);
 	}
 	
 	public void update(){
 		backgroundx += 0.5;
-		if (input.up.clicked) select --;
-		if (input.down.clicked) select ++;
-		
-		if (input.enter.clicked && select == 1) {
-			game.setGameMode(new SinglePlayer());
-		}
-		if (input.enter.clicked && select == 2) {
+		if (input.enter.clicked){
 			game.setMenu(new SelectContractMenu());
-		}
-		if (input.enter.clicked && select == 3) {
-			game.setGameMode(new MultiPlayer());
-		}
-		if (input.enter.clicked && select == 4){
-			game.setMenu(new MainMenu());
+			SinglePlayer.SCORE = 0;
 		}
 	}
 	

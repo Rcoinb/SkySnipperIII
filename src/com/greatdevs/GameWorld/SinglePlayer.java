@@ -1,5 +1,7 @@
 package com.greatdevs.GameWorld;
 
+import java.awt.Color;
+import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.image.BufferedImage;
 import java.util.Random;
@@ -52,6 +54,25 @@ public class SinglePlayer extends GameMode{
 			}
 		}
 		game.update.entity.render(g);
+	}
+	
+	public void renderGUI(Graphics g){
+		g.setFont(new Font("Arial", Font.BOLD, 25));
+		int strw1 = (int) g.getFontMetrics().getStringBounds("Score " + SinglePlayer.SCORE, g).getWidth();
+		g.setColor(Color.WHITE);
+		g.drawString("Score " + SinglePlayer.SCORE, (((Game.WIDTH  * Game.SCALE) - strw1) - 25), 25);
+		int strw2 = (int) g.getFontMetrics().getStringBounds("Coins " + SinglePlayer.COINS, g).getWidth();
+		g.setColor(Color.WHITE);
+		g.drawString("Coins " + SinglePlayer.COINS, (((Game.WIDTH  * Game.SCALE) - strw2) - 25), 490);
+		
+		for (final Player player : game.update.entity.playerarray){
+			if (player.superpower && !player.superpowerinuse){
+					g.setColor(Color.YELLOW);
+					g.setFont(new Font("Arial", Font.BOLD, 25));
+					int title5w = (int) g.getFontMetrics().getStringBounds("Press x to use super power", g).getWidth();
+					g.drawString("Press x to use super power", (((Game.WIDTH  * Game.SCALE) / 2) - (title5w / 2)), 30);
+			}
+		}
 	}
 	
 	public void update(){

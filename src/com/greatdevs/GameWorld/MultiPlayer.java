@@ -1,5 +1,7 @@
 package com.greatdevs.GameWorld;
 
+import java.awt.Color;
+import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.image.BufferedImage;
 import java.util.Random;
@@ -82,6 +84,13 @@ public class MultiPlayer extends GameMode{
 		entity.render(g);
 		opponent.render(g);
 		thisplayer.render(g);
+	}
+	
+	public void renderGUI(Graphics g){
+		g.setFont(new Font("Arial", Font.BOLD, 25));
+		int strw1 = (int) g.getFontMetrics().getStringBounds("Score " + MultiPlayer.SCORE, g).getWidth();
+		g.setColor(Color.WHITE);
+		g.drawString("Score " + MultiPlayer.SCORE, (((Game.WIDTH  * Game.SCALE) - strw1) - 25), 25);
 	}
 	
 	public void update(){

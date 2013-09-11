@@ -3,11 +3,12 @@ package com.greatdevs.Entity;
 import java.awt.Color;
 import java.awt.Graphics;
 import java.util.ArrayList;
-import java.util.Random;
 
 import com.greatdevs.Game;
 import com.greatdevs.Entity.Boss.*;
+import com.greatdevs.GameWorld.ContractMode;
 import com.greatdevs.GameWorld.SinglePlayer;
+import com.greatdevs.GameWorld.Contract.Menu.LoseContractMenu;
 import com.greatdevs.Menu.LoseMenu;
 import com.greatdevs.Menu.ShopShipMenu;
 import com.greatdevs.Sound.Sound;
@@ -78,7 +79,8 @@ public class Entity {
 			if (player.hp <= 0){
 				Sound.play("explosion.wav");
 				playerarray.remove(i);
-				game.setMenu(new LoseMenu());
+				if (Game.GAME_MODE != ContractMode.CONTRACTMODE) game.setMenu(new LoseMenu());
+				else game.setMenu(new LoseContractMenu());
 			}
 		}
 		for(int i = 0; i < bonusarray.size(); i ++){
@@ -162,10 +164,6 @@ public class Entity {
 				if (bullet.getRect().intersects(star.getRect())){
 					explosionarray.add(new Explosion(star.x, star.y));
 					if (i < bulletarray.size()){
-						if (new Random().nextInt(4) == 0){
-							coinarray.add(new Coin(star.x, star.y, game.gamemode.objectspeed));
-							game.update.entity.particlearray.add(new Particle(Color.YELLOW, 35, 25, star.x, star.y, 2));
-						}
 						bulletarray.remove(i);
 					}
 					if (stararray.get(w) != null) stararray.remove(w);

@@ -22,6 +22,10 @@ public class GameMode {
 		
 	}
 	
+	public void renderGUI(Graphics g){
+		
+	}
+	
 	public void update(){
 		
 	}

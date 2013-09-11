@@ -1,6 +1,7 @@
 package com.greatdevs.Menu.CustomShip;
 
 import java.awt.Color;
+import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Rectangle;
 import java.awt.image.BufferedImage;
@@ -38,7 +39,8 @@ public class DrawComponent extends CSMenu{
 		g.setColor(new Color(0,0,0,225));
 		g.fillRect(0, 0, (Game.WIDTH * Game.SCALE) / 4, Game.HEIGHT * Game.SCALE);
 		g.setColor(Color.WHITE);
-		g.drawString("Place component", 25, 50);
+		g.setFont(new Font("Arial", Font.BOLD, 25));
+		g.drawString("Draw component", 25, 50);
 		if (select >= 4) select = 4;
 		if (select <= 1) select = 1;
 		g.drawString("Red " + colorred, 25, 300);

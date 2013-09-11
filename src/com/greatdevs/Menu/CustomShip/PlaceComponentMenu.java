@@ -1,9 +1,11 @@
 package com.greatdevs.Menu.CustomShip;
 
 import java.awt.Color;
+import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Rectangle;
 import java.awt.image.BufferedImage;
+
 import com.greatdevs.Game;
 import com.greatdevs.InputHandler;
 import com.greatdevs.Image.ShipIcons;
@@ -40,6 +42,7 @@ public class PlaceComponentMenu extends CSMenu{
 		g.setColor(new Color(0,0,0,225));
 		g.fillRect(0, 0, (Game.WIDTH * Game.SCALE) / 4, Game.HEIGHT * Game.SCALE);
 		g.setColor(Color.WHITE);
+		g.setFont(new Font("Arial", Font.BOLD, 25));
 		g.drawString("Place component", 25, 50);
 		if (select >= 5) select = 5;
 		if (select <= 1) select = 1;

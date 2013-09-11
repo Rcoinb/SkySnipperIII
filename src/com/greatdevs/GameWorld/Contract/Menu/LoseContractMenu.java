@@ -1,19 +1,18 @@
-package com.greatdevs.Menu.CustomShip;
+package com.greatdevs.GameWorld.Contract.Menu;
 
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.Graphics;
 
 import com.greatdevs.Game;
+import com.greatdevs.GameWorld.SinglePlayer;
+import com.greatdevs.Menu.MainMenu;
 import com.greatdevs.Menu.Menu;
-import com.greatdevs.Menu.ShopMenu;
 
-public class FirstMenu extends Menu{
-	public int select = 1;
-	private int sy = 0;
-	private double backgroundx = 0;
+public class LoseContractMenu extends Menu{
+	public double backgroundx = 0;
 	
-	public FirstMenu(){
+	public LoseContractMenu(){
 		
 	}
 	
@@ -23,26 +22,19 @@ public class FirstMenu extends Menu{
 		g.fillRect(0, 0, Game.WIDTH * Game.SCALE, Game.HEIGHT * Game.SCALE);
 		g.setColor(new Color(0,0,0,225));
 		g.fillRect(0, 0, (Game.WIDTH * Game.SCALE) / 4, Game.HEIGHT * Game.SCALE);
-		g.setColor(Color.WHITE);
 		g.setFont(new Font("Arial", Font.BOLD, 25));
-		g.drawString("Custom ships", 25, 50);
-		if (select >= 3) select = 3;
-		if (select <= 1) select = 1;
-		g.drawString("Load ship", 25, 350);	
-		g.drawString("Create ship", 25, 400);	
-		g.drawString("Exit", 25, 450);	
-		g.drawString(">                      <", 3, sy);
-		sy = select * 50 + 300;
+		g.setColor(Color.WHITE);
+		g.drawString("Contract failed", 25, 50);
+		g.drawString("Exit", 25, 435);	
+		g.drawString(">                 <", 3, 435);
 	}
 	
 	public void update(){
 		backgroundx += 0.5;
-		if (input.up.clicked) select --;
-		if (input.down.clicked) select ++;
-		
-		if (input.enter.clicked && select == 1) game.setMenu(new MyShipsList());
-		if (input.enter.clicked && select == 2) game.setMenu(new CustomShipMenu());
-		if (input.enter.clicked && select == 3) game.setMenu(new ShopMenu());
+		if (input.enter.clicked){
+			game.setMenu(new MainMenu());
+			SinglePlayer.SCORE = 0;
+		}
 	}
 	
 	public void BackGroundrender(Graphics g){
