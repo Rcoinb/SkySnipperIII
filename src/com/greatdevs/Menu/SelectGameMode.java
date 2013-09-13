@@ -29,7 +29,7 @@ public class SelectGameMode extends Menu{
 		g.drawString("Select gamemode", 25, 50);
 		if (select >= 4) select = 4;
 		if (select <= 1) select = 1;
-		g.drawString("Singleplayer", 25, 300);	
+		g.drawString("Endless mode", 25, 300);	
 		g.drawString("Contract mode", 25, 350);	
 		g.drawString("Co-op mode", 25, 400);	
 		g.drawString("Exit", 25, 450);	

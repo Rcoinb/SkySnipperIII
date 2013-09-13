@@ -11,6 +11,7 @@ import com.greatdevs.InputHandler;
 import com.greatdevs.Entity.Player;
 import com.greatdevs.Entity.ShopShip;
 import com.greatdevs.GameWorld.Contract.Contract;
+import com.greatdevs.Menu.LoadingMenu;
 import com.greatdevs.Menu.PauseMenu;
 
 public class ContractMode extends GameMode{
@@ -36,6 +37,7 @@ public class ContractMode extends GameMode{
 		GAMEMODE = CONTRACTMODE;
 		game.update.entity.playerarray.add(new Player(0, (((Game.HEIGHT * Game.SCALE) / 2)) - (game.update.entity.playerheight / 2)));
 		background = game.icons.background;
+		game.setMenu(new LoadingMenu(35));
 	}
 		
 	public void render(Graphics g){

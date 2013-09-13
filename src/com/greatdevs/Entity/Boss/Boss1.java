@@ -126,8 +126,8 @@ public class Boss1 extends Boss{
 			if (bull.x < 0 - (bull.getRect().width)) bbulletarray.remove(i);
 		}
 		for(Player player : game.update.entity.playerarray){
-			if (y < player.y) y += 5;
-			if ((y + height) > player.y + player.height) y -= 5;		
+			if (y < player.y) y += 4;
+			if ((y + height) > player.y + player.height) y -= 4;		
 			if ((new Rectangle(player.x, y, width, height).intersects(player.getRect())) && canfire){
 				bbulletarray.add(new bullet(x, y + (height / 2) - 1, 25, this)); 
 				Sound.play("shootpressed.wav");
