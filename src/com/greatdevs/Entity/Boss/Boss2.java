@@ -62,7 +62,7 @@ public class Boss2 extends Boss{
 			game.update.entity.explosionarray.add(new Explosion(x + width, y + height));
 			game.update.entity.bossarray.remove(this);
 		}
-		SinglePlayer.SCORE += 1250;
+		SinglePlayer.SCORE += 1500;
 	}
 	
 	public void returnfire(){

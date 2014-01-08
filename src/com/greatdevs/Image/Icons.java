@@ -7,7 +7,7 @@ public class Icons {
 
 	SpriteSheet ss;
 	
-	public static BufferedImage frameicon;
+	public static BufferedImage frameicon, devsign;
 	
 	public BufferedImage focuslable, background, hpbonus, speeddownbonus, shopship, shieldbonus, magnetbonus;
 	public BufferedImage p6sp;
@@ -23,6 +23,7 @@ public class Icons {
 		BufferedImage spriteSheet;
 		
 		frameicon = loader.loadImage("/FrameIcon.png");
+		devsign = loader.loadImage("/devsign.png");
 		
 		spriteSheet = loader.loadImage("/icons.png");
 

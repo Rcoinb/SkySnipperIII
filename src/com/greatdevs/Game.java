@@ -6,6 +6,7 @@ import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Graphics;
 
+import com.greatdevs.Luancher.Launcher;
 import com.greatdevs.Menu.*;
 import com.greatdevs.Save.Save;
 import com.greatdevs.Save.SaveOptions;
@@ -27,10 +28,14 @@ public class Game extends Canvas implements Runnable {
 	
 	private BufferedImage image = new BufferedImage(WIDTH * SCALE, HEIGHT * SCALE, BufferedImage.TYPE_INT_RGB);
 	
+	public static final int DefaultlauncherID = 0x27E641;
+	
 	public static final String TITLE = "Sky Snipper III";
 	public static final int WIDTH = 20;
 	public static final int HEIGHT = 10;
 	public static final int SCALE = 50;
+	
+	public static boolean LaunchedFromLauncher = false;
 	
 	public static final int minWidth = 500, minHeight = 250;
 	
@@ -201,6 +206,9 @@ public class Game extends Canvas implements Runnable {
 		if (!hasFocus()){
 			noFocusRender(g);
 		}
+		
+		if (!LaunchedFromLauncher) g.drawImage(Icons.devsign, 0, 0, null);
+		
         //Paint
 		g.dispose();
 	}
@@ -262,6 +270,11 @@ public class Game extends Canvas implements Runnable {
 	}
 	
 	public static void main(String[] args) {
+		new Launcher().setupLauncher();
+	}
+	
+	public static void startGame() {
+		System.out.println("Starting game...");
 		PathUpdate();
 		SetupGame();
 	}

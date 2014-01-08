@@ -44,7 +44,7 @@ public class DrawComponent extends CSMenu{
 		if (select >= 4) select = 4;
 		if (select <= 1) select = 1;
 		g.drawString("Red " + colorred, 25, 300);
-		g.drawString("Greed " + colorgreen, 25, 350);	
+		g.drawString("Green " + colorgreen, 25, 350);	
 		g.drawString("Blue " + colorblue, 25, 400);
 		g.drawString("Place", 25, 450);		
 		g.drawString(">                      <", 3, sy);
